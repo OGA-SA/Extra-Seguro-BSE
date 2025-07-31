@@ -38,24 +38,24 @@ h2 {
 /* Contenedor principal con flex sin wrap y scroll horizontal */
 .datos {
   width: 95%;
+  justify-content: space-between;
   max-width: 1200px;
   display: flex;
   justify-content: center;
   align-items: stretch;
-  flex-wrap: wrap;
-  justify-content: space-between; /* reparte mejor en responsive */
   gap: 15px;
   margin-top: 30px;
   padding: 10px 20px;
   box-sizing: border-box;
 
-  flex-wrap: wrap;        /* ✅ Permite que se acomoden si no entran */
-  overflow-x: hidden;     /* ✅ Elimina el scroll horizontal */
+  flex-wrap: nowrap;       /* No permite que los hijos bajen */
+  overflow-x: auto;        /* Scroll horizontal si no cabe */
 }
 
 /* Columnas hijas que escalan manteniendo estructura interna */
 .contenedor-izquierda {
-  flex: 1 1 45%;
+  flex: 1 1 48%;
+  min-width: 300px;
   min-width: 300px;    /* mínimo para no romper */
   display: flex;
   flex-direction: column;
@@ -65,7 +65,8 @@ h2 {
 }
 
 .columna-derecha {
-  flex: 1 1 45%;
+  flex: 1 1 48%;
+  min-width: 300px;
   min-width: 200px;    /* mínimo ancho */
   display: flex;
   flex-direction: column;
@@ -346,7 +347,8 @@ td input {
 @media (max-width: 768px) {
   .form-group {
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
+    align-items: stretch;
   }
 
   .tablas-piezas {
@@ -357,12 +359,5 @@ td input {
 
   .tablas-piezas table {
     width: 90%;
-  }
-}
-@media (max-width: 768px) {
-  .form-group {
-    flex-direction: column;
-    gap: 15px;
-    align-items: stretch;
   }
 }
