@@ -69,6 +69,7 @@ h2 {
 }
 .contenedor-izquierda {
   width: 65%;
+  margin-top: 10px;
 }
 .columna-derecha {
   width: 30%;
