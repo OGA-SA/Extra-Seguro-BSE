@@ -9,24 +9,26 @@ html, body {
   overflow-x: hidden;
   width: 100%;
   font-family: sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  background: white;
+}
+
+/* 🆕 Contenedor centrado */
+.contenedor-central {
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 img.logo {
-  position: static;
   margin: 25px 0 0 0;
   display: block;
   width: 140px;
-  max-width: 100%;
   height: auto;
-  align-items: flex-start;
 }
 
 h2, .texto, .header, h3 {
-  width: 95%;
-  max-width: 1200px;
+  width: 100%;
   margin: auto;
   box-sizing: border-box;
 }
@@ -39,21 +41,17 @@ h2 {
   border-radius: 8px;
 }
 
-/* ✅ Contenedor principal perfectamente alineado */
+/* 🟢 Contenedor de datos centrado */
 .datos {
-  width: 95%;
-  max-width: 1200px;
-  margin: 30px auto 0 auto; /* ✅ este margen lo centra correctamente */
-  padding: 0;
+  width: 100%;
+  margin-top: 30px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
   gap: 20px;
-  box-sizing: border-box;
 }
 
-/* ✅ Columnas simétricas */
 .contenedor-izquierda,
 .columna-derecha {
   width: 48%;
@@ -61,52 +59,34 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  box-sizing: border-box;
 }
 
 .fila-formulario {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 95%;
   margin: 20px auto;
-  flex-wrap: nowrap;
 }
 
 .form-group {
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
   gap: 40px;
-  max-width: 100%;
-  box-sizing: border-box;
+  justify-content: center;
 }
 
 .form-group label {
-  flex-shrink: 1;
-  min-width: 100px;
-  max-width: 100%;
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 10px;
   border: 1px solid #999;
   border-radius: 4px;
-  box-sizing: border-box;
 }
 
 .imagen-y-campos {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
   margin: 40px auto;
   gap: 20px;
   width: 100%;
-  box-sizing: border-box;
 }
 
 .canvas-section {
@@ -114,11 +94,6 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.canvas {
-  display: flex;
-  align-items: flex-end;
 }
 
 .clear-button {
@@ -129,85 +104,19 @@ h2 {
 
 .columna-derecha label {
   display: flex;
-  text-align: left;
-  justify-content: flex-start;
   border: 1px solid #999;
   padding: 10px;
   border-radius: 4px;
-  min-width: 200px;
   gap: 35px;
-  max-width: 100%;
-  width: auto;
-  box-sizing: border-box;
+  width: 100%;
 }
 
 .columna-derecha .fecha {
-  display: flex;
-  justify-content: flex-start;
-  border: none;
   margin-bottom: 40px;
-  gap: 30px;
-  flex-wrap: nowrap;
-}
-
-.columna-derecha .fecha label.Fecha {
-  border: 1px solid #999;
-  border-radius: 4px;
-  padding: 10px;
-  gap: 10px;
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  box-sizing: border-box;
-}
-
-.columna-derecha .fecha label.Fecha input {
-  border: none;
-  outline: none;
-  background-color: transparent;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-.columna-derecha .visual {
-  margin-top: 30px;
-  min-width: 110px;
-  max-width: 100%;
-  box-sizing: border-box;
 }
 
 .columna-derecha .stro label {
-  display: flex;
-  justify-content: column;
-  margin-bottom: 100px;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-.columna-derecha .stro label.siniestro {
   margin-bottom: 50px;
-  margin-top: 70px;
-}
-
-.columna-derecha .stro label.visual {
-  margin-top: 50px;
-}
-
-.form-group label span,
-.columna-derecha span {
-  text-align: left;
-  min-width: 80px;
-}
-
-.form-group input,
-.columna-derecha input {
-  border: none;
-  outline: none;
-  padding: 5px;
-  background-color: transparent;
-  font-size: 14px;
-  max-width: 100%;
-  box-sizing: border-box;
 }
 
 .texto {
@@ -225,11 +134,8 @@ table {
   border-collapse: collapse;
   margin: 25px auto 0 auto;
   table-layout: fixed;
-  max-width: 100%;
+  width: 100%;
   overflow-x: auto;
-  display: block;
-  white-space: nowrap;
-  box-sizing: border-box;
 }
 
 th, td {
@@ -242,7 +148,6 @@ td input {
   width: 100%;
   border: none;
   padding: 5px;
-  box-sizing: border-box;
 }
 
 .tablas-piezas {
@@ -251,19 +156,10 @@ td input {
   gap: 40px;
   margin-top: 30px;
   flex-wrap: nowrap;
-  width: 100%;
   overflow-x: auto;
-  box-sizing: border-box;
-}
-
-.tablas-piezas table {
-  width: 45%;
-  max-width: 100%;
-  box-sizing: border-box;
 }
 
 /* ==== MEDIA QUERIES ==== */
-
 @media (max-width: 767px) {
   img.logo {
     width: 120px;
@@ -278,6 +174,14 @@ td input {
   .columna-derecha {
     width: 100%;
   }
+
+  .tablas-piezas {
+    flex-direction: column;
+  }
+
+  .tablas-piezas table {
+    width: 100%;
+  }
 }
 
 @media (max-width: 479px) {
@@ -289,11 +193,6 @@ td input {
     font-size: 1.1rem;
     margin-top: 40px;
   }
-
-  .contenedor-izquierda,
-  .columna-derecha {
-    width: 100%;
-  }
 }
 
 .header {
@@ -302,3 +201,4 @@ td input {
   align-items: center;
   padding: 25px 10px 0 10px;
 }
+
