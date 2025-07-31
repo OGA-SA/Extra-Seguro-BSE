@@ -124,133 +124,129 @@
 </script>
 
 <script>
-  const canvas = document.getElementById("canvas");
-  const ctx = canvas.getContext("2d");
-  let baseImageData = null;
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    let baseImageData = null;
 
-  const image = new Image();
-  image.src = "parabrisa.png";
-  image.crossOrigin = "anonymous";
-  image.onload = () => {
-    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-    baseImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  };
+    const image = new Image();
+    image.src = "parabrisa.png";
+    image.crossOrigin = "anonymous";
+    image.onload = () => {
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+      baseImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    };
 
-  let drawing = false;
+    let drawing = false;
 
-  function getPos(evt) {
-    const rect = canvas.getBoundingClientRect();
-    return evt.touches
-      ? {
-          x: evt.touches[0].clientX - rect.left,
-          y: evt.touches[0].clientY - rect.top
-        }
-      : { x: evt.offsetX, y: evt.offsetY };
-  }
-
-  function startDraw(evt) {
-    evt.preventDefault();
-    drawing = true;
-    const pos = getPos(evt);
-    ctx.beginPath();
-    ctx.moveTo(pos.x, pos.y);
-  }
-
-  function draw(evt) {
-    if (!drawing) return;
-    evt.preventDefault();
-    const pos = getPos(evt);
-    ctx.lineWidth = 2;
-    ctx.lineCap = "round";
-    ctx.strokeStyle = "red";
-    ctx.lineTo(pos.x, pos.y);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(pos.x, pos.y);
-  }
-
-  function endDraw(evt) {
-    evt.preventDefault();
-    drawing = false;
-    ctx.beginPath();
-  }
-
-  canvas.addEventListener("mousedown", startDraw);
-  canvas.addEventListener("mousemove", draw);
-  canvas.addEventListener("mouseup", endDraw);
-  canvas.addEventListener("mouseleave", endDraw);
-
-  canvas.addEventListener("touchstart", startDraw, { passive: false });
-  canvas.addEventListener("touchmove", draw, { passive: false });
-  canvas.addEventListener("touchend", endDraw);
-  canvas.addEventListener("touchcancel", endDraw);
-
-  function clearCanvas() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-  }
-
-  window.clearCanvas = clearCanvas;
-
-  function canvasEstaModificado() {
-    const current = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-    const base = baseImageData?.data;
-    if (!base) return false;
-    for (let i = 0; i < current.length; i++) {
-      if (current[i] !== base[i]) return true;
-    }
-    return false;
-  }
-
-  // Generar PDF con html2pdf y validaciones
-  document.getElementById("boton").addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    // Obtener valores
-    const taller = document.getElementById("taller").value.trim();
-    const serieNumero = document.getElementById("serieNumero").value.trim();
-    const siniestro = document.getElementById("siniestro").value.trim();
-    const fecha = document.getElementById("fecha").value.trim();
-    const dificultadVisual = document.getElementById("dificultadVisual").value.trim();
-
-    // Validar campos obligatorios
-    if (!taller || !serieNumero || !siniestro || !fecha) {
-      alert("Por favor complete todos los campos antes de generar el PDF.");
-      return;
+    function getPos(evt) {
+      const rect = canvas.getBoundingClientRect();
+      return evt.touches
+        ? { x: evt.touches[0].clientX - rect.left, y: evt.touches[0].clientY - rect.top }
+        : { x: evt.offsetX, y: evt.offsetY };
     }
 
-     if (userHasDrawn && !dificultadVisual) {
-            alert("Si realizaste un dibujo, completá el campo 'Dificulta visual'.");
-            return;
-          }
-
-    // Confirmación final antes de generar PDF
-    const confirmar = confirm("Verifica que el número de siniestro esté tipeado correctamente. ¿Deseas continuar?");
-    if (!confirmar) {
-      return;
+    function startDraw(evt) {
+      evt.preventDefault();
+      drawing = true;
+      const pos = getPos(evt);
+      ctx.beginPath();
+      ctx.moveTo(pos.x, pos.y);
     }
 
-    // Ocultar botones para que no salgan en el PDF
-    const botones = document.querySelectorAll("button");
-    botones.forEach(btn => btn.style.display = "none");
+    function draw(evt) {
+      if (!drawing) return;
+      evt.preventDefault();
+      const pos = getPos(evt);
+      ctx.lineWidth = 2;
+      ctx.lineCap = "round";
+      ctx.strokeStyle = "red";
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(pos.x, pos.y);
+    }
 
-    // Generar PDF con html2pdf
-    html2pdf()
-      .from(document.getElementById("contenidoPDF"))
-      .set({
-        margin: 0.5,
-        filename: "formulario_con_dibujo.pdf",
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: "in", format: "letter", orientation: "portrait" }
-      })
-      .save()
-      .then(() => {
-        // Mostrar botones nuevamente
-        botones.forEach(btn => (btn.style.display = "inline-block"));
-      });
-  });
-</script>
+    function endDraw(evt) {
+      evt.preventDefault();
+      drawing = false;
+      ctx.beginPath();
+    }
+
+    canvas.addEventListener("mousedown", startDraw);
+    canvas.addEventListener("mousemove", draw);
+    canvas.addEventListener("mouseup", endDraw);
+    canvas.addEventListener("mouseleave", endDraw);
+
+    canvas.addEventListener("touchstart", startDraw, { passive: false });
+    canvas.addEventListener("touchmove", draw, { passive: false });
+    canvas.addEventListener("touchend", endDraw);
+    canvas.addEventListener("touchcancel", endDraw);
+
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+    }
+
+    window.clearCanvas = clearCanvas;
+
+    // Generar PDF con html2pdf y validaciones
+    document.getElementById("boton").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      // Obtener valores
+      const taller = document.getElementById("taller").value.trim();
+      const serieNumero = document.getElementById("serieNumero").value.trim();
+      const siniestro = document.getElementById("siniestro").value.trim();
+      const fecha = document.getElementById("fecha").value.trim();
+      const dificultadVisual = document.getElementById("dificultadVisual").value.trim();
+
+      // Validar campos obligatorios
+      if (!taller || !serieNumero || !siniestro || !fecha) {
+        alert("Por favor complete todos los campos antes de generar el PDF.");
+        return;
+      }
+
+      // Validar si el canvas está vacío
+      const context = canvas.getContext("2d");
+      const pixelBuffer = new Uint32Array(
+        context.getImageData(0, 0, canvas.width, canvas.height).data.buffer
+      );
+      // El canvas está en blanco si todos los píxeles son transparentes o blancos
+      // Usamos la condición que me diste (que no haya ningún color distinto de 0)
+      const isCanvasBlank = !pixelBuffer.some(color => color !== 0);
+
+      if (!isCanvasBlank && !dificultadVisual) {
+        alert("Por favor describa la dificultad visual asociada al dibujo.");
+        return;
+      }
+
+      // Confirmación final antes de generar PDF
+      const confirmar = confirm("Verifica que el número de siniestro esté tipeado correctamente. ¿Deseas continuar?");
+      if (!confirmar) {
+        return;
+      }
+
+      // Ocultar botones para que no salgan en el PDF
+      const botones = document.querySelectorAll("button");
+      botones.forEach(btn => btn.style.display = "none");
+
+      // Generar PDF con html2pdf
+      html2pdf()
+        .from(document.getElementById("contenidoPDF"))
+        .set({
+          margin: 0.5,
+          filename: "formulario_con_dibujo.pdf",
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: "in", format: "letter", orientation: "portrait" }
+        })
+        .save()
+        .then(() => {
+          // Mostrar botones nuevamente
+          botones.forEach(btn => btn.style.display = "inline-block");
+        });
+    });
+  </script>
 
 </body>
 </html>
