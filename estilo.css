@@ -179,7 +179,6 @@ h2 {
 .columna-derecha .fecha label.Fecha input {
   border: none;
   outline: none;
-  background-color: transparent;
   max-width: 100%;
   box-sizing: border-box;
   text-align: center;
