@@ -51,7 +51,7 @@ h2 {
   align-items: flex-start;
   gap: 20px;
   box-sizing: border-box;
-border: 2px solid black;
+background-color: lightblue;
 }
 
 /* ✅ Columnas simétricas */
