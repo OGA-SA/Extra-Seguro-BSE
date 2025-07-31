@@ -56,7 +56,6 @@ h2 {
 /* ✅ Columnas simétricas y centradas */
 .contenedor-izquierda,
 .columna-derecha {
-  width: 48%;
   min-width: 250px;
   display: flex;
   flex-direction: column;
@@ -68,7 +67,12 @@ h2 {
   margin-right: auto;
   padding: 20px; /* 💡 AJUSTE */
 }
-
+.contenedor-izquierda{
+  width: 60%;
+}
+.columna-derecha{
+  width: 35%;
+}
 .fila-formulario {
   display: flex;
   flex-direction: column;
