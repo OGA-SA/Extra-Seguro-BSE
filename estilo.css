@@ -149,6 +149,8 @@ h2 {
   max-width: 100%;
   width: auto;
   box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .columna-derecha .fecha {
