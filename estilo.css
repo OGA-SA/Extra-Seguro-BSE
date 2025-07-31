@@ -64,6 +64,7 @@ background-color: lightblue;
   align-items: center;
   justify-content: flex-start;
   box-sizing: border-box;
+  background-color: lightblue;
 }
 
 .fila-formulario {
