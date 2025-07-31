@@ -52,7 +52,7 @@ h2 {
 /* ✅ Columnas ajustadas */
 .contenedor-izquierda,
 .columna-derecha {
-  width: 50%;
+  width: 48%;
   min-width: 250px;
   display: flex;
   flex-direction: column;
