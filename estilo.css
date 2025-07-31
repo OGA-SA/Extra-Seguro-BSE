@@ -16,8 +16,8 @@ html, body {
 
 img.logo {
   position: static;
-  margin: 25px 0 0 0; /* margen superior de 25px, sin márgenes automáticos */
-  display: block; /* podés mantenerlo si querés que se comporte como bloque */
+  margin: 25px 0 0 0;
+  display: block;
   width: 140px;
   max-width: 100%;
   height: auto;
@@ -35,48 +35,31 @@ h2 {
   box-sizing: border-box;
 }
 
-/* Contenedor principal con flex sin wrap y scroll horizontal */
+/* ✅ Contenedor principal ajustado */
 .datos {
   width: 95%;
-  justify-content: space-between;
   max-width: 1200px;
   display: flex;
-  justify-content: center;
-  align-items: stretch;
-  gap: 15px;
-  margin-top: 30px;
+  flex-wrap: wrap;                /* ahora sí se adapta */
+  justify-content: space-between; /* espacio entre columnas */
+  align-items: flex-start;
+  gap: 20px;
+  margin: 30px auto 0 auto;       /* centrado */
   padding: 10px 20px;
   box-sizing: border-box;
-
-  flex-wrap: nowrap;       /* No permite que los hijos bajen */
-  overflow-x: auto;        /* Scroll horizontal si no cabe */
 }
 
-/* Columnas hijas que escalan manteniendo estructura interna */
-.contenedor-izquierda {
-  flex: 1 1 48%;
-  min-width: 300px;
-  min-width: 300px;    /* mínimo para no romper */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  box-sizing: border-box;
-}
-
+/* ✅ Columnas ajustadas */
+.contenedor-izquierda,
 .columna-derecha {
-  flex: 1 1 48%;
-  min-width: 300px;
-  min-width: 200px;    /* mínimo ancho */
+  width: 48%;
+  min-width: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  height: 100%;
   box-sizing: border-box;
 }
 
-/* Formularios internos mantienen fila sin wrap */
 .fila-formulario {
   display: flex;
   flex-direction: column;
@@ -282,7 +265,6 @@ td input {
 
 /* ==== MEDIA QUERIES ==== */
 
-/* Tablets (menor a 768px) */
 @media (max-width: 767px) {
   img.logo {
     width: 120px;
@@ -294,22 +276,12 @@ td input {
     font-size: 1.3rem;
   }
 
-  /* Mantenemos wrap para evitar scroll horizontal extremo, si querés quitarlo sacalo */
-  .datos {
-    overflow-x: auto;
-  }
-
-  /* Permitir que columnas se achiquen pero sin cambiar estructura */
-  .contenedor-izquierda {
-    min-width: 250px;
-  }
-
+  .contenedor-izquierda,
   .columna-derecha {
-    min-width: 180px;
+    width: 100%;
   }
 }
 
-/* Celulares (menor a 480px) */
 @media (max-width: 479px) {
   img.logo {
     width: 100px;
@@ -320,17 +292,9 @@ td input {
     margin-top: 40px;
   }
 
-  /* Mantener scroll horizontal para que no se rompa layout */
-  .datos {
-    overflow-x: auto;
-  }
-
-  .contenedor-izquierda {
-    min-width: 200px;
-  }
-
+  .contenedor-izquierda,
   .columna-derecha {
-    min-width: 150px;
+    width: 100%;
   }
 }
 
