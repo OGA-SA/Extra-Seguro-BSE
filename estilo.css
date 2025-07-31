@@ -43,7 +43,7 @@ h2 {
 .datos {
   width: 95%;
   max-width: 1200px;
-  margin: 30px auto 0 auto;
+  margin: 30px auto 0 auto; /* ✅ este margen lo centra correctamente */
   padding: 0;
   display: flex;
   flex-wrap: wrap;
