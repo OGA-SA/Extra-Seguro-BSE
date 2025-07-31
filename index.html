@@ -10,6 +10,7 @@
     <div class="header">
       <img src="Cars.JPG" alt="Logo Cars" class="logo" />
     </div>
+
     <h2>FORMULARIO EXTRA SEGURO</h2>
 
     <div class="datos">
@@ -25,6 +26,7 @@
 
         <div class="imagen-y-campos">
           <div class="canvas-section">
+            <img src="parabrisas.jpg" alt="Parabrisas" class="imagen-parabrisas" />
             <canvas id="canvas" width="700" height="350"></canvas>
             <button class="clear-button" type="button" onclick="clearCanvas()">Limpiar Dibujo</button>
           </div>
@@ -33,11 +35,11 @@
 
       <form class="columna-derecha">
         <div class="fecha">
-          <label class="Fecha"><span>Fecha:</span> <input type="date" id="fecha" required /></label>
+          <label><span>Fecha:</span> <input type="date" id="fecha" required /></label>
         </div>
         <div class="stro">
-          <label class="siniestro"><span>Siniestro:</span> <input type="text" id="siniestro" required /></label>
-          <label class="visual"><span>¿Dificulta visual?:</span> <input type="text" id="dificultadVisual" /></label>
+          <label><span>Siniestro:</span> <input type="text" id="siniestro" required /></label>
+          <label><span>¿Dificulta visual?:</span> <input type="text" id="dificultadVisual" /></label>
         </div>
       </form>
     </div>
@@ -48,41 +50,7 @@
     </div>
 
     <div class="tablas-piezas">
-      <table id="tablaPiezas1">
-        <thead>
-          <tr>
-            <th>PIEZA / ACCESORIOS</th>
-            <th>CHAPA</th>
-            <th>PINTURA</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Guardabarro del der</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-          <tr><td>Guardabarro del izq</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-          <tr><td>Parabrisas</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-        </tbody>
-      </table>
-
-      <table id="tablaPiezas2">
-        <thead>
-          <tr>
-            <th>PIEZA / ACCESORIOS</th>
-            <th>CHAPA</th>
-            <th>PINTURA</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Guardabarro del der</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
-          <tr><td>Guardabarro del izq</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-          <tr><td>Parabrisas</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-        </tbody>
-      </table>
-      <datalist id="opciones-piezas">
-        <option value="Manzana">
-        <option value="Mandarina">
-        <option value="Melón">
-        <option value="Mango">
-      </datalist>
+      <!-- tablas aquí -->
     </div>
   </div>
 
@@ -93,8 +61,6 @@
   </form>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
-  <!-- Scripts funcionales -->
-  <!-- ... tu JS está bien y no necesita cambios ... -->
 </body>
 </html>
+
