@@ -39,16 +39,14 @@ h2 {
 .datos {
   width: 95%;
   max-width: 1200px;
+  margin: 30px auto 0 auto;    /* CENTRADO exacto */
+  padding: 0;                  /* sin padding lateral innecesario */
   display: flex;
-  flex-wrap: wrap;                /* ahora sí se adapta */
-  justify-content: space-between; /* espacio entre columnas */
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: flex-start;
   gap: 20px;
-  margin: 30px auto 0 auto;       /* centrado */
-  padding: 10px 5px;
   box-sizing: border-box;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 /* ✅ Columnas ajustadas */
