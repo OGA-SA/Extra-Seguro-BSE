@@ -159,7 +159,14 @@ h2 {
   gap: 30px;
   flex-wrap: nowrap;
 }
-
+.columna-derecha .fecha {
+  display: flex;
+  justify-content: center; /* 💡 AJUSTE */
+  border: none;
+  margin-bottom: 40px;
+  gap: 30px;
+  flex-wrap: nowrap;
+}
 .columna-derecha .fecha label.Fecha {
   border: 1px solid #999;
   border-radius: 4px;
