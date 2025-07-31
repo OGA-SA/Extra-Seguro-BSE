@@ -35,6 +35,10 @@ h2 {
   box-sizing: border-box;
 }
 
+.datos, h2, .texto, .header {
+  border: 1px dashed red;  /* TEMPORAL, para que compares */
+}
+
 /* ✅ Contenedor principal ajustado */
 .datos {
   width: 95%;
