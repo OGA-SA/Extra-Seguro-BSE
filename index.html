@@ -219,11 +219,10 @@
       return;
     }
 
-    // Validar si hay dibujo y no hay descripción
-    if (canvasEstaModificado() && !dificultadVisual) {
-      alert("Por favor describa la dificultad visual asociada al dibujo.");
-      return;
-    }
+     if (userHasDrawn && !dificultadVisual) {
+            alert("Si realizaste un dibujo, completá el campo 'Dificulta visual'.");
+            return;
+          }
 
     // Confirmación final antes de generar PDF
     const confirmar = confirm("Verifica que el número de siniestro esté tipeado correctamente. ¿Deseas continuar?");
