@@ -159,6 +159,7 @@ h2 {
   justify-content: center;
   border: none;
   margin-bottom: 40px;
+  margin-top: 10px;
   gap: 30px;
   flex-wrap: nowrap;
 }
