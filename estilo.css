@@ -53,26 +53,27 @@ h2 {
   box-sizing: border-box;
 }
 
-/* ✅ Columnas simétricas */
+/* ✅ Columnas simétricas y centradas */
 .contenedor-izquierda,
 .columna-derecha {
   width: 48%;
   min-width: 250px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* 💡 AJUSTE */
   justify-content: flex-start;
   box-sizing: border-box;
   background-color: lightblue;
   margin-left: auto;
   margin-right: auto;
+  padding: 20px; /* 💡 AJUSTE */
 }
 
 .fila-formulario {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 95%;
+  align-items: center; /* 💡 AJUSTE */
+  width: 100%;
   margin: 20px auto;
   flex-wrap: nowrap;
 }
@@ -82,9 +83,9 @@ h2 {
   flex-wrap: nowrap;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: center; /* 💡 AJUSTE */
   gap: 40px;
-  max-width: 100%;
+  width: 100%; /* 💡 AJUSTE */
   box-sizing: border-box;
 }
 
@@ -94,11 +95,13 @@ h2 {
   max-width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center; /* 💡 AJUSTE */
   gap: 10px;
   padding: 10px;
   border: 1px solid #999;
   border-radius: 4px;
   box-sizing: border-box;
+  text-align: center; /* 💡 AJUSTE */
 }
 
 .imagen-y-campos {
@@ -132,8 +135,8 @@ h2 {
 
 .columna-derecha label {
   display: flex;
-  text-align: left;
-  justify-content: flex-start;
+  justify-content: center; /* 💡 AJUSTE */
+  text-align: center; /* 💡 AJUSTE */
   border: 1px solid #999;
   padding: 10px;
   border-radius: 4px;
@@ -146,7 +149,7 @@ h2 {
 
 .columna-derecha .fecha {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center; /* 💡 AJUSTE */
   border: none;
   margin-bottom: 40px;
   gap: 30px;
@@ -160,8 +163,9 @@ h2 {
   gap: 10px;
   width: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center; /* 💡 AJUSTE */
   box-sizing: border-box;
+  text-align: center; /* 💡 AJUSTE */
 }
 
 .columna-derecha .fecha label.Fecha input {
@@ -170,6 +174,7 @@ h2 {
   background-color: transparent;
   max-width: 100%;
   box-sizing: border-box;
+  text-align: center; /* 💡 AJUSTE */
 }
 
 .columna-derecha .visual {
@@ -181,7 +186,8 @@ h2 {
 
 .columna-derecha .stro label {
   display: flex;
-  justify-content: column;
+  justify-content: center; /* 💡 AJUSTE */
+  text-align: center; /* 💡 AJUSTE */
   margin-bottom: 100px;
   max-width: 100%;
   box-sizing: border-box;
@@ -198,7 +204,7 @@ h2 {
 
 .form-group label span,
 .columna-derecha span {
-  text-align: left;
+  text-align: center; /* 💡 AJUSTE */
   min-width: 80px;
 }
 
@@ -211,6 +217,7 @@ h2 {
   font-size: 14px;
   max-width: 100%;
   box-sizing: border-box;
+  text-align: center; /* 💡 AJUSTE */
 }
 
 .texto {
@@ -266,7 +273,6 @@ td input {
 }
 
 /* ==== MEDIA QUERIES ==== */
-
 @media (max-width: 767px) {
   img.logo {
     width: 120px;
