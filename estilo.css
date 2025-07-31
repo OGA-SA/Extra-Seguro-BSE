@@ -1,0 +1,359 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  max-width: 100vw;
+  overflow-x: hidden;
+  width: 100%;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+img.logo {
+  position: static;
+  margin: 25px 0 0 0; /* margen superior de 25px, sin márgenes automáticos */
+  display: block; /* podés mantenerlo si querés que se comporte como bloque */
+  width: 140px;
+  max-width: 100%;
+  height: auto;
+  align-items: flex-start;
+}
+
+h2 {
+  text-align: center;
+  margin: 100px auto 0 auto;
+  background-color: #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  width: 95%;
+  max-width: 1200px;
+  box-sizing: border-box;
+}
+
+/* Contenedor principal con flex sin wrap y scroll horizontal */
+.datos {
+  width: 95%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 15px;
+  margin-top: 30px;
+  padding: 0 10px;
+  box-sizing: border-box;
+
+  flex-wrap: wrap;        /* ✅ Permite que se acomoden si no entran */
+  overflow-x: hidden;     /* ✅ Elimina el scroll horizontal */
+}
+
+/* Columnas hijas que escalan manteniendo estructura interna */
+.contenedor-izquierda {
+  flex: 1 1 45%;
+  min-width: 300px;    /* mínimo para no romper */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.columna-derecha {
+  flex: 1 1 45%;
+  min-width: 200px;    /* mínimo ancho */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Formularios internos mantienen fila sin wrap */
+.fila-formulario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 95%;
+  margin: 20px auto;
+  flex-wrap: nowrap;
+}
+
+.form-group {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.form-group label {
+  flex-shrink: 1;
+  min-width: 100px;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.imagen-y-campos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 40px auto;
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.canvas-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.canvas {
+  display: flex;
+  align-items: flex-end;
+}
+
+.clear-button {
+  margin-top: 10px;
+  align-self: flex-end;
+  margin-right: 20px;
+}
+
+.columna-derecha label {
+  display: flex;
+  text-align: left;
+  justify-content: flex-start;
+  border: 1px solid #999;
+  padding: 10px;
+  border-radius: 4px;
+  min-width: 200px;
+  gap: 35px;
+  max-width: 100%;
+  width: auto;
+  box-sizing: border-box;
+}
+
+.columna-derecha .fecha {
+  display: flex;
+  justify-content: flex-start;
+  border: none;
+  margin-bottom: 40px;
+  gap: 30px;
+  flex-wrap: nowrap;
+}
+
+.columna-derecha .fecha label.Fecha {
+  border: 1px solid #999;
+  border-radius: 4px;
+  padding: 10px;
+  gap: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+.columna-derecha .fecha label.Fecha input {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.columna-derecha .visual {
+  margin-top: 30px;
+  min-width: 110px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.columna-derecha .stro label {
+  display: flex;
+  justify-content: column;
+  margin-bottom: 100px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.columna-derecha .stro label.siniestro {
+  margin-bottom: 50px;
+  margin-top: 70px;
+}
+
+.columna-derecha .stro label.visual {
+  margin-top: 50px;
+}
+
+.form-group label span,
+.columna-derecha span {
+  text-align: left;
+  min-width: 80px;
+}
+
+.form-group input,
+.columna-derecha input {
+  border: none;
+  outline: none;
+  padding: 5px;
+  background-color: transparent;
+  font-size: 14px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.texto {
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+  box-sizing: border-box;
+}
+
+h3 {
+  text-align: center;
+  border: 1px solid black;
+  padding: 8px;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 25px auto 0 auto;
+  table-layout: fixed;
+  max-width: 100%;
+  overflow-x: auto;
+  display: block;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+th, td {
+  border: 1px solid #000;
+  padding: 7px;
+  text-align: left;
+}
+
+td input {
+  width: 100%;
+  border: none;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.tablas-piezas {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 30px;
+  flex-wrap: nowrap;
+  width: 100%;
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+
+.tablas-piezas table {
+  width: 45%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* ==== MEDIA QUERIES ==== */
+
+/* Tablets (menor a 768px) */
+@media (max-width: 767px) {
+  img.logo {
+    width: 120px;
+  }
+
+  h2 {
+    margin-top: 60px;
+    width: 90%;
+    font-size: 1.3rem;
+  }
+
+  /* Mantenemos wrap para evitar scroll horizontal extremo, si querés quitarlo sacalo */
+  .datos {
+    overflow-x: auto;
+  }
+
+  /* Permitir que columnas se achiquen pero sin cambiar estructura */
+  .contenedor-izquierda {
+    min-width: 250px;
+  }
+
+  .columna-derecha {
+    min-width: 180px;
+  }
+}
+
+/* Celulares (menor a 480px) */
+@media (max-width: 479px) {
+  img.logo {
+    width: 100px;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+    margin-top: 40px;
+  }
+
+  /* Mantener scroll horizontal para que no se rompa layout */
+  .datos {
+    overflow-x: auto;
+  }
+
+  .contenedor-izquierda {
+    min-width: 200px;
+  }
+
+  .columna-derecha {
+    min-width: 150px;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 95%;
+  max-width: 1200px;
+  padding: 25px 10px 0 10px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .form-group {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .tablas-piezas {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .tablas-piezas table {
+    width: 90%;
+  }
+}
