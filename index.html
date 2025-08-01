@@ -207,13 +207,12 @@
       }
 
       // Validar si el canvas está vacío
-      function isCanvasBlank(canvas) {
+      
       const context = canvas.getContext("2d");
       const pixelBuffer = new Uint32Array(
         context.getImageData(0, 0, canvas.width, canvas.height).data.buffer
       );
-      return !pixelBuffer.some(color => color !== 0);
-      }
+     
       
       // El canvas está en blanco si todos los píxeles son transparentes o blancos
       // Usamos la condición que me diste (que no haya ningún color distinto de 0)
