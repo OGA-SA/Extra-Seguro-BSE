@@ -238,11 +238,16 @@ function agregarFilaSiEsUltima(input, tablaId) {
     // Limpiar los inputs
     nuevaFila.querySelectorAll("input").forEach(input => input.value = "");
 
+    // Limpiar el contenido de la primera celda (nombre de la pieza)
+    const primeraCelda = nuevaFila.querySelector("td");
+    if (primeraCelda) {
+      primeraCelda.textContent = "";
+    }
+
     tabla.querySelector("tbody").appendChild(nuevaFila);
   }
 }
 
-// Función para asignar eventos de escucha a inputs de ambas tablas
 function inicializarAutofila(tablaId) {
   const tabla = document.getElementById(tablaId);
   tabla.addEventListener("input", function (e) {
@@ -252,11 +257,9 @@ function inicializarAutofila(tablaId) {
   });
 }
 
-// Inicializar para ambas tablas
 inicializarAutofila("tablaPiezas1");
 inicializarAutofila("tablaPiezas2");
 </script>
-
 </body>
 </html>
 
