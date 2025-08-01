@@ -15,7 +15,7 @@ html, body {
 }
 
 img.logo {
-  position: static;
+  
   margin: 25px 0 0 0;
   display: block;
   width: 140px;
@@ -30,16 +30,7 @@ h2, .texto, .header, h3 {
   margin: auto;
   box-sizing: border-box;
 }
-.header {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 25px 10px 0 10px;
-  width: 95%;
-  max-width: 1200px;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
+
 h2 {
   text-align: center;
   margin-top: 100px;
