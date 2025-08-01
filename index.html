@@ -235,14 +235,8 @@ function agregarFilaSiEsUltima(input, tablaId) {
   if (ultimaFila.contains(input)) {
     const nuevaFila = ultimaFila.cloneNode(true);
 
-    // Limpiar los inputs
+    // Limpiar todos los inputs de la fila clonada
     nuevaFila.querySelectorAll("input").forEach(input => input.value = "");
-
-    // Limpiar el contenido de la primera celda (nombre de la pieza)
-    const primeraCelda = nuevaFila.querySelector("td");
-    if (primeraCelda) {
-      primeraCelda.textContent = "";
-    }
 
     tabla.querySelector("tbody").appendChild(nuevaFila);
   }
@@ -257,6 +251,7 @@ function inicializarAutofila(tablaId) {
   });
 }
 
+// Activar en ambas tablas
 inicializarAutofila("tablaPiezas1");
 inicializarAutofila("tablaPiezas2");
 </script>
