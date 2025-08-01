@@ -100,6 +100,7 @@
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
   let baseImageData = null;
+  let userHasDrawn = false;
 
   const image = new Image();
   image.src = "parabrisa.png";
@@ -126,6 +127,7 @@
   function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+    userHasDrawn = false;
     // Actualizamos baseImageData al nuevo "canvas limpio"
     baseImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
   }
@@ -161,6 +163,7 @@
     ctx.stroke();
     ctx.beginPath();
     ctx.moveTo(pos.x, pos.y);
+    userHasDrawn = true;
   }
 
   function endDraw(evt) {
@@ -197,7 +200,7 @@
     // ✅ Evaluamos si hay dibujo
     const hayDibujo = canvasEstaModificado();
 
-    if (hayDibujo && !dificultadVisual) {
+    if (userHasDrawn && !dificultadVisual) {
       alert("Por favor describa la dificultad visual asociada al dibujo.");
       return;
     }
