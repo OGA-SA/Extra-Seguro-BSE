@@ -226,7 +226,36 @@
       });
   });
 </script>
+<script>
+function agregarFilaSiEsUltima(input, tablaId) {
+  const tabla = document.getElementById(tablaId);
+  const filas = tabla.querySelectorAll("tbody tr");
+  const ultimaFila = filas[filas.length - 1];
 
+  if (ultimaFila.contains(input)) {
+    const nuevaFila = ultimaFila.cloneNode(true);
+
+    // Limpiar los inputs
+    nuevaFila.querySelectorAll("input").forEach(input => input.value = "");
+
+    tabla.querySelector("tbody").appendChild(nuevaFila);
+  }
+}
+
+// Función para asignar eventos de escucha a inputs de ambas tablas
+function inicializarAutofila(tablaId) {
+  const tabla = document.getElementById(tablaId);
+  tabla.addEventListener("input", function (e) {
+    if (e.target.tagName === "INPUT") {
+      agregarFilaSiEsUltima(e.target, tablaId);
+    }
+  });
+}
+
+// Inicializar para ambas tablas
+inicializarAutofila("tablaPiezas1");
+inicializarAutofila("tablaPiezas2");
+</script>
 
 </body>
 </html>
