@@ -96,32 +96,6 @@
 
   <!-- SCRIPT FUNCIONAL -->
 
- <script>
-  const sugerencias = ["Manzana", "Mandarina", "Melón", "Mango"];
-  const input = document.getElementById("autocomplete");
-
-  let ultimaEntrada = "";
-
-  input.addEventListener("input", () => {
-    const valor = input.value.toLowerCase();
-
-    if (valor.length < ultimaEntrada.length) {
-      ultimaEntrada = valor;
-      return;
-    }
-
-    const match = sugerencias.find(opcion =>
-      opcion.toLowerCase().startsWith(valor)
-    );
-    if (match && valor !== match.toLowerCase()) {
-      input.value = match;
-      input.setSelectionRange(valor.length, match.length);
-    }
-
-    ultimaEntrada = valor;
-  });
-</script>
-
 <script>
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
@@ -130,11 +104,35 @@
   const image = new Image();
   image.src = "parabrisa.png";
   image.crossOrigin = "anonymous";
+
   image.onload = () => {
     ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+    // ⚠️ Guardamos la imagen base solo cuando ya esté cargada completamente
     baseImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
   };
 
+  function canvasEstaModificado() {
+    const actual = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    if (!baseImageData) return false;
+
+    for (let i = 0; i < actual.data.length; i++) {
+      if (actual.data[i] !== baseImageData.data[i]) {
+        return true; // hay algo diferente
+      }
+    }
+    return false; // es igual que la imagen original
+  }
+
+  function clearCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+    // Actualizamos baseImageData al nuevo "canvas limpio"
+    baseImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  }
+
+  window.clearCanvas = clearCanvas;
+
+  // EVENTOS DE DIBUJO
   let drawing = false;
 
   function getPos(evt) {
@@ -181,14 +179,7 @@
   canvas.addEventListener("touchend", endDraw);
   canvas.addEventListener("touchcancel", endDraw);
 
-  function clearCanvas() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-    baseImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  }
-
-  window.clearCanvas = clearCanvas;
-
+  // BOTÓN SUBMIT
   document.getElementById("boton").addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -203,20 +194,10 @@
       return;
     }
 
-    // ✅ Comparar canvas actual con imagen base para ver si hay dibujo
-    const currentImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    let isCanvasBlank = true;
+    // ✅ Evaluamos si hay dibujo
+    const hayDibujo = canvasEstaModificado();
 
-    if (baseImageData) {
-      for (let i = 0; i < currentImageData.data.length; i++) {
-        if (currentImageData.data[i] !== baseImageData.data[i]) {
-          isCanvasBlank = false;
-          break;
-        }
-      }
-    }
-
-    if (!isCanvasBlank && !dificultadVisual) {
+    if (hayDibujo && !dificultadVisual) {
       alert("Por favor describa la dificultad visual asociada al dibujo.");
       return;
     }
@@ -242,6 +223,7 @@
       });
   });
 </script>
+
 
 </body>
 </html>
