@@ -299,6 +299,12 @@ td input {
     width: 100%;
   }
 }
+.header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 25px 10px 0 10px;
+}
 
 @media (max-width: 479px) {
   img.logo {
