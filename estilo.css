@@ -284,7 +284,7 @@ td input {
 }
 
 /* ==== MEDIA QUERIES ==== */
-@media (max-width: 767px) {
+@media (max-width: 800px) {
   img.logo {
     width: 100px;
     margin-left: 10px;
