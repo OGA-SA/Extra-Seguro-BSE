@@ -311,9 +311,21 @@ td input {
 }
 
 @media (max-width: 479px) {
-  h2 {
+  
+h2 {
     font-size: 1.1rem;
     margin-top: 40px;
   }
+
+  .contenedor-izquierda,
+  .columna-derecha {
+    width: 100%;
+  }
 }
 
+.header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 25px 10px 0 10px;
+}
