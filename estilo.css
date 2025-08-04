@@ -286,7 +286,7 @@ td input {
 /* ==== MEDIA QUERIES ==== */
 @media (max-width: 767px) {
   img.logo {
-    width: 120px;
+    width: 100px;
   }
 
   h2 {
