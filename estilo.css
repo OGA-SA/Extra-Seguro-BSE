@@ -287,6 +287,7 @@ td input {
 @media (max-width: 767px) {
   img.logo {
     width: 100px;
+    margin-left: 10px;
   }
 
   h2 {
