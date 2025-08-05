@@ -5,52 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FORMULARIO EXTRA SEGURO</title>
   <link rel="stylesheet" href="estilo.css" />
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: auto;
-      overflow-x: hidden;
-      overflow-y: auto;
-      background: white;
-    }
-
-    #escalado {
-      transform-origin: top center;
-      display: flex;
-      justify-content: center;
-    }
-
-    #contenidoPDF {
-      max-width: 1200px;
-      width: 100%;
-      margin: 0 auto;
-      background: white;
-    }
-
-    .header {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-    }
-
-    .logo {
-      max-width: 150px;
-      height: auto;
-      margin: 10px;
-    }
-
-    h2 {
-      text-align: center;
-      margin-top: 0;
-    }
-
-    canvas {
-      max-width: 100%;
-      height: auto;
-    }
-  </style>
 </head>
 <body>
   <div id="escalado">
@@ -96,86 +50,86 @@
       </div>
 
       <div class="tablas-piezas">
-        <table id="tablaPiezas1">
-          <thead>
-            <tr>
-              <th>PIEZA / ACCESORIOS</th>
-              <th>CHAPA</th>
-              <th>PINTURA</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>GUARDABARRO DEL DER</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-            <tr><td>GUARDABARRO DEL IZQ</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-            <tr><td>ESPOLON</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-            <tr><td>CARETA</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-            <tr><td>PARAGOLPE DELANTERO</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-            <tr><td>PUNTERA P/GOLPE DEL DER</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-            <tr><td>PUNTERA P/GOLPE DEL IZQ</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-            <tr><td>SEMIOPTICA DERECHA</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-            <tr><td>SEMIOPTICA IZQUIERDA</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-            <tr><td>SEÑALERO DEL DER</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-            <tr><td>SEÑALERO DEL IZQ</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-            <tr><td>PUERTA DELANTERA DERECHA</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-            <tr><td>PUERTA DELANTERA IZQUIERDA</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-            <tr><td>PORTON TRAS DER</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-            <tr><td>PORTON TRAS IZQ</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-            <tr><td>GUARDABARRO TRAS DER</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-            <tr><td>GUARDABARRO TRAS IZQ</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-            <tr><td>TECHO</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-            <tr><td>PARABRISAS</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-            <tr><td><input type="text" /></td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-          </tbody>
-        </table>
+       <table id="tablaPiezas1">
+        <thead>
+          <tr>
+            <th>PIEZA / ACCESORIOS</th>
+            <th>CHAPA</th>
+            <th>PINTURA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>GUARDABARRO DEL DER</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
+          <tr><td>GUARDABARRO DEL IZQ</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
+          <tr><td>ESPOLON</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
+          <tr><td>CARETA</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
+          <tr><td>PARAGOLPE DELANTERO</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
+          <tr><td>PUNTERA P/GOLPE DEL DER</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
+          <tr><td>PUNTERA P/GOLPE DEL IZQ</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
+          <tr><td>SEMIOPTICA DERECHA</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
+          <tr><td>SEMIOPTICA IZQUIERDA</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
+          <tr><td>SEÑALERO DEL DER</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
+          <tr><td>SEÑALERO DEL IZQ</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
+          <tr><td>PUERTA DELANTERA DERECHA</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
+          <tr><td>PUERTA DELANTERA IZQUIERDA</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
+          <tr><td>PORTON TRAS DER</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
+          <tr><td>PORTON TRAS IZQ</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
+          <tr><td>GUARDABARRO TRAS DER</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
+          <tr><td>GUARDABARRO TRAS IZQ</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
+          <tr><td>TECHO</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
+          <tr><td>PARABRISAS</td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
+          <tr><td><input type="text" /></td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
+        </tbody>
+      </table>
 
-        <table id="tablaPiezas2">
-          <thead>
-            <tr>
-              <th>PIEZA / ACCESORIOS</th>
-              <th>CHAPA</th>
-              <th>PINTURA</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>PANEL TRASERO</td><td><input type="text" id="autocomplete" /></td><td><input type="text" /></td></tr>
-            <tr><td>TAPA VALIJA / PORTON TRAS.</td><td><input type="text" id="autocomplete" /></td><td><input type="text" /></td></tr>
-            <tr><td>PARAGOLPE TRASERO</td><td><input type="text" id="autocomplete" /></td><td><input type="text" /></td></tr>
-            <tr><td>PUNTERA P/GOLPE TRAS DER</td><td><input type="text" id="autocomplete" /></td><td><input type="text" /></td></tr>
-            <tr><td>PUNTERA P/GOLPE TRAS IZQ</td><td><input type="text" id="autocomplete" /></td><td><input type="text" /></td></tr>
-            <tr><td>FAROL TRASERO DERECHO</td><td><input type="text" id="autocomplete" /></td><td><input type="text" /></td></tr>
-            <tr><td>FAROL TRASERO IZQUIERDO</td><td><input type="text" id="autocomplete" /></td><td><input type="text" /></td></tr>
-            <tr><td>ZOCALO DERECHO</td><td><input type="text" id="autocomplete" /></td><td><input type="text" /></td></tr>
-            <tr><td>ZOCALO IZQUIERDO</td><td><input type="text" id="autocomplete" /></td><td><input type="text" /></td></tr>
-            <tr><td>LUNETA TRASERA</td><td><input type="text" id="autocomplete" /></td><td><input type="text" /></td></tr>
-            <tr><td>MOLDURA sup tapa caja</td><td><input type="text" id="autocomplete" /></td><td><input type="text" /></td></tr>
-            <tr><td>LATERAL DERECHO CAJA</td><td><input type="text" id="autocomplete" /></td><td><input type="text" /></td></tr>
-            <tr><td>LATERAL IZQUIERDO CAJA</td><td><input type="text" id="autocomplete" /></td><td><input type="text" /></td></tr>
-            <tr><td>FRENTE DE CHAPA</td><td><input type="text" id="autocomplete" /></td><td><input type="text" /></td></tr>
-            <tr><td>PUERTA TRASERA DER</td><td><input type="text" id="autocomplete" /></td><td><input type="text" /></td></tr>
-            <tr><td>PUERTA TRASERA IZQ</td><td><input type="text" id="autocomplete" /></td><td><input type="text" /></td></tr>
-            <tr><td>PORTON LATERAL DERECHO</td><td><input type="text" id="autocomplete" /></td><td><input type="text" /></td></tr>
-            <tr><td>CHORIZO DE TECHO IZQ</td><td><input type="text" id="autocomplete" /></td><td><input type="text" /></td></tr>
-            <tr><td><input type="text" /></td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
-          </tbody>
-        </table>
-
-        <datalist id="opciones-piezas">
-          <option value="Manzana">
-          <option value="Mandarina">
-          <option value="Melón">
-          <option value="Mango">
-        </datalist>
+      <table id="tablaPiezas2">
+        <thead>
+          <tr>
+            <th>PIEZA / ACCESORIOS</th>
+            <th>CHAPA</th>
+            <th>PINTURA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>PANEL TRASERO</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
+          <tr><td>TAPA VALIJA / PORTON TRAS.</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
+          <tr><td>PARAGOLPE TRASERO</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
+          <tr><td>PUNTERA P/GOLPE TRAS DER</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
+          <tr><td>PUNTERA P/GOLPE TRAS IZQ</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
+          <tr><td>FAROL TRASERO DERECHO</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
+          <tr><td>FAROL TRASERO IZQUIERDO</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
+          <tr><td>ZOCALO DERECHO</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
+          <tr><td>ZOCALO IZQUIERDO</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
+          <tr><td>LUNETA TRASERA</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
+          <tr><td>MOLDURA sup tapa caja</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
+          <tr><td>LATERAL DERECHO CAJA</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
+          <tr><td>LATERAL IZQUIERDO CAJA</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
+          <tr><td>FRENTE DE CHAPA</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
+          <tr><td>PUERTA TRASERA DER</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
+          <tr><td>PUERTA TRASERA IZQ</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
+          <tr><td>PORTON LATERAL DERECHO</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
+          <tr><td>CHORIZO DE TECHO IZQ </td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
+          <tr><td><input type="text" /></td><td><input type="text" name="piezas" list="opciones-piezas"/></td><td><input type="text" /></td></tr>
+        </tbody>
+      </table>
+      <datalist id="opciones-piezas">
+        <option value="Manzana">
+        <option value="Mandarina">
+        <option value="Melón">
+        <option value="Mango">
+      </datalist>
       </div>
     </div>
+
+    <form id="boton">
+      <div style="text-align: center; margin: 30px 0;">
+        <button type="submit">Generar PDF</button>
+      </div>
+    </form>
   </div>
 
-  <form id="boton">
-    <div style="text-align: center; margin: 30px 0;">
-      <button type="submit">Generar PDF</button>
-    </div>
-  </form>
-
   <!-- Scripts -->
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <script>
@@ -316,5 +270,28 @@
 
     function inicializarAutofila(tablaId) {
       const tabla = document.getElementById(tablaId);
-     
+      tabla.addEventListener("input", function (e) {
+        if (e.target.tagName === "INPUT") {
+          agregarFilaSiEsUltima(e.target, tablaId);
+        }
+      });
+    }
 
+    inicializarAutofila("tablaPiezas1");
+    inicializarAutofila("tablaPiezas2");
+  </script>
+
+  <!-- Escalado automático -->
+  <script>
+    function escalarPagina() {
+      const baseWidth = 1200;
+      const escala = Math.min(window.innerWidth / baseWidth, 1);
+      document.getElementById('escalado').style.transform = `scale(${escala})`;
+      document.body.style.height = `${document.getElementById('escalado').offsetHeight * escala}px`;
+    }
+
+    window.addEventListener('resize', escalarPagina);
+    window.addEventListener('load', escalarPagina);
+  </script>
+</body>
+</html>
