@@ -45,7 +45,9 @@ h3 {
   padding: 8px;
   }
 
-
+.texto {
+  margin-bottom: 20px;
+}
 
 /* ======== CONTENEDOR PRINCIPAL ======== */
 .datos {
