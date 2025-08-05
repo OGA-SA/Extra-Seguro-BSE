@@ -1,249 +1,279 @@
-/* Reset básico */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  box-sizing: border-box;
 }
 
-body {
-  background-color: #f2f2f2;
-  color: #000;
-  padding: 20px;
-  text-align: center;
-}
-
-/* Contenedor escalado */
-#escalado {
-  width: 1200px;
-  margin: 0 auto;
-  transform-origin: top left;
-}
-
-/* Contenido PDF */
-#contenidoPDF {
-  background: #fff;
-  padding: 20px 25px 30px 25px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: left;
-}
-
-/* Header con logo */
-.header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.logo {
-  width: 160px;
-  height: auto;
-}
-
-/* Título */
-h2 {
-  margin-bottom: 20px;
-  font-weight: bold;
-  font-size: 24px;
-  text-align: center;
-}
-
-/* Datos principales */
-.datos {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 25px;
-}
-
-/* Izquierda: formulario y canvas */
-.contenedor-izquierda {
-  width: 70%;
-}
-
-.fila-formulario {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  display: inline-block;
-  margin-right: 15px;
-  font-weight: 600;
-}
-
-.form-group input[type="text"],
-.form-group input[type="date"] {
-  padding: 5px;
-  width: 120px;
-  margin-left: 5px;
-  border: 1px solid #aaa;
-  border-radius: 3px;
-}
-
-/* Canvas sección */
-.canvas-section {
-  margin-top: 20px;
-  position: relative;
-}
-
-canvas {
-  border: 1px solid #ccc;
+html, body {
+  margin: 0;
+  padding: 0;
   width: 100%;
-  max-width: 700px;
-  height: auto;
-}
-
-.clear-button {
-  margin-top: 8px;
-  padding: 6px 12px;
-  background-color: #005f9e;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.clear-button:hover {
-  background-color: #00416d;
-}
-
-/* Derecha: formulario */
-.columna-derecha {
-  width: 28%;
+  height: 100%;
+  font-family: sans-serif;
+  overflow-x: hidden; /* 🚫 No scroll horizontal */
+  overflow-y: auto;   /* ✅ Scroll vertical */
+  background-color: white;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  align-items: center;
 }
 
-.fecha,
-.stro {
+
+/* HEADER: mostrar logo a la izquierda y alinear con el resto */
+.header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0;
+  padding: 0;
+}
+.logo {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+
+}
+
+img.logo {
+  display: block;
+  width: 130px;
+  height: auto;
+}
+
+h2 {
+  text-align: center;
+  margin: 0 auto 20px auto;
+  background-color: #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  width: 95%;
+  max-width: 1200px;
+}
+
+/* AGRUPAR LOS ELEMENTOS CENTRALES */
+h2, .texto, .header, h3 {
+  width: 95%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+h3 {
+  text-align: center;
+  border: 1px solid black;
+  padding: 8px;
+}
+
+.texto {
   margin-bottom: 20px;
 }
 
-.Fecha,
-.siniestro,
-.visual {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: 600;
-}
-
-.Fecha input,
-.siniestro input,
-.visual input {
-  padding: 5px;
-  width: 100%;
-  max-width: 180px;
-  border: 1px solid #aaa;
-  border-radius: 3px;
-  margin-left: 5px;
-}
-
-/* Texto informativo */
-.texto {
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-.texto h3 {
-  font-weight: 600;
-  font-size: 18px;
-  margin-bottom: 8px;
-}
-
-/* Tablas */
-.tablas-piezas {
+.datos {
+  width: 95%;
+  max-width: 1200px;
+  margin: 30px auto;
   display: flex;
   justify-content: space-between;
   gap: 20px;
+}
+
+.contenedor-izquierda,
+.columna-derecha {
+  min-width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.contenedor-izquierda {
+  width: 65%;
+}
+
+.columna-derecha {
+  width: 30%;
+}
+
+.fila-formulario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 20px auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+}
+
+.form-group label {
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.form-group input,
+.columna-derecha input {
+  border: none;
+  outline: none;
+  padding: 5px;
+  background-color: transparent;
+  font-size: 14px;
+  width: 100%;
+  text-align: center;
+}
+
+.form-group label span,
+.columna-derecha span {
+  text-align: center;
+  min-width: 80px;
+}
+
+.imagen-y-campos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px auto;
+  gap: 20px;
+  width: 100%;
+}
+
+.canvas-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.canvas {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.clear-button {
+  margin-top: 10px;
+  align-self: flex-end;
+  margin-right: 20px;
+}
+
+.columna-derecha label {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid #999;
+  padding: 10px;
+  border-radius: 4px;
+  gap: 35px;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.columna-derecha .fecha {
+  display: flex;
+  justify-content: center;
+  border: none;
   margin-bottom: 40px;
+  margin-top: 20px;
+  gap: 30px;
+}
+
+.columna-derecha .fecha label.Fecha {
+  border: 1px solid #999;
+  border-radius: 4px;
+  padding: 10px;
+  gap: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.columna-derecha .fecha label.Fecha input {
+  border: none;
+  outline: none;
+  max-width: 100%;
+  text-align: center;
+}
+
+.columna-derecha .visual {
+  margin-top: 30px;
+  min-width: 110px;
+  max-width: 100%;
+}
+
+.columna-derecha .stro label {
+  border: 1px solid #999;
+  border-radius: 4px;
+  padding: 10px;
+  gap: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.columna-derecha .stro label.siniestro {
+  margin-bottom: 50px;
+  margin-top: 70px;
+}
+
+.columna-derecha .stro label.visual {
+  margin-top: 50px;
 }
 
 table {
   border-collapse: collapse;
-  width: 48%;
+  margin: 0 auto;
+  table-layout: fixed;
+  max-width: 100%;
+  overflow-x: auto;
+  display: block;
+  white-space: nowrap;
 }
 
-th,
-td {
-  border: 1px solid #999;
-  padding: 6px 10px;
+th, td {
+  border: 1px solid #000;
+  padding: 7px;
   text-align: left;
-  font-size: 14px;
 }
 
-th {
-  background-color: #ddd;
-  font-weight: 700;
-}
-
-input[type="text"] {
+td input {
   width: 100%;
-  padding: 3px 6px;
-  border: 1px solid #bbb;
-  border-radius: 3px;
-  font-size: 14px;
+  border: none;
+  padding: 5px;
 }
 
-/* Botón Generar PDF */
-#boton {
-  margin-top: 30px;
+.tablas-piezas {
+  display: flex;
+  width: 95%;
+  max-width: 1200px;
+  margin: 40px auto 0 auto;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  overflow-y: auto;
 }
 
-/* Responsividad: Tablets y móviles */
-@media (max-width: 1024px) {
-  #escalado {
-    width: 100%;
-  }
-
-  .datos {
-    flex-direction: column;
-  }
-
-  .contenedor-izquierda,
-  .columna-derecha {
-    width: 100%;
-  }
-
-  .tablas-piezas {
-    flex-direction: column;
-  }
-
-  table {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-
-  canvas {
-    max-width: 100%;
-    height: auto;
-  }
+.tablas-piezas table {
+  width: 45%;
+  max-width: 100%;
+  vertical-align: top;
+  margin-top: 0;
 }
-
-@media (max-width: 480px) {
-  body {
-    padding: 10px;
-  }
-
-  h2 {
-    font-size: 20px;
-  }
-
-  .form-group label,
-  .Fecha,
-  .siniestro,
-  .visual {
-    font-size: 14px;
-  }
-
-  input[type="text"],
-  input[type="date"] {
-    width: 100%;
-    max-width: 100%;
-    margin-left: 0;
-  }
-
-  .clear-button {
-    width: 100%;
-  }
-}
-
