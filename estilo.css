@@ -39,7 +39,7 @@ img.logo {
 
 h2 {
   text-align: center;
-  margin: 20px auto;
+  margin: 0 auto 20px auto;
   background-color: #ccc;
   padding: 10px;
   border-radius: 8px;
