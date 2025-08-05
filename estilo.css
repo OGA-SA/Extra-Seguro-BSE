@@ -27,6 +27,11 @@ html, body {
   padding: 25px 10px 0 10px;
 }
 
+#contenidoPDF {
+  margin-top: 0;
+  padding-top: 0;
+}
+
 img.logo {
   display: block;
   width: 130px;
