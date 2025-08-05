@@ -43,7 +43,7 @@ h3 {
   text-align: center;
   border: 1px solid black;
   padding: 8px;
-  }
+}
 
 .texto {
   margin-bottom: 20px;
@@ -259,21 +259,25 @@ td input {
 /* ======== TABLAS PIEZAS ======== */
 .tablas-piezas {
   display: flex;
-  margin: auto;
+  margin: 40px auto 0 auto; /* margen superior agregado */
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* alinea ambas tablas arriba */
   gap: 40px;
   flex-wrap: nowrap;
   width: 100%;
   overflow-x: auto;
 }
-.tabla-piezas2{
-  margin-top: 0px;
-}
 
 .tablas-piezas table {
   width: 45%;
   max-width: 100%;
+  vertical-align: top; /* alineación vertical */
+  margin-top: 0;       /* aseguramos que no se desplace */
+}
+
+.tabla-piezas1,
+.tabla-piezas2 {
+  margin-top: 0 !important; /* por si algún margen las desplazaba */
 }
 
 /* ======== MEDIA QUERIES ======== */
@@ -313,8 +317,7 @@ td input {
 }
 
 @media (max-width: 479px) {
-  
-h2 {
+  h2 {
     font-size: 1.1rem;
     margin-top: 40px;
   }
@@ -323,11 +326,4 @@ h2 {
   .columna-derecha {
     width: 100%;
   }
-}
-
-.header {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 25px 10px 0 10px;
 }
