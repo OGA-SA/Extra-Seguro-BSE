@@ -9,6 +9,7 @@ html, body {
   font-family: sans-serif;
   overflow: hidden; /* sin scroll */
   background-color: white;
+  align-items: center;
 }
 
 #escalado {
