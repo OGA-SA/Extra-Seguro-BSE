@@ -245,11 +245,23 @@
       html2pdf()
         .from(document.getElementById("contenidoPDF"))
         .set({
-          margin: 0.5,
-          filename: "formulario_con_dibujo.pdf",
-          image: { type: "jpeg", quality: 0.98 },
-          html2canvas: { scale: 2 },
-          jsPDF: { unit: "in", format: "A4", orientation: "portrait" }
+          margin:       0,
+          filename:     "formulario_con_dibujo.pdf",
+          image:        { type: "jpeg", quality: 1 },
+          html2canvas:  {
+            scale: 2,            // Alta resolución
+            useCORS: true,       // Soporte para imágenes externas
+            logging: true,       // Para ver errores en consola si hay
+            scrollX: 0,
+            scrollY: -window.scrollY,
+            windowWidth: document.documentElement.scrollWidth,
+            windowHeight: document.documentElement.scrollHeight
+          },
+          jsPDF: {
+            unit: "mm",
+            format: "a4",
+            orientation: "portrait"
+          }
         })
         .save()
         .then(() => {
