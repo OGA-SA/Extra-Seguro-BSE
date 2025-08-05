@@ -234,7 +234,7 @@ h3 {
 /* ======== TABLAS ======== */
 table {
   border-collapse: collapse;
-  margin: 25px auto 0 auto;
+  margin: 0 auto 0 auto;
   table-layout: fixed;
   max-width: 100%;
   overflow-x: auto;
