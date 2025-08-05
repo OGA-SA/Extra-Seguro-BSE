@@ -24,11 +24,17 @@ html, body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 95%;
+  width: 100%;
   max-width: 1200px;
   padding: 25px 10px 0 10px;
 }
-
+.logo {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
 
 img.logo {
   display: block;
