@@ -26,14 +26,15 @@ html, body {
   align-items: center;
   width: 100%;
   max-width: 1200px;
-  padding: 25px 10px 0 10px;
+  margin: 0;
+  padding: 0;
 }
 .logo {
   display: block;
   max-width: 100%;
   height: auto;
   margin: 0;
-  padding: 0;
+
 }
 
 img.logo {
