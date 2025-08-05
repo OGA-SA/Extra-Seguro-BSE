@@ -18,10 +18,6 @@ body{
   overflow: auto !important;
 }
 
-#escalado {
-  width: 100%; /* diseño base */
-  
-}
 
 .header {
   display: flex;
