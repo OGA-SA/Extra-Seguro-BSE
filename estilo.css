@@ -261,7 +261,6 @@ td input {
   justify-content: center;
   align-items: center;
   gap: 40px;
-  margin-top: 30px;
   flex-wrap: nowrap;
   width: 100%;
   overflow-x: auto;
