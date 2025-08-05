@@ -273,6 +273,7 @@ td input {
   justify-content: center;
   align-items: flex-start;
   gap: 40px;
+  overflow-y: auto;
 }
 
 .tablas-piezas table {
