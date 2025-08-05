@@ -128,7 +128,7 @@
       </div>
     </form>
   </div>
-
+</html>
   <!-- Scripts -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -242,10 +242,14 @@
       const botones = document.querySelectorAll("button");
       botones.forEach(btn => btn.style.display = "none");
 
+      // Eliminar el escalado temporalmente para que html2pdf capture el contenido sin escala
+      const escalado = document.getElementById('escalado');
+      escalado.style.transform = 'none';
+
       html2pdf()
           .from(document.getElementById("contenidoPDF"))
           .set({
-            margin: 10,
+            margin: [15, 15, 15, 15], // margen superior, derecha, inferior, izquierda (en mm)
             filename: "formulario_con_dibujo.pdf",
             image: { type: "jpeg", quality: 1 },
             html2canvas: {
@@ -253,7 +257,6 @@
               useCORS: true,
               scrollX: 0,
               scrollY: 0,
-              // prueba quitando windowWidth y windowHeight
             },
             jsPDF: {
               unit: "mm",
@@ -264,8 +267,9 @@
           .save()
           .then(() => {
             botones.forEach(btn => btn.style.display = "inline-block");
+            // Restaurar el escalado después de generar el pdf
+            escalarPagina();
           });
-
     });
 
     function agregarFilaSiEsUltima(input, tablaId) {
@@ -284,33 +288,6 @@
       const tabla = document.getElementById(tablaId);
       tabla.addEventListener("input", function (e) {
         if (e.target.tagName === "INPUT") {
-          agregarFilaSiEsUltima(e.target, tablaId);
-        }
-      });
-    }
+         
 
-    inicializarAutofila("tablaPiezas1");
-    inicializarAutofila("tablaPiezas2");
-  </script>
-
-  <!-- Escalado automático -->
-  <script>
-  function escalarPagina() {
-    const baseWidth = 1200;
-    const escala = Math.min(window.innerWidth / baseWidth, 1);
-    const escalado = document.getElementById('escalado');
-
-    escalado.style.transform = `scale(${escala})`;
-    escalado.style.transformOrigin = 'top center'; // 🔴 Esto es clave para que no desplace hacia abajo
-
-    // Ajustar el alto del body al tamaño escalado real
-    const altoEscalado = escalado.getBoundingClientRect().height;
-    document.body.style.height = `${altoEscalado}px`;
-  }
-
-  window.addEventListener('resize', escalarPagina);
-  window.addEventListener('load', escalarPagina);
-</script>
-</body>
-</html>
 
