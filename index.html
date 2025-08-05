@@ -243,29 +243,29 @@
       botones.forEach(btn => btn.style.display = "none");
 
       html2pdf()
-        .from(document.getElementById("contenidoPDF"))
-        .set({
-          margin: [20, 10, 10, 10],  // margen: top, right, bottom, left
-          filename: "formulario_con_dibujo.pdf",
-          image: { type: "jpeg", quality: 1 },
-          html2canvas: {
-            scale: 1.5,
-            useCORS: true,
-            scrollX: 0,
-            scrollY: -window.scrollY,
-            windowWidth: document.documentElement.scrollWidth,
-            windowHeight: document.documentElement.scrollHeight
-          },
-          jsPDF: {
-            unit: "mm",
-            format: "a4",
-            orientation: "portrait"
-          }
-        })
-        .save()
-        .then(() => {
-          botones.forEach(btn => btn.style.display = "inline-block");
-        });
+          .from(document.getElementById("contenidoPDF"))
+          .set({
+            margin: 10,
+            filename: "formulario_con_dibujo.pdf",
+            image: { type: "jpeg", quality: 1 },
+            html2canvas: {
+              scale: 2,
+              useCORS: true,
+              scrollX: 0,
+              scrollY: 0,
+              // prueba quitando windowWidth y windowHeight
+            },
+            jsPDF: {
+              unit: "mm",
+              format: "a4",
+              orientation: "portrait"
+            }
+          })
+          .save()
+          .then(() => {
+            botones.forEach(btn => btn.style.display = "inline-block");
+          });
+
     });
 
     function agregarFilaSiEsUltima(input, tablaId) {
