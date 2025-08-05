@@ -12,9 +12,13 @@ html, body {
   align-items: center;
 }
 
+body{
+  overflow: auto !important;
+}
+
 #escalado {
   width: 1200px; /* diseño base */
-  transform-origin: top left;
+  transform-origin: top center;
 }
 
 .header {
