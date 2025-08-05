@@ -7,6 +7,7 @@ html, body {
   padding: 0;
   width: 100%;
   font-family: sans-serif;
+  overflow-x: hidden;
 }
 
 /* ======== HEADER Y LOGO ======== */
@@ -53,7 +54,7 @@ h3 {
 .datos {
   width: 95%;
   max-width: 1200px;
-  margin: 30px auto 30px auto;
+  margin: 30px auto;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
@@ -65,7 +66,7 @@ h3 {
 /* ======== COLUMNAS ======== */
 .contenedor-izquierda,
 .columna-derecha {
-  min-width: 250px;
+  min-width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -99,7 +100,7 @@ h3 {
   justify-content: center;
   gap: 40px;
   width: 100%;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 
 .form-group label {
@@ -141,6 +142,7 @@ h3 {
   margin: 40px auto;
   gap: 20px;
   width: 100%;
+  overflow-x: auto;
 }
 
 .canvas-section {
@@ -184,7 +186,7 @@ h3 {
   margin-bottom: 40px;
   margin-top: 20px;
   gap: 30px;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 
 .columna-derecha .fecha label.Fecha {
@@ -236,7 +238,7 @@ h3 {
 /* ======== TABLAS ======== */
 table {
   border-collapse: collapse;
-  margin: 0 auto 0 auto;
+  margin: 0 auto;
   table-layout: fixed;
   max-width: 100%;
   overflow-x: auto;
@@ -259,40 +261,30 @@ td input {
 /* ======== TABLAS PIEZAS ======== */
 .tablas-piezas {
   display: flex;
-  margin: 40px auto 0 auto; /* margen superior agregado */
-  justify-content: center;
-  align-items: flex-start; /* alinea ambas tablas arriba */
-  gap: 40px;
-  flex-wrap: nowrap;
   width: 95%;
   max-width: 1200px;
+  margin: 40px auto 0 auto;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
   overflow-x: auto;
 }
 
 .tablas-piezas table {
   width: 45%;
   max-width: 100%;
-  vertical-align: top; /* alineación vertical */
-  margin-top: 0;       /* aseguramos que no se desplace */
+  vertical-align: top;
+  margin-top: 0;
 }
 
 .tabla-piezas1,
 .tabla-piezas2 {
-  margin-top: 0 !important; /* por si algún margen las desplazaba */
+  margin-top: 0 !important;
 }
 
 /* ======== MEDIA QUERIES ======== */
-@media (max-width: 830px) {
-  img.logo {
-    width: 100px;
-    margin-left: 10px;
-  }
-
-  h2 {
-    margin-top: 60px;
-    font-size: 1.3rem;
-  }
-
+@media (max-width: 1200px) {
   .contenedor-izquierda,
   .columna-derecha {
     width: 100%;
@@ -300,11 +292,7 @@ td input {
 
   .form-group {
     flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
-  .form-group label {
-    width: 100%;
+    gap: 20px;
   }
 
   .tablas-piezas {
@@ -315,16 +303,33 @@ td input {
   .tablas-piezas table {
     width: 100%;
   }
+
+  .imagen-y-campos {
+    flex-direction: column;
+  }
 }
 
-@media (max-width: 479px) {
-  h2 {
-    font-size: 1.1rem;
-    margin-top: 40px;
+@media (max-width: 600px) {
+  img.logo {
+    width: 90px;
   }
 
-  .contenedor-izquierda,
-  .columna-derecha {
+  h2 {
+    margin-top: 40px;
+    font-size: 1.1rem;
+  }
+
+  .form-group label {
     width: 100%;
+  }
+
+  .columna-derecha .fecha {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .clear-button {
+    align-self: center;
+    margin-right: 0;
   }
 }
