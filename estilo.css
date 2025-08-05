@@ -264,7 +264,8 @@ td input {
   align-items: flex-start; /* alinea ambas tablas arriba */
   gap: 40px;
   flex-wrap: nowrap;
-  width: 100%;
+  width: 95%;
+  max-width: 1200px;
   overflow-x: auto;
 }
 
