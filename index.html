@@ -284,16 +284,22 @@
 
   <!-- Escalado automático -->
   <script>
-    function escalarPagina() {
-      const baseWidth = 1200;
-      const escala = Math.min(window.innerWidth / baseWidth, 1);
-      document.getElementById('escalado').style.transform = `scale(${escala})`;
-      document.body.style.height = `${document.getElementById('escalado').offsetHeight * escala}px`;
-    }
+  function escalarPagina() {
+    const baseWidth = 1200;
+    const escala = Math.min(window.innerWidth / baseWidth, 1);
+    const escalado = document.getElementById('escalado');
 
-    window.addEventListener('resize', escalarPagina);
-    window.addEventListener('load', escalarPagina);
-  </script>
+    escalado.style.transform = `scale(${escala})`;
+    escalado.style.transformOrigin = 'top center'; // 🔴 Esto es clave para que no desplace hacia abajo
+
+    // Ajustar el alto del body al tamaño escalado real
+    const altoEscalado = escalado.getBoundingClientRect().height;
+    document.body.style.height = `${altoEscalado}px`;
+  }
+
+  window.addEventListener('resize', escalarPagina);
+  window.addEventListener('load', escalarPagina);
+</script>
 </body>
 </html>
 
