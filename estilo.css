@@ -16,10 +16,6 @@ html, body {
   align-items: center;
 }
 
-body {
-  margin-top: 10px;
-  /* ¡NO usar overflow: auto !important aquí! ya que puede romper el scroll */
-}
 
 /* HEADER: mostrar logo a la izquierda y alinear con el resto */
 .header {
