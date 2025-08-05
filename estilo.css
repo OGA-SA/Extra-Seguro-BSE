@@ -6,8 +6,9 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100%;
+  min-width: 1200px; /* Fuerza el ancho mínimo */
   font-family: sans-serif;
-  overflow-x: hidden;
+  overflow-x: auto;  /* Permite scroll horizontal si no entra */
 }
 
 /* ======== HEADER Y LOGO ======== */
@@ -57,7 +58,7 @@ h3 {
   margin: 30px auto;
   padding: 0;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* que NO se vayan abajo */
   justify-content: space-between;
   align-items: stretch;
   gap: 20px;
@@ -66,7 +67,7 @@ h3 {
 /* ======== COLUMNAS ======== */
 .contenedor-izquierda,
 .columna-derecha {
-  min-width: 300px;
+  min-width: 350px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -100,7 +101,7 @@ h3 {
   justify-content: center;
   gap: 40px;
   width: 100%;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* mantiene fila */
 }
 
 .form-group label {
@@ -136,7 +137,7 @@ h3 {
 /* ======== CANVAS ======== */
 .imagen-y-campos {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* evita que se apilen */
   justify-content: center;
   align-items: center;
   margin: 40px auto;
@@ -186,7 +187,7 @@ h3 {
   margin-bottom: 40px;
   margin-top: 20px;
   gap: 30px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .columna-derecha .fecha label.Fecha {
@@ -267,7 +268,7 @@ td input {
   justify-content: center;
   align-items: flex-start;
   gap: 40px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* mantiene en fila */
   overflow-x: auto;
 }
 
@@ -284,52 +285,4 @@ td input {
 }
 
 /* ======== MEDIA QUERIES ======== */
-@media (max-width: 1200px) {
-  .contenedor-izquierda,
-  .columna-derecha {
-    width: 100%;
-  }
-
-  .form-group {
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-
-  .tablas-piezas {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .tablas-piezas table {
-    width: 100%;
-  }
-
-  .imagen-y-campos {
-    flex-direction: column;
-  }
-}
-
-@media (max-width: 600px) {
-  img.logo {
-    width: 90px;
-  }
-
-  h2 {
-    margin-top: 40px;
-    font-size: 1.1rem;
-  }
-
-  .form-group label {
-    width: 100%;
-  }
-
-  .columna-derecha .fecha {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .clear-button {
-    align-self: center;
-    margin-right: 0;
-  }
-}
+/* Eliminamos media queries que alteraban diseño en pantallas chicas */
