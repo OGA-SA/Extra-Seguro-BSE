@@ -306,3 +306,28 @@ td input {
 .boton:hover {
   background-color: #00416d;
 }
+
+/* Estilos aplicados SOLO cuando se genera el PDF */
+.modo-pdf #contenidoPDF {
+  width: 794px; /* ancho de A4 a 96dpi */
+  padding: 20px;
+  background: white;
+  box-sizing: border-box;
+  transform: none !important; /* sin escala */
+}
+
+.modo-pdf table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.modo-pdf td, 
+.modo-pdf th {
+  padding: 4px;
+  word-break: break-word;
+}
+
+.modo-pdf canvas {
+  max-width: 100%;
+}
