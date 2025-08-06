@@ -18,6 +18,12 @@ html, body {
   align-items: center;
 }
 
+#contenidoPDF {
+  background: #fff;
+  padding: 20px 25px 30px 25px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
 
 /* HEADER: mostrar logo a la izquierda y alinear con el resto */
 .header {
@@ -166,11 +172,20 @@ h3 {
 }
 
 .clear-button {
-  margin-top: 10px;
+  margin-top: 8px;
   align-self: flex-end;
   margin-right: 20px;
+  padding: 6px 12px;
+  background-color: #005f9e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
+.clear-button:hover {
+  background-color: #00416d;
+}
 .columna-derecha label {
   display: flex;
   justify-content: center;
