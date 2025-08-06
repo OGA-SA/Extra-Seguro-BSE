@@ -217,6 +217,23 @@
     canvas.addEventListener("touchend", endDraw);
     canvas.addEventListener("touchcancel", endDraw);
 
+        function getPos(evt) {
+          const rect = canvas.getBoundingClientRect();
+          const escalaX = canvas.width / rect.width;
+          const escalaY = canvas.height / rect.height;
+        
+          const x = evt.touches
+            ? (evt.touches[0].clientX - rect.left) * escalaX
+            : (evt.clientX - rect.left) * escalaX;
+        
+          const y = evt.touches
+            ? (evt.touches[0].clientY - rect.top) * escalaY
+            : (evt.clientY - rect.top) * escalaY;
+        
+          return { x, y };
+        }
+
+    
     document.getElementById("boton").addEventListener("submit", function (event) {
       event.preventDefault();
 
@@ -342,6 +359,7 @@
     ultimaEntrada = valor;
   });
 </script>
+
 
   
 </body>
