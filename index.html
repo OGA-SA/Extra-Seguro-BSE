@@ -233,82 +233,70 @@
           return { x, y };
         }
 
-        document.getElementById("boton").addEventListener("submit", function (event) {
-      event.preventDefault();
-    
-      const taller = document.getElementById("taller").value.trim();
-      const serieNumero = document.getElementById("serieNumero").value.trim();
-      const siniestro = document.getElementById("siniestro").value.trim();
-      const fecha = document.getElementById("fecha").value.trim();
-      const dificultadVisual = document.getElementById("dificultadVisual").value.trim();
-    
-      if (!taller || !serieNumero || !siniestro || !fecha) {
-        alert("Por favor complete todos los campos antes de generar el PDF.");
-        return;
-      }
-    
-      const hayDibujo = canvasEstaModificado();
-    
-      if (userHasDrawn && !dificultadVisual) {
-        alert("Por favor describa la dificultad visual asociada al dibujo.");
-        return;
-      }
-    
-      const confirmar = confirm("Verifica que el número de siniestro esté tipeado correctamente. ¿Deseas continuar?");
-      if (!confirmar) return;
-    
-      const botones = document.querySelectorAll("button");
-      botones.forEach(btn => btn.style.display = "none");
-    
-      // Crear un clon del contenido
-      const original = document.getElementById("contenidoPDF");
-      const clon = original.cloneNode(true);
-      clon.id = "contenidoPDF_Clon";
-    
-      // Estilos específicos para PDF
-      clon.style.width = "794px";
-      clon.style.padding = "20px";
-      clon.style.margin = "0 auto";
-      clon.style.backgroundColor = "#fff";
-      clon.style.transform = "none";
-      clon.style.position = "fixed";
-      clon.style.top = "0";
-      clon.style.left = "0";
-      clon.style.zIndex = "-1"; // detrás de todo, pero visible para captura
-      clon.style.opacity = "1";
-    
-      document.body.appendChild(clon);
-    
-      // Asegurarse de que las imágenes estén cargadas
-      setTimeout(() => {
-        html2pdf()
-          .from(clon)
-          .set({
-            margin: 0,
-            filename: "formulario_con_dibujo.pdf",
-            image: { type: "jpeg", quality: 1 },
-            html2canvas: {
-              scale: 2,
-              useCORS: true,
-              scrollX: 0,
-              scrollY: 0,
-              windowWidth: clon.scrollWidth,
-              windowHeight: clon.scrollHeight,
-            },
-            jsPDF: {
-              unit: "pt",
-              format: "a4",
-              orientation: "portrait"
-            }
-          })
-          .save()
-          .then(() => {
-            botones.forEach(btn => btn.style.display = "inline-block");
-            document.body.removeChild(clon);
-            escalarPagina();
-          });
-      }, 300); // pequeño retraso para renderizar completamente
-    });
+                document.getElementById("boton").addEventListener("submit", function (event) {
+          event.preventDefault();
+        
+          const taller = document.getElementById("taller").value.trim();
+          const serieNumero = document.getElementById("serieNumero").value.trim();
+          const siniestro = document.getElementById("siniestro").value.trim();
+          const fecha = document.getElementById("fecha").value.trim();
+          const dificultadVisual = document.getElementById("dificultadVisual").value.trim();
+        
+          if (!taller || !serieNumero || !siniestro || !fecha) {
+            alert("Por favor complete todos los campos antes de generar el PDF.");
+            return;
+          }
+        
+          const hayDibujo = canvasEstaModificado();
+        
+          if (userHasDrawn && !dificultadVisual) {
+            alert("Por favor describa la dificultad visual asociada al dibujo.");
+            return;
+          }
+        
+          const confirmar = confirm("Verifica que el número de siniestro esté tipeado correctamente. ¿Deseas continuar?");
+          if (!confirmar) return;
+        
+          const botones = document.querySelectorAll("button");
+          botones.forEach(btn => btn.style.display = "none");
+        
+          const escalado = document.getElementById('escalado');
+          const transformAnterior = escalado.style.transform;
+        
+          // 🔴 Desactivar el escalado antes de capturar
+          escalado.style.transform = 'none';
+        
+          // 🔴 Asegurarse que el canvas y layout estén visibles completamente antes de capturar
+          setTimeout(() => {
+            html2pdf()
+              .from(document.getElementById("contenidoPDF"))
+              .set({
+                margin: 0,
+                filename: "formulario_con_dibujo.pdf",
+                image: { type: "jpeg", quality: 1 },
+                html2canvas: {
+                  scale: 2,
+                  useCORS: true,
+                  scrollX: 0,
+                  scrollY: 0,
+                  windowWidth: document.getElementById("contenidoPDF").scrollWidth,
+                  windowHeight: document.getElementById("contenidoPDF").scrollHeight,
+                },
+                jsPDF: {
+                  unit: "pt",
+                  format: "a4",
+                  orientation: "portrait"
+                }
+              })
+              .save()
+              .then(() => {
+                // Restaurar botones y escala después de guardar
+                botones.forEach(btn => btn.style.display = "inline-block");
+                escalado.style.transform = transformAnterior;
+                escalarPagina();
+              });
+          }, 200); // Esperar a que el DOM se estabilice antes de capturar
+        });
 
     function agregarFilaSiEsUltima(input, tablaId) {
       const tabla = document.getElementById(tablaId);
