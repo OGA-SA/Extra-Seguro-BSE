@@ -336,6 +336,8 @@ td input {
 
 .modo-pdf canvas {
   max-width: 100%;
+  overflow: hidden;
+  max-width: 100%;
 }
 .modo-pdf .tablas-piezas {
   width: 100%;
