@@ -311,7 +311,7 @@ td input {
 .modo-pdf #contenidoPDF {
   width: 794px; /* ancho de A4 a 96dpi */
   margin: 0; /* antes estaba auto, ahora 0 para alinear al borde izquierdo */
-  padding: 10px 0px 10px 0px; /* menos padding a la derecha */
+ 
   background: white;
   box-sizing: border-box;
   transform: none !important; /* sin escala */
