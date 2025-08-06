@@ -315,5 +315,32 @@
   window.addEventListener('resize', escalarPagina);
   window.addEventListener('load', escalarPagina);
 </script>
+  
+<script>
+  const sugerencias = ["Prueba", "Mandarina", "Melón", "Mango"];
+  const input = document.getElementById("autocomplete");
+
+  let ultimaEntrada = "";
+
+  input.addEventListener("input", () => {
+    const valor = input.value.toLowerCase();
+
+    // Evita sugerir si el usuario está borrando
+    if (valor.length < ultimaEntrada.length) {
+      ultimaEntrada = valor;
+      return;
+    }
+
+    const match = sugerencias.find(opcion => opcion.toLowerCase().startsWith(valor));
+    if (match && valor !== match.toLowerCase()) {
+      input.value = match;
+      input.setSelectionRange(valor.length, match.length); // subraya lo sugerido
+    }
+
+    ultimaEntrada = valor;
+  });
+</script>
+
+  
 </body>
 </html>
