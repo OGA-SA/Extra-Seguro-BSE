@@ -311,7 +311,7 @@ td input {
 
 .modo-pdf #contenidoPDF {
   width: 794px; /* ancho de A4 a 96dpi */
-  max-width: 100%;
+  max-width: 794px;
   margin: 0; /* antes estaba auto, ahora 0 para alinear al borde izquierdo */
   padding: 20px 5px 20px 20px; /* menos padding a la derecha */
   overflow: hidden;
@@ -339,13 +339,34 @@ td input {
   overflow: hidden;
   max-width: 100%;
 }
+
+/* Arreglo para tablas */
 .modo-pdf .tablas-piezas {
   width: 100%;
-  overflow: visible;
+  overflow: hidden;
 }
-
 .modo-pdf .tablas-piezas table {
   width: 100%;
   table-layout: fixed;
   border-collapse: collapse;
+}
+.modo-pdf .tablas-piezas th,
+.modo-pdf .tablas-piezas td {
+  padding: 6px;
+  word-break: break-word;
+  font-size: 10pt;
+  text-align: left;
+}
+
+.modo-pdf .stro {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 100%;
+}
+
+.modo-pdf .stro label {
+  flex: 1 1 48%;  /* Dos columnas */
+  min-width: 200px;
+  box-sizing: border-box;
 }
