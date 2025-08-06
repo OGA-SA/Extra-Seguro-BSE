@@ -265,30 +265,49 @@
       const escalado = document.getElementById('escalado');
       escalado.style.transform = 'none';
 
-      html2pdf()
-          .from(document.getElementById("contenidoPDF"))
-          .set({
-            margin: [15, 15, 15, 15], // margen superior, derecha, inferior, izquierda (en mm)
-            filename: "formulario_con_dibujo.pdf",
-            image: { type: "jpeg", quality: 1 },
-            html2canvas: {
-              scale: 2,
-              useCORS: true,
-              scrollX: 0,
-              scrollY: 0,
-            },
-            jsPDF: {
-              unit: "mm",
-              format: "a4",
-              orientation: "portrait"
-            }
-          })
-          .save()
-          .then(() => {
-            botones.forEach(btn => btn.style.display = "inline-block");
-            // Restaurar el escalado después de generar el pdf
-            escalarPagina();
-          });
+        // Clonar el contenido original
+        const original = document.getElementById("contenidoPDF");
+        const clon = original.cloneNode(true);
+        clon.id = "contenidoPDF_Clon";
+        
+        // Estilos exclusivos para el PDF
+        clon.style.width = "794px"; // A4 a 96dpi
+        clon.style.padding = "20px";
+        clon.style.margin = "0 auto";
+        clon.style.backgroundColor = "#fff";
+        clon.style.boxSizing = "border-box";
+        clon.style.transform = "none"; // eliminar cualquier escala
+        clon.style.position = "absolute";
+        clon.style.left = "-9999px"; // oculto pero presente
+        
+        document.body.appendChild(clon);
+      
+            html2pdf()
+        .from(clon)
+        .set({
+          margin: 0,
+          filename: "formulario_con_dibujo.pdf",
+          image: { type: "jpeg", quality: 1 },
+          html2canvas: {
+            scale: 2,
+            useCORS: true,
+            scrollX: 0,
+            scrollY: 0,
+            windowWidth: clon.scrollWidth,
+            windowHeight: clon.scrollHeight,
+          },
+          jsPDF: {
+            unit: "pt",
+            format: "a4",
+            orientation: "portrait"
+          }
+        })
+        .save()
+        .then(() => {
+          botones.forEach(btn => btn.style.display = "inline-block");
+          escalarPagina();
+          document.body.removeChild(clon); // eliminar el clon luego del PDF
+        });
     });
 
     function agregarFilaSiEsUltima(input, tablaId) {
