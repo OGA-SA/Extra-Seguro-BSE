@@ -310,7 +310,8 @@ td input {
 /* Estilos aplicados SOLO cuando se genera el PDF */
 .modo-pdf #contenidoPDF {
   width: 794px; /* ancho de A4 a 96dpi */
-  padding: 20px;
+  margin: 0 auto; /* antes estaba auto, ahora 0 para alinear al borde izquierdo */
+  padding: 20px 10px 20px 20px; /* menos padding a la derecha */
   background: white;
   box-sizing: border-box;
   transform: none !important; /* sin escala */
@@ -326,8 +327,20 @@ td input {
 .modo-pdf th {
   padding: 4px;
   word-break: break-word;
+  text-align: left;
+  font-size: 10pt;
 }
 
 .modo-pdf canvas {
   max-width: 100%;
+}
+.modo-pdf .tablas-piezas {
+  width: 100%;
+  overflow: visible;
+}
+
+.modo-pdf .tablas-piezas table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
 }
