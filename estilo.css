@@ -308,6 +308,9 @@ td input {
 }
 
 /* Estilos aplicados SOLO cuando se genera el PDF */
+.modo-pdf *{
+  margin: auto;
+}
 .modo-pdf #contenidoPDF {
   width: 794px; /* ancho de A4 a 96dpi */
   margin: 0; /* antes estaba auto, ahora 0 para alinear al borde izquierdo */
