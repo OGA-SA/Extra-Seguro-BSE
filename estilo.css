@@ -263,11 +263,12 @@ table {
   overflow-x: auto;
   display: block;
   white-space: nowrap;
+  width: 100%;
 }
 
 th, td {
   border: 1px solid #000;
-  padding: 7px;
+  padding: 5px;
   text-align: left;
 }
 
