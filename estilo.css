@@ -309,26 +309,6 @@ td input {
 }
 
 /* Estilos aplicados SOLO cuando se genera el PDF */
-.modo-pdf {
-  background: white !important;
-  color: black !important;
-  font-family: Arial, sans-serif !important;
-  font-size: 12pt !important;
-  line-height: 1.3 !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  filter: none !important;
-}
-.modo-pdf #escalado {
-  transform: none !important;
-}
-
-.pdf-temp-text {
-  display: inline !important;
-  font-size: 12pt;
-  font-family: Arial, sans-serif;
-  color: black;
-}
 
 .modo-pdf #contenidoPDF {
   width: 190mm; /* ancho de A4 a 96dpi */
@@ -342,22 +322,17 @@ td input {
 }
 
 .modo-pdf table {
-  display: table;
-  width: 100% !important;
+  width: 100%;
   table-layout: fixed;
-  border-collapse: collapse !important;
-  white-space: normal; /* para que el texto pueda saltar de línea */
-  font-size: 10pt !important;
+  border-collapse: collapse;
 }
 
 .modo-pdf td, 
 .modo-pdf th {
-  padding: 4px 6px !important;
+  padding: 4px;
   word-break: break-word;
   text-align: left;
   font-size: 10pt;
-  border: 1px solid #333 !important;
-  color: black !important;
 }
 
 .modo-pdf canvas {
@@ -403,11 +378,6 @@ td input {
 }
 .modo-pdf input[type="text"], 
 .modo-pdf input[type="date"] {
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-/* Asegurar que los botones queden ocultos */
-.modo-pdf button {
-  display: none !important;
+  width: auto !important;
+  min-width: 20px;
 }
