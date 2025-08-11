@@ -346,10 +346,10 @@ document.getElementById("boton").addEventListener("submit", function (event) {
   
 <script>
   const sugerencias = ["Prueba", "Mandarina", "Melón", "Mango"];
-  const inputs = document.querySelectorAll(".autocomplete")
-    inputs.forEach(input => {
-    "Prueba", "Mandarina", "Melón", "Mango"
-  });
+
+const inputs = document.querySelectorAll(".autocomplete");
+
+inputs.forEach(input => {
   let ultimaEntrada = "";
 
   input.addEventListener("input", () => {
@@ -369,4 +369,5 @@ document.getElementById("boton").addEventListener("submit", function (event) {
 
     ultimaEntrada = valor;
   });
+});
 </script>
