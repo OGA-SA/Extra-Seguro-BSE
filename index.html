@@ -59,7 +59,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>GUARDABARRO DEL DER</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
+          <tr><td>GUARDABARRO DEL DER</td><td><input type="text" class="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
           <tr><td>GUARDABARRO DEL IZQ</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
           <tr><td>ESPOLON</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
           <tr><td>CARETA</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
@@ -346,7 +346,7 @@ document.getElementById("boton").addEventListener("submit", function (event) {
   
 <script>
   const sugerencias = ["Prueba", "Mandarina", "Melón", "Mango"];
-  const input = document.getElementById("autocomplete");
+  const inputs = document.querySelectorAll(".autocomplete")
 
   let ultimaEntrada = "";
 
