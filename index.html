@@ -258,8 +258,20 @@ document.getElementById("boton").addEventListener("submit", function (event) {
   // 🔵 Aplica estilos PDF
   body.classList.add("modo-pdf");
   escalado.style.transform = "none";
-
+  
+   const inputs = document.querySelectorAll("#contenidoPDF input, #contenidoPDF select, #contenidoPDF textarea");
+      let originales = [];
+      inputs.forEach(el => {
+        originales.push({ el: el, valor: el.value });
+        const span = document.createElement("span");
+        span.textContent = el.value;
+        span.className = "pdf-temp-text";
+        el.parentNode.insertBefore(span, el);
+        el.style.display = "none";
+      });
+  
   setTimeout(() => {
+    document.getElementById("contenidoPDF").style.paddingTop = "1cm";
     html2pdf()
       .from(document.getElementById("contenidoPDF"))
       .set({
@@ -271,7 +283,7 @@ document.getElementById("boton").addEventListener("submit", function (event) {
           useCORS: true
         },
         jsPDF: {
-          unit: "mm",
+          unit: "cm",
           format: "a4",
           orientation: "portrait"
         }
@@ -283,6 +295,7 @@ document.getElementById("boton").addEventListener("submit", function (event) {
         escalado.style.transform = transformAnterior;
         botones.forEach(btn => btn.style.display = "inline-block");
         escalarPagina();
+        document.getElementById("contenidoPDF").style.paddingTop = "";
       });
   }, 200);
 });
