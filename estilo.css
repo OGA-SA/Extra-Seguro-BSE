@@ -353,7 +353,6 @@ td input {
 
 .modo-pdf canvas {
   max-width: 100%;
-  width:90%;
   height: auto;
 }
 
@@ -363,7 +362,7 @@ td input {
 }
 
 .modo-pdf .tablas-piezas table {
-  width: 100%;
+  width: 70%;
   table-layout: auto;
   border-collapse: collapse;
 }
