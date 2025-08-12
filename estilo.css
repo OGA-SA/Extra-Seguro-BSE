@@ -356,9 +356,6 @@ td input {
   text-align: center;
 }
 
-.modo-pdf .fecha{
-  padding-top: 10px;
-}
 
 /* Columna izquierda igual que la derecha */
 .modo-pdf .contenedor-izquierda {
@@ -369,6 +366,8 @@ td input {
   justify-content: center;
   background-color: blue;
   text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 /* Contenedor de la sección Stro */
