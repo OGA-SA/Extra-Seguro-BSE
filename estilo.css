@@ -335,6 +335,7 @@ td input {
 }
 .modo-pdf .columna-derecha{
   width: 70%;
+  background-color: grey; 
 }
 .modo-pdf .stro{
   width: 70%;
