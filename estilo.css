@@ -334,10 +334,11 @@ td input {
   width: 100%;  /* ocupar todo el ancho disponible */
 }
 .modo-pdf .columna-derecha{
-  width: 70%;
+  width: 100%;
   background-color: blue; 
 }
 .modo-pdf .contenedor-izquierda{
+  width: 100%;
   background-color: blue;
   
 }
