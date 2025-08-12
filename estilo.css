@@ -357,7 +357,7 @@ td input {
 }
 
 .modo-pdf .fecha{
-  margin-top: 10px;
+  padding-top: 10px;
 }
 
 /* Columna izquierda igual que la derecha */
