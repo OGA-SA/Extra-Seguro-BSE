@@ -320,10 +320,10 @@ td input {
   transform: none !important;
 }
 
-.mofo-pdf h2{
+.modo-pdf h2{
   margin-bottom: 10px;
 }
-.modo-pdf label{
+.modo-pdf .form-group{
    width: auto;    
 }
 
