@@ -320,6 +320,13 @@ td input {
   transform: none !important;
 }
 
+.mofo-pdf h2{
+  margin-bottom: 10px;
+}
+.modo-pdf label{
+   width: auto;    
+}
+
 .modo-pdf table {
   width: 100%;
   border-collapse: collapse;
