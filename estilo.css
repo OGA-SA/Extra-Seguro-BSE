@@ -324,10 +324,12 @@ td input {
   margin-top: 10px;
 }
 .modo-pdf .form-group{
-   width: 60%;    
+   width: 65%;    
 }
-
-.modo-pdf columna-derecha{
+.modo-pdf .form-group input[type="text"] {
+  width: 100%;  /* ocupar todo el ancho disponible */
+}
+.modo-pdf .columna-derecha{
   width: 70%;
 }
 
