@@ -357,7 +357,7 @@ td input {
 }
 
 .modo-pdf .columna-derecha label {
-  margin-bottom: 4px; /* reduce el espacio vertical */
+  margin-bottom: 0; /* reduce el espacio vertical */
 }
 /* Columna izquierda igual que la derecha */
 .modo-pdf .contenedor-izquierda {
