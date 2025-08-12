@@ -337,6 +337,9 @@ td input {
   width: 70%;
   background-color: blue; 
 }
+.modo-pdf .contenedor-izquierda{
+  background-color: blue;
+}
 .modo-pdf .stro{
   width: 70%;
 }
