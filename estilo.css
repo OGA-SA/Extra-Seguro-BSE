@@ -356,6 +356,10 @@ td input {
   text-align: center;
 }
 
+.modo-pdf .fecha{
+  margin-top: 10px;
+}
+
 /* Columna izquierda igual que la derecha */
 .modo-pdf .contenedor-izquierda {
   flex: 1;                 /* ocupar mismo espacio que la derecha */
