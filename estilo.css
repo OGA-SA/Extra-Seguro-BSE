@@ -324,8 +324,12 @@ td input {
   margin-top: 10px;
 }
 .modo-pdf .form-group{
-   width: 65%;    
+   width: 65%; 
+  white-space: normal;   /* permite saltos de línea */
+  word-break: break-word; /* corta palabras largas */
+  height: auto;
 }
+
 .modo-pdf .form-group input[type="text"] {
   width: 100%;  /* ocupar todo el ancho disponible */
 }
@@ -349,6 +353,7 @@ td input {
 
 .modo-pdf canvas {
   max-width: 100%;
+  width:90%;
   height: auto;
 }
 
