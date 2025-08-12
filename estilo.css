@@ -339,11 +339,13 @@ td input {
   width: 100%;
   background-color: blue; 
   align-items: center;
+  justify-content: center;
 }
 .modo-pdf .contenedor-izquierda{
   width: 100%;
   background-color: blue;
   align-items: center;
+  justify-content: center;
   
 }
 
