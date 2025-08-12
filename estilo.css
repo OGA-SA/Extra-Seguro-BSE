@@ -324,7 +324,11 @@ td input {
   margin-top: 10px;
 }
 .modo-pdf .form-group{
-   width: 70%;    
+   width: 60%;    
+}
+
+.modo-pdf columna-derecha{
+  width: 70%;
 }
 
 .modo-pdf table {
