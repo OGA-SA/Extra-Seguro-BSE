@@ -336,6 +336,9 @@ td input {
 .modo-pdf .columna-derecha{
   width: 70%;
 }
+.modo-pdf .stro{
+  width: 70%;
+}
 
 .modo-pdf table {
   width: 100%;
