@@ -325,8 +325,9 @@ td input {
 .modo-pdf h2{
   margin-top: 10px;
 }
+
 .modo-pdf .form-group{
-   width: 65%; 
+  width: 65%; 
   white-space: normal;   /* permite saltos de línea */
   word-break: break-word; /* corta palabras largas */
   height: auto;
@@ -335,12 +336,16 @@ td input {
 .modo-pdf .form-group input[type="text"] {
   width: 100%;  /* ocupar todo el ancho disponible */
 }
+
 .modo-pdf .columna-derecha{
+display: flex;               /* Activar flexbox */
+  flex-direction: column;      /* Apilar en columna */
+  align-items: center;         /* Centrar horizontalmente */
+  justify-content: center;     /* Centrar verticalmente (opcional) */
   width: 100%;
   background-color: blue; 
-  align-items: center;
-  justify-content: center;
 }
+
 .modo-pdf .contenedor-izquierda{
   width: 100%;
   background-color: blue;
