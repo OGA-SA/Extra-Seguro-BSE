@@ -322,10 +322,12 @@ td input {
 }
 
 /* Centrar el contenedor .datos */
-.modo-pdf .datos {
-  margin: 0 auto;
-  display: block;
-  text-align: center;
+.modo-pdf .fila {
+  display: flex;
+  flex-direction: row;     /* lado a lado */
+  align-items: stretch;    /* que tengan la misma altura */
+  justify-content: space-between;
+  width: 100%;
 }
 
 .modo-pdf h2 {
@@ -345,24 +347,22 @@ td input {
 
 /* Columna derecha centrada horizontal y verticalmente */
 .modo-pdf .columna-derecha {
+  flex: 1;
   display: flex;
-  flex-direction: column;
-  align-items: center;       /* Centrar horizontal */
-  justify-content: center;   /* Centrar vertical */
-  width: 100%;
-  min-height: 100%;          /* Para que el vertical center funcione bien */
-  background-color: blue; 
+  flex-direction: column;  /* contenido interno en columna */
+  align-items: center;
+  justify-content: center;
+  background-color: blue;
   text-align: center;
 }
 
 /* Columna izquierda igual que la derecha */
 .modo-pdf .contenedor-izquierda {
+  flex: 1;                 /* ocupar mismo espacio que la derecha */
   display: flex;
-  flex-direction: column;
-  align-items: center;       /* Centrar horizontal */
-  justify-content: center;   /* Centrar vertical */
-  width: 100%;
-  min-height: 100%;
+  flex-direction: column;  /* contenido interno en columna */
+  align-items: center;
+  justify-content: center;
   background-color: blue;
   text-align: center;
 }
