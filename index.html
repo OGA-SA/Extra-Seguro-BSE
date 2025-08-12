@@ -226,7 +226,7 @@
         
           return { x, y };
         }
-document.getElementById("boton").addEventListener("submit", function (event) {
+document.getElementById("boton").addEventListener("submit", async function (event) {
   event.preventDefault();
 
   const taller = document.getElementById("taller").value.trim();
@@ -256,45 +256,47 @@ document.getElementById("boton").addEventListener("submit", function (event) {
   const transformAnterior = escalado.style.transform;
 
   // 🔵 Aplica estilos PDF
-  body.classList.add("modo-pdf");
+   body.classList.add("modo-pdf");
   escalado.style.transform = "none";
   
-   const inputs = document.querySelectorAll("#contenidoPDF input, #contenidoPDF select, #contenidoPDF textarea");
-      let originales = [];
-      inputs.forEach(el => {
-        originales.push({ el: el, valor: el.value });
-        const span = document.createElement("span");
-        span.textContent = el.value;
-        span.className = "pdf-temp-text";
-        el.parentNode.insertBefore(span, el);
-        el.style.display = "none";
-      });
+  const inputs = document.querySelectorAll("#contenidoPDF input, #contenidoPDF select, #contenidoPDF textarea");
+  inputs.forEach(el => {
+    const span = document.createElement("span");
+    span.textContent = el.value;
+    span.className = "pdf-temp-text";
+    el.parentNode.insertBefore(span, el);
+    el.style.display = "none";
+  });
   
   setTimeout(() => {
     document.getElementById("contenidoPDF").style.paddingTop = "1cm";
-    html2pdf()
-      .from(document.getElementById("contenidoPDF"))
-      .set({
-        margin: [15, 10, 15, 10],
-        filename: "formulario_con_dibujo.pdf",
-        image: { type: "jpeg", quality: 1 },
-        html2canvas: {
-          scale: 2,
-          useCORS: true
-        },
-        jsPDF: {
-          unit: "cm",
-          format: "a4",
-          orientation: "portrait"
-        }
-      })
-      .save()
-      .then(() => {
-        // ✅ Restaurar todo
-        body.classList.remove("modo-pdf");
-        escalado.style.transform = transformAnterior;
-        botones.forEach(btn => btn.style.display = "inline-block");
-        escalarPagina();
+   // 🔵 Espera a que todo el DOM y las imágenes terminen de renderizar
+  await new Promise(resolve => setTimeout(resolve, 800));
+
+  // Generar PDF
+  await html2pdf()
+    .from(document.getElementById("contenidoPDF"))
+    .set({
+      margin: [15, 10, 15, 10],
+      filename: "formulario_con_dibujo.pdf",
+      image: { type: "jpeg", quality: 1 },
+      html2canvas: {
+        scale: 2,
+        useCORS: true
+      },
+      jsPDF: {
+        unit: "cm",
+        format: "a4",
+        orientation: "portrait"
+      }
+    })
+    .save();
+
+  // Restaurar
+  body.classList.remove("modo-pdf");
+  escalado.style.transform = transformAnterior;
+  botones.forEach(btn => btn.style.display = "inline-block");
+  escalarPagina();
         document.getElementById("contenidoPDF").style.paddingTop = "";
       });
   }, 200);
