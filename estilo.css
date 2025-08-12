@@ -311,40 +311,37 @@ td input {
 /* Estilos aplicados SOLO cuando se genera el PDF */
 
 .modo-pdf #contenidoPDF {
-  width: 190mm; /* ancho de A4 a 96dpi */
+  width: 100%; /* ancho de A4 a 96dpi */
   max-width: 210mm;
-  margin: 0; /* antes estaba auto, ahora 0 para alinear al borde izquierdo */
-  padding: 20px 5px 20px 20px; /* menos padding a la derecha */
-  overflow: hidden;
+  margin: 0 auto; /* antes estaba auto, ahora 0 para alinear al borde izquierdo */
+  padding: 10mm; /* menos padding a la derecha */
   background: white;
   box-sizing: border-box;
-  transform: none !important; /* sin escala */
+  transform: none !important;
 }
 
 .modo-pdf table {
   width: 100%;
-  table-layout: fixed;
   border-collapse: collapse;
+  table-layout: auto; /* deja que se ajuste automáticamente */
+  word-break: break-word;
 }
 
 .modo-pdf td, 
 .modo-pdf th {
   padding: 4px;
-  word-break: break-word;
-  text-align: left;
   font-size: 10pt;
+  white-space: normal; /* permite salto de línea */
 }
 
 .modo-pdf canvas {
   max-width: 100%;
-  overflow: hidden;
-  max-width: 100%;
+  height: auto;
 }
 
 /* Arreglo para tablas */
 .modo-pdf .tablas-piezas {
-  width: 100%;
-  overflow: hidden;
+  overflow-x: auto;
 }
 
 .modo-pdf .tablas-piezas table {
@@ -373,11 +370,14 @@ td input {
   min-width: 200px;
   box-sizing: border-box;
 }
-.modo-pdf input {
+
+.modo-pdf input,
+.modo-pdf select,
+.modo-pdf textarea {
   max-width: 100%;
-  width: 100%;
   box-sizing: border-box;
 }
+
 .modo-pdf input[type="text"], 
 .modo-pdf input[type="date"] {
   width: auto !important;
