@@ -352,6 +352,7 @@ td input {
 .modo-pdf .stro{
   width: 70%;
   height: auto;
+  justify-content: center;
 }
 
 .modo-pdf table {
