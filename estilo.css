@@ -325,6 +325,9 @@ td input {
 .modo-pdf h2{
   margin-top: 10px;
 }
+.modo-pdf .datos{
+  margin-left: auto;
+}
 
 .modo-pdf .form-group{
   width: 65%; 
@@ -357,7 +360,7 @@ display: flex;               /* Activar flexbox */
 .modo-pdf .stro{
   width: 70%;
   height: auto;
-  justify-content: center;
+  margin-left: auto;
 }
 
 .modo-pdf table {
