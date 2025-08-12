@@ -354,6 +354,7 @@ td input {
   justify-content: center;
   background-color: blue;
   text-align: center;
+  gap: 4px;
 }
 
 .modo-pdf .columna-derecha label {
