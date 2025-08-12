@@ -259,12 +259,22 @@ document.getElementById("boton").addEventListener("submit", function (event) {
   body.classList.add("modo-pdf");
   escalado.style.transform = "none";
 
+  // Suponiendo que el input tiene un id
+const inputNombre = document.querySelector('#siniestro'); // cambia #stro por el id real de tu input
+
+// Valor que escribieron
+let nombreArchivo = inputNombre.value.trim();
+
+// Si está vacío, ponemos uno por defecto
+if (!nombreArchivo) {
+  nombreArchivo = 'formulario_con_dibujo';
+}
   setTimeout(() => {
     html2pdf()
       .from(document.getElementById("contenidoPDF"))
       .set({
         margin: [15, 10, 15, 10],
-        filename: "formulario_con_dibujo.pdf",
+        filename: `${nombreArchivo}.pdf`,
         image: { type: "jpeg", quality: 1 },
         html2canvas: {
           scale: 2,
