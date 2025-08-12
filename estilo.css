@@ -312,96 +312,66 @@ td input {
 /* Estilos aplicados SOLO cuando se genera el PDF */
 
 .modo-pdf #contenidoPDF {
-  width: 100%; /* ancho de A4 a 96dpi */
-  max-width: 210mm;
-  margin: 0 auto; /* antes estaba auto, ahora 0 para alinear al borde izquierdo */
+  width: 100%;
+  max-width: 210mm; /* límite real A4 */
+  margin: 0 auto; /* centrado horizontal */
   padding: 10mm;
-  align-items: center;
   background: white;
   box-sizing: border-box;
   transform: none !important;
 }
 
-.modo-pdf h2{
-  margin-top: 10px;
-}
-.modo-pdf .datos{
-  margin: auto;
+/* Centrar el contenedor .datos */
+.modo-pdf .datos {
+  margin: 0 auto;
+  display: block;
+  text-align: center;
 }
 
-.modo-pdf .form-group{
+.modo-pdf h2 {
+  margin-top: 10px;
+}
+
+.modo-pdf .form-group {
   width: 65%; 
-  white-space: normal;   /* permite saltos de línea */
-  word-break: break-word; /* corta palabras largas */
+  white-space: normal;
+  word-break: break-word;
   height: auto;
 }
 
 .modo-pdf .form-group input[type="text"] {
-  width: 100%;  /* ocupar todo el ancho disponible */
+  width: 100%;  
 }
 
-.modo-pdf .columna-derecha{
-display: flex;               /* Activar flexbox */
-  flex-direction: column;      /* Apilar en columna */
-  align-items: center;         /* Centrar horizontalmente */
-  justify-content: center;     /* Centrar verticalmente (opcional) */
+/* Columna derecha centrada horizontal y verticalmente */
+.modo-pdf .columna-derecha {
+  display: flex;
+  flex-direction: column;
+  align-items: center;       /* Centrar horizontal */
+  justify-content: center;   /* Centrar vertical */
   width: 100%;
+  min-height: 100%;          /* Para que el vertical center funcione bien */
   background-color: blue; 
+  text-align: center;
 }
 
-.modo-pdf .contenedor-izquierda{
+/* Columna izquierda igual que la derecha */
+.modo-pdf .contenedor-izquierda {
+  display: flex;
+  flex-direction: column;
+  align-items: center;       /* Centrar horizontal */
+  justify-content: center;   /* Centrar vertical */
   width: 100%;
+  min-height: 100%;
   background-color: blue;
-  align-items: center;
-  justify-content: center;
-  
+  text-align: center;
 }
 
-.modo-pdf .stro{
+/* Contenedor de la sección Stro */
+.modo-pdf .stro {
   width: 70%;
   height: auto;
   margin: auto;
-}
-
-.modo-pdf table {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: auto; /* deja que se ajuste automáticamente */
-  word-break: break-word;
-}
-
-.modo-pdf td, 
-.modo-pdf th {
-  padding: 4px;
-  font-size: 10pt;
-  white-space: normal; /* permite salto de línea */
-}
-
-.modo-pdf canvas {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Arreglo para tablas */
-.modo-pdf .tablas-piezas {
-  overflow-x: auto;
-}
-
-.modo-pdf .tablas-piezas table {
-  width: 70%;
-  table-layout: auto;
-  border-collapse: collapse;
-}
-
-.modo-pdf .tablas-piezas th,
-.modo-pdf .tablas-piezas td {
-  padding: 6px;
-  word-break: break-word;
-  font-size: 10pt;
-  text-align: left;
-}
-
-.modo-pdf .stro {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -409,7 +379,7 @@ display: flex;               /* Activar flexbox */
 }
 
 .modo-pdf .stro label {
-  flex: 1 1 48%;  /* Dos columnas */
+  flex: 1 1 48%;
   min-width: 200px;
   box-sizing: border-box;
 }
@@ -425,4 +395,44 @@ display: flex;               /* Activar flexbox */
 .modo-pdf input[type="date"] {
   width: auto !important;
   min-width: 20px;
+}
+
+/* Tablas completas y sin cortes */
+.modo-pdf table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  word-break: break-word;
+}
+
+.modo-pdf td, 
+.modo-pdf th {
+  padding: 4px;
+  font-size: 10pt;
+  white-space: normal;
+}
+
+/* Si la tabla es más ancha, se agrega scroll horizontal */
+.modo-pdf .tablas-piezas {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.modo-pdf .tablas-piezas table {
+  width: 100%; /* ocupar todo el espacio para que no se corte */
+  table-layout: auto;
+  border-collapse: collapse;
+}
+
+.modo-pdf .tablas-piezas th,
+.modo-pdf .tablas-piezas td {
+  padding: 6px;
+  word-break: break-word;
+  font-size: 10pt;
+  text-align: left;
+}
+
+.modo-pdf canvas {
+  max-width: 100%;
+  height: auto;
 }
