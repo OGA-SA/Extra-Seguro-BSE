@@ -322,7 +322,7 @@ td input {
 }
 
 /* Centrar el contenedor .datos */
-.modo-pdf .fila {
+.modo-pdf .datos {
   display: flex;
   flex-direction: row;     /* lado a lado */
   align-items: stretch;    /* que tengan la misma altura */
