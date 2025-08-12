@@ -339,9 +339,12 @@ td input {
 }
 .modo-pdf .contenedor-izquierda{
   background-color: blue;
+  
 }
+
 .modo-pdf .stro{
   width: 70%;
+  height: auto;
 }
 
 .modo-pdf table {
