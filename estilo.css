@@ -37,12 +37,12 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
 .logo {
   display: block;
   max-width: 100%;
   height: auto;
   margin: 0;
-
 }
 
 img.logo {
@@ -346,11 +346,13 @@ td input {
   width: 100%;
   overflow: hidden;
 }
+
 .modo-pdf .tablas-piezas table {
   width: 100%;
-  table-layout: fixed;
+  table-layout: auto;
   border-collapse: collapse;
 }
+
 .modo-pdf .tablas-piezas th,
 .modo-pdf .tablas-piezas td {
   padding: 6px;
