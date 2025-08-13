@@ -333,7 +333,7 @@ td input {
   display: grid;
   grid-template-columns: 60% 30%; /* izquierda / derecha */
   align-items: start; /* alinear arriba ambas columnas */
-  gap: 20px; /* separación horizontal entre columnas */
+  gap: 10px; /* separación horizontal entre columnas */
   width: 100%;
 }
 
@@ -370,10 +370,6 @@ td input {
   width: 70%;
   height: auto;
   margin: auto;
-  margin-bottom: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
   max-width: 100%;
 }
 
