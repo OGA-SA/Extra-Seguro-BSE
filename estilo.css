@@ -363,9 +363,6 @@ td input {
   text-align: center;
   gap: 23px;
 }
-.modo-pdf .fecha{
-  margin-top:10px;
-}
 
 .modo-pdf .columna-derecha label {
   margin-bottom: 0; /* reduce el espacio vertical */
