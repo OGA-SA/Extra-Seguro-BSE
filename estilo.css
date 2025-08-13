@@ -354,14 +354,6 @@ td input {
   width: 100%;  
 }
 
-/* Columna derecha centrada horizontal y verticalmente */
-.modo-pdf .contenedor-izquierda,
-.modo-pdf .columna-derecha {
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* centrado vertical interno */
-}
-
 .modo-pdf .columna-derecha label {
   margin-bottom: 0; /* reduce el espacio vertical */
 }
