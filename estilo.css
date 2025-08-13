@@ -342,7 +342,7 @@ td input {
 }
 
 .modo-pdf .form-group {
-  width: 65%; 
+  width: 60%; 
   white-space: normal;
   word-break: break-word;
   height: auto;
@@ -354,29 +354,15 @@ td input {
 }
 
 /* Columna derecha centrada horizontal y verticalmente */
+.modo-pdf .contenedor-izquierda,
 .modo-pdf .columna-derecha {
-  flex: 1;
   display: flex;
-  flex-direction: column;  /* contenido interno en columna */
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 23px;
+  flex-direction: column;
+  justify-content: center; /* centrado vertical interno */
 }
 
 .modo-pdf .columna-derecha label {
   margin-bottom: 0; /* reduce el espacio vertical */
-}
-/* Columna izquierda igual que la derecha */
-.modo-pdf .contenedor-izquierda {
-  flex: 1;                 /* ocupar mismo espacio que la derecha */
-  display: flex;
-  flex-direction: column;  /* contenido interno en columna */
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 20px;
-  
 }
 
 /* Contenedor de la sección Stro */
