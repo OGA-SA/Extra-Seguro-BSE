@@ -358,8 +358,8 @@ td input {
 }
 
 .modo-pdf .stro label {
-  flex: 1 1 48%;
-  min-width: 150px;
+  flex: 1 1 45%;
+  min-width: 120px;
   box-sizing: border-box;
 }
 
@@ -377,7 +377,7 @@ td input {
 }
 
 .modo-pdf h3{
-  font-size: 8pt;
+  font-size: 6pt;
 }
 
 /* Tablas completas y sin cortes */
