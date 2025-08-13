@@ -357,7 +357,7 @@ td input {
   
 }
 
-.modo-pdf .stro label {
+.modo-pdf .stro {
   flex: 1 1 45%;
   min-width: 120px;
   box-sizing: border-box;
