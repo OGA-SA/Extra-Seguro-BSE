@@ -357,6 +357,9 @@ td input {
   margin: 0; /* sin márgenes extra */
 }
 
+.modo-pdf .form-group{
+  flex-direction: flex-start;
+}
 
 .modo-pdf .columna-derecha label {
   margin-bottom: 0; /* reduce el espacio vertical */
