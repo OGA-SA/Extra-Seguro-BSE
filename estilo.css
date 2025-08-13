@@ -331,10 +331,11 @@ td input {
 /* Centrar el contenedor .datos */
 .modo-pdf .datos {
   display: grid;
-  grid-template-columns: 60% 30%; /* Izquierda / derecha */
-  align-items: start; /* Alinear contenido arriba */
-  column-gap: 20px;
+  grid-template-columns: 1fr 0.9fr; /* Proporción más segura */
+  align-items: start;
+  column-gap: 15px; /* reducir separación */
   width: 100%;
+  box-sizing: border-box; /* evitar que padding sume ancho extra */
   font-size: 10pt;
 }
  
@@ -342,7 +343,8 @@ td input {
 .modo-pdf .columna-derecha {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* espacio entre elementos dentro de cada columna */
+  gap: 10px;
+  box-sizing: border-box;
 }
 
 .modo-pdf h2 {
