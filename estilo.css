@@ -376,8 +376,7 @@ td input {
   height: auto;
 }
 
-.modo-pdf .texto{
-  width: 100%;
+.modo-pdf h3{
   font-size: 12pt;
 }
 
