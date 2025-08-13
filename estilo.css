@@ -331,12 +331,17 @@ td input {
 /* Centrar el contenedor .datos */
 .modo-pdf .datos {
   display: grid;
-  grid-template-columns: 65% 35%; /* Ancho de cada columna */
-  grid-auto-rows: min-content; /* Filas se adaptan al contenido */
-  align-items: center; /* Centrar verticalmente los elementos de cada fila */
-  column-gap: 20px; /* Separación entre columnas */
-  row-gap: 10px; /* Separación entre filas */
+  grid-template-columns: 65% 35%; /* Izquierda / derecha */
+  align-items: start; /* Alinear contenido arriba */
+  column-gap: 20px;
   width: 100%;
+}
+
+.modo-pdf .contenedor-izquierda,
+.modo-pdf .columna-derecha {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* espacio entre elementos dentro de cada columna */
 }
 
 .modo-pdf h2 {
@@ -344,17 +349,9 @@ td input {
   width: 95%;
 }
 
-.modo-pdf .contenedor-izquierda,
-.modo-pdf .columna-derecha {
-  display: contents; /* importante: cada hijo ocupa su celda en el grid */
-}
-
-
 .modo-pdf .columna-derecha label {
-  margin-bottom: 0; /* reduce el espacio vertical */
+  margin-bottom: 0;
 }
-
-
 
 .modo-pdf input[type="text"],
 .modo-pdf input[type="date"],
@@ -364,6 +361,10 @@ td input {
   box-sizing: border-box;
 }
 
+.modo-pdf canvas {
+  max-width: 100%;
+  height: auto;
+}
 
 /* Tablas completas y sin cortes */
 .modo-pdf table {
@@ -398,9 +399,4 @@ td input {
   word-break: break-word;
   font-size: 10pt;
   text-align: left;
-}
-
-.modo-pdf canvas {
-  max-width: 100%;
-  height: auto;
 }
