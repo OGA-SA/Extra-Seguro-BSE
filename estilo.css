@@ -351,6 +351,7 @@ td input {
 
 .modo-pdf .columna-derecha label {
   margin-bottom: 0;
+  font-size: 10pt;
 }
 
 .modo-pdf input[type="text"],
@@ -372,12 +373,13 @@ td input {
   border-collapse: collapse;
   table-layout: auto;
   word-break: break-word;
+  
 }
 
 .modo-pdf td, 
 .modo-pdf th {
   padding: 4px;
-  font-size: 10pt;
+  font-size: 8pt;
   white-space: normal;
 }
 
