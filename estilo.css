@@ -318,6 +318,7 @@ td input {
   width: 100%;
   max-width: 210mm; /* límite real A4 */
   margin: 0 auto; /* centrado horizontal */
+  margin-top: 0;
   padding: 10mm;
   background: white;
   box-sizing: border-box;
