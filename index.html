@@ -273,7 +273,7 @@ if (!nombreArchivo) {
     html2pdf()
       .from(document.getElementById("contenidoPDF"))
       .set({
-        margin: [15, 10, 15, 10],
+        margin: [5, 7, 10, 7],
         filename: `${nombreArchivo}.pdf`,
         image: { type: "jpeg", quality: 1 },
         html2canvas: {
