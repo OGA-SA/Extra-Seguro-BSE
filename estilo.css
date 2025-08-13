@@ -330,10 +330,10 @@ td input {
 
 /* Centrar el contenedor .datos */
 .modo-pdf .datos {
-  display: flex;
-  flex-direction: row;     /* lado a lado */
-  align-items: flex-start;    /* que tengan la misma altura */
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 65% 35%; /* izquierda / derecha */
+  align-items: start; /* alinear arriba ambas columnas */
+  gap: 20px; /* separación horizontal entre columnas */
   width: 100%;
 }
 
