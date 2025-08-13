@@ -332,7 +332,7 @@ td input {
 .modo-pdf .datos {
   display: flex;
   flex-direction: row;     /* lado a lado */
-  align-items: stretch;    /* que tengan la misma altura */
+  align-items: flex-start;    /* que tengan la misma altura */
   justify-content: space-between;
   width: 100%;
 }
