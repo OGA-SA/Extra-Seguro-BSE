@@ -366,13 +366,7 @@ td input {
   margin-bottom: 0; /* reduce el espacio vertical */
 }
 
-/* Contenedor de la sección Stro */
-.modo-pdf .stro {
-  width: 70%;
-  height: auto;
-  margin: auto;
-  max-width: 100%;
-}
+
 
 .modo-pdf .stro label {
   flex: 1 1 48%;
