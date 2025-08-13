@@ -346,7 +346,7 @@ td input {
   white-space: normal;
   word-break: break-word;
   height: auto;
-  gap: 23px;
+  
 }
 
 .modo-pdf .form-group input[type="text"] {
