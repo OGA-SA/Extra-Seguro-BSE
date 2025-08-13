@@ -335,6 +335,7 @@ td input {
   align-items: start; /* Alinear contenido arriba */
   column-gap: 20px;
   width: 100%;
+  font-size: 10pt;
 }
 
 .modo-pdf .contenedor-izquierda,
@@ -351,7 +352,7 @@ td input {
 
 .modo-pdf .columna-derecha label {
   margin-bottom: 0;
-  font-size: 10pt;
+  
 }
 
 .modo-pdf input[type="text"],
@@ -399,6 +400,6 @@ td input {
 .modo-pdf .tablas-piezas td {
   padding: 6px;
   word-break: break-word;
-  font-size: 10pt;
+  font-size: 8pt;
   text-align: left;
 }
