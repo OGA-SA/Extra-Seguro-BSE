@@ -370,6 +370,11 @@ td input {
   height: auto;
 }
 
+.modo-pdf .texto{
+  width: 95%;
+  font-size: 12pt;
+}
+
 /* Tablas completas y sin cortes */
 .modo-pdf table {
   width: 100%;
