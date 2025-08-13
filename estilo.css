@@ -324,6 +324,10 @@ td input {
   transform: none !important;
 }
 
+.modo-pdf body{
+  margin: 0;
+}
+
 /* Centrar el contenedor .datos */
 .modo-pdf .datos {
   display: flex;
