@@ -43,8 +43,8 @@ html, body {
   max-width: 100%;
   height: auto;
   margin: 0;
- 
-}
+  margin-bottom: 10px;
+ }
 
 img.logo {
   display: block;
@@ -60,7 +60,7 @@ h2 {
   border-radius: 8px;
   width: 95%;
   max-width: 1200px;
-  margin-top: 10px;
+  
 }
 
 /* AGRUPAR LOS ELEMENTOS CENTRALES */
