@@ -331,7 +331,7 @@ td input {
 /* Centrar el contenedor .datos */
 .modo-pdf .datos {
   display: grid;
-  grid-template-columns: 65% 35%; /* Izquierda / derecha */
+  grid-template-columns: 60% 30%; /* Izquierda / derecha */
   align-items: start; /* Alinear contenido arriba */
   column-gap: 20px;
   width: 100%;
