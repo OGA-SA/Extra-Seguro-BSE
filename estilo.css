@@ -365,28 +365,12 @@ td input {
   margin-bottom: 0; /* reduce el espacio vertical */
 }
 
-.modo-pdf .contenedor-izquierda{
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* texto alineado a la izquierda */
-  justify-content: flex-start; /* contenido arriba */
-  text-align: left;
-  padding: 20px;
-  }
 
-.modo-pdf .columna-derecha {
-   display: contents;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* texto alineado a la izquierda */
-  justify-content: flex-start; /* contenido arriba */
-  text-align: left;
-  
-}
+
 
 .modo-pdf .fecha {
   align-items: flex-start; /* mantener alineación izquierda */
-  margin-top: 0; /* eliminar salto vertical */
+ 
 }
 
 .modo-pdf input[type="text"],
