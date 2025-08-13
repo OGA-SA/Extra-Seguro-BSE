@@ -349,13 +349,7 @@ td input {
   display: contents; /* importante: cada hijo ocupa su celda en el grid */
 }
 
-.modo-pdf .form-group,
-.modo-pdf .fecha {
-  display: flex;
-  flex-direction: column;
-  gap: 5px; /* espacio interno entre label e input */
-  margin: 0; /* sin márgenes extra */
-}
+
 
 .modo-pdf .form-group{
   flex-direction: flex-start;
