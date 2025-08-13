@@ -357,9 +357,6 @@ td input {
   margin: 0; /* sin márgenes extra */
 }
 
-.modo-pdf .form-group input[type="text"] {
-  width: 100%;  
-}
 
 .modo-pdf .columna-derecha label {
   margin-bottom: 0; /* reduce el espacio vertical */
@@ -396,11 +393,7 @@ td input {
   width: 100%;
   box-sizing: border-box;
 }
-.modo-pdf input[type="text"], 
-.modo-pdf input[type="date"] {
-  width: auto !important;
-  min-width: 20px;
-}
+
 
 /* Tablas completas y sin cortes */
 .modo-pdf table {
