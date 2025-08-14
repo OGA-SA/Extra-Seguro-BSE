@@ -355,11 +355,13 @@ td input {
 
 .modo-pdf .columna-derecha label {
   margin-bottom: 0;
+  justify-content: flex-start;
+  text-align: center;
   
 }
 
 .modo-pdf .stro {
-  width: 65%;
+  width: 60%;
   box-sizing: border-box;
 }
 
@@ -369,7 +371,7 @@ td input {
 
 .modo-pdf .fecha {
   width: 60%;
-  justify-content: flex-start;
+  
 }
 
 .modo-pdf input[type="text"],
