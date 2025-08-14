@@ -359,6 +359,9 @@ td input {
   text-align: center;
   
 }
+.modo-pdf .columna-derecha .stro label.siniestro{
+  margin-top: o;
+}
 
 .modo-pdf .stro {
   width: 60%;
