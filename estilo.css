@@ -376,7 +376,10 @@ td input {
   width: 60%;
   
 }
-
+.modo-pdf .fecha span {
+  text-align: center;
+  
+}
 .modo-pdf input[type="text"],
 .modo-pdf input[type="date"],
 .modo-pdf select,
