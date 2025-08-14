@@ -367,6 +367,7 @@ td input {
 .modo-pdf .stro {
   width: 60%;
   box-sizing: border-box;
+  margin-right: 10px;
 }
 
 .modo-pdf .form-group{
