@@ -363,6 +363,10 @@ td input {
   box-sizing: border-box;
 }
 
+.modo-pdf .form-group{
+  width: 70%;
+}
+
 .modo-pdf .fecha {
   width: 70%;
 }
