@@ -364,11 +364,12 @@ td input {
 }
 
 .modo-pdf .form-group{
-  width: 70%;
+  width: 90%;
 }
 
 .modo-pdf .fecha {
-  width: 70%;
+  width: 60%;
+  justify-content: flex-start;
 }
 
 .modo-pdf input[type="text"],
