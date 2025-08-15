@@ -377,10 +377,7 @@ if (!nombreArchivo) {
       return;
     }
 
-    const match = sugerencias.find(opcion =>
-      opcion.toLowerCase().startsWith(valor)
-    );
-
+    const match = sugerencias.find(opcion => opcion.toLowerCase().startsWith(valor));
     if (match && valor !== match.toLowerCase()) {
       input.value = match;
       input.setSelectionRange(valor.length, match.length); // subraya lo sugerido
