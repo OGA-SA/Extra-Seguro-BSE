@@ -410,7 +410,13 @@ td input {
   border-collapse: collapse;
   table-layout: auto;
   word-break: break-word;
+  page-break-inside: auto;
   
+}
+
+.modo-pdf tr{
+  page-break-inside: avoid; /* ❌ No cortar dentro de una fila */
+  page-break-after: auto;
 }
 
 .modo-pdf td, 
