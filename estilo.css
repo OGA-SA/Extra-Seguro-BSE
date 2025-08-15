@@ -364,6 +364,7 @@ td input {
   justify-content: flex-start;
   text-align: center;
   margin-right: 10px;
+  gap: 2px;
   
 }
 .modo-pdf .columna-derecha .stro label.siniestro{
@@ -373,7 +374,7 @@ td input {
 .modo-pdf .stro {
   width: 50%;
   box-sizing: border-box;
-  margin-right: 25px;
+  margin-right: 35px;
   margin-top: -25px;
 }
 
