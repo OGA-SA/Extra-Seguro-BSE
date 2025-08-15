@@ -142,7 +142,7 @@ h3 {
   border: none;
   font: inherit;            /* Igual fuente que el label */
   width: auto;              /* Que no ocupe todo el contenedor */
-  min-width: 5ch;           /* Ancho mínimo en caracteres */
+  min-width: 10ch;           /* Ancho mínimo en caracteres */
   max-width: 100%;          /* Evita desbordes */
 }
 
@@ -343,8 +343,7 @@ td input {
   width: 100%;
   box-sizing: border-box; /* evitar que padding sume ancho extra */
   font-size: 10pt;
-  margin-top: -10px;
-}
+ }
  
 .modo-pdf .contenedor-izquierda,
 .modo-pdf .columna-derecha {
@@ -357,6 +356,7 @@ td input {
 .modo-pdf h2 {
   margin-top: 10px;
   width: 95%;
+  margin-bottom: -10px;
 }
 
 .modo-pdf .columna-derecha label {
