@@ -391,6 +391,10 @@ td input {
   
 }
 
+.modo-pdf label span {
+  margin: 0; /* Quita márgenes innecesarios */
+}
+
 .modo-pdf input{
   font-size: 8pt;
 }
