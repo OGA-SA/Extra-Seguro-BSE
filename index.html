@@ -78,7 +78,7 @@
           <tr><td>GUARDABARRO TRAS IZQ</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
           <tr><td>TECHO</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
           <tr><td>PARABRISAS</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
-          <tr><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text"/></td><td><input type="text" /></td></tr>
+          <tr><td><input id="autocomplete" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe..."/></td><td><input type="text"/></td><td><input type="text" /></td></tr>
         </tbody>
       </table>
 
@@ -363,27 +363,52 @@ if (!nombreArchivo) {
 </script>
   
 <script>
-  const sugerencias = ["Prueba", "Mandarina", "Melón", "Mango"];
-  const input = document.getElementById("autocomplete");
+  document.addEventListener('DOMContentLoaded', () => {
+    const sugerencias = ["Prueba", "Mandarina", "Melón", "Mango"];
+    const input = document.getElementById("autocomplete");
+    let bloqueado = false; // evita bucles al asignar input.value
 
-  let ultimaEntrada = "";
+    // Normaliza: sin acentos, minúsculas, trim
+    const limpiar = (s) =>
+      (s || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .trim();
 
-  input.addEventListener("input", () => {
-    const valor = input.value;
-    const valorLower = valor.toLowerCase();
+    input.addEventListener("input", () => {
+      if (bloqueado) return;
 
-    const match = sugerencias.find(opcion =>
-      opcion.toLowerCase().startsWith(valorLower)
-    );
+      const escrito = input.value;           // lo que ve el usuario
+      const base = limpiar(escrito);         // para comparar
 
-    if (match && valorLower !== match.toLowerCase()) {
-      // Ponemos la sugerencia completa
+      if (!base) return;
+
+      // Busca la primera sugerencia que empiece por lo escrito (ignorando acentos y mayúsculas)
+      const match = sugerencias.find(op => limpiar(op).startsWith(base));
+      if (!match) return;
+
+      // Si ya coincide exacto (ignorando acentos), no sugieras
+      if (limpiar(match) === base) return;
+
+      // Rellena y selecciona la parte sugerida
+      bloqueado = true;
       input.value = match;
-      // Seleccionamos la parte sugerida
-      input.setSelectionRange(valor.length, match.length);
-    }
+      if (document.activeElement !== input) input.focus({ preventScroll: true });
+      // Selecciona desde lo escrito hasta el fin del match
+      input.setSelectionRange(escrito.length, match.length);
+      bloqueado = false;
+    });
 
-    ultimaEntrada = valorLower;
+    // Opcional: aceptar sugerencia con TAB o → (ArrowRight)
+    input.addEventListener("keydown", (e) => {
+      const sel = input.selectionStart !== input.selectionEnd;
+      if (sel && (e.key === "Tab" || e.key === "ArrowRight")) {
+        // Acepta la sugerencia (coloca el cursor al final)
+        const end = input.value.length;
+        requestAnimationFrame(() => input.setSelectionRange(end, end));
+        if (e.key === "Tab") e.preventDefault();
+      }
+    });
   });
 </script>
-    
