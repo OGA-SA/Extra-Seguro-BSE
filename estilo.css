@@ -343,7 +343,7 @@ td input {
   width: 100%;
   box-sizing: border-box; /* evitar que padding sume ancho extra */
   font-size: 10pt;
-  margin-left: 10px;
+  margin-left: 20px;
  }
  
 .modo-pdf .contenedor-izquierda,
