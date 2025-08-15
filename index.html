@@ -363,52 +363,26 @@ if (!nombreArchivo) {
 </script>
   
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const sugerencias = ["Prueba", "Mandarina", "Melón", "Mango"];
-    const input = document.getElementById("autocomplete");
-    let bloqueado = false; // evita bucles al asignar input.value
+  const sugerencias = ["Prueba", "Mandarina", "Melón", "Mango"];
+  const input = document.getElementById("autocomplete");
 
-    // Normaliza: sin acentos, minúsculas, trim
-    const limpiar = (s) =>
-      (s || "")
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .toLowerCase()
-        .trim();
+  let ultimaEntrada = "";
 
-    input.addEventListener("input", () => {
-      if (bloqueado) return;
+  input.addEventListener("input", () => {
+    const valor = input.value.toLowerCase();
 
-      const escrito = input.value;           // lo que ve el usuario
-      const base = limpiar(escrito);         // para comparar
+    // Evita sugerir si el usuario está borrando
+    if (valor.length < ultimaEntrada.length) {
+      ultimaEntrada = valor;
+      return;
+    }
 
-      if (!base) return;
-
-      // Busca la primera sugerencia que empiece por lo escrito (ignorando acentos y mayúsculas)
-      const match = sugerencias.find(op => limpiar(op).startsWith(base));
-      if (!match) return;
-
-      // Si ya coincide exacto (ignorando acentos), no sugieras
-      if (limpiar(match) === base) return;
-
-      // Rellena y selecciona la parte sugerida
-      bloqueado = true;
+    const match = sugerencias.find(opcion => opcion.toLowerCase().startsWith(valor));
+    if (match && valor !== match.toLowerCase()) {
       input.value = match;
-      if (document.activeElement !== input) input.focus({ preventScroll: true });
-      // Selecciona desde lo escrito hasta el fin del match
-      input.setSelectionRange(escrito.length, match.length);
-      bloqueado = false;
-    });
+      input.setSelectionRange(valor.length, match.length); // subraya lo sugerido
+    }
 
-    // Opcional: aceptar sugerencia con TAB o → (ArrowRight)
-    input.addEventListener("keydown", (e) => {
-      const sel = input.selectionStart !== input.selectionEnd;
-      if (sel && (e.key === "Tab" || e.key === "ArrowRight")) {
-        // Acepta la sugerencia (coloca el cursor al final)
-        const end = input.value.length;
-        requestAnimationFrame(() => input.setSelectionRange(end, end));
-        if (e.key === "Tab") e.preventDefault();
-      }
-    });
+    ultimaEntrada = valor;
   });
 </script>
