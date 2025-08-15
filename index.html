@@ -368,8 +368,8 @@ if (!nombreArchivo) {
 
   let ultimaEntrada = "";
 
-  input.addEventListener("input", () => {
-    const valor = input.value.toLowerCase();
+  td.addEventListener("td", () => {
+    const valor = td.value.toLowerCase();
 
     // Evita sugerir si el usuario está borrando
     if (valor.length < ultimaEntrada.length) {
