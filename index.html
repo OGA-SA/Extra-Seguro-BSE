@@ -78,7 +78,7 @@
           <tr><td>GUARDABARRO TRAS IZQ</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
           <tr><td>TECHO</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
           <tr><td>PARABRISAS</td><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text" /></td></tr>
-          <tr><td id="autocomplete" placeholder="" autocomplete="off"><input type="text" /></td><td><input type="text"/></td><td><input type="text" /></td></tr>
+          <tr><td><input type="text" id="autocomplete" placeholder="" autocomplete="off"/></td><td><input type="text"/></td><td><input type="text" /></td></tr>
         </tbody>
       </table>
 
@@ -364,12 +364,12 @@ if (!nombreArchivo) {
   
 <script>
   const sugerencias = ["Prueba", "Mandarina", "Melón", "Mango"];
-  const td = document.getElementById("autocomplete");
+  const input = document.getElementById("autocomplete");
 
   let ultimaEntrada = "";
 
-  td.addEventListener("td", () => {
-    const valor = td.value.toLowerCase();
+  input.addEventListener("input", () => {
+    const valor = input.value.toLowerCase();
 
     // Evita sugerir si el usuario está borrando
     if (valor.length < ultimaEntrada.length) {
@@ -377,7 +377,10 @@ if (!nombreArchivo) {
       return;
     }
 
-    const match = sugerencias.find(opcion => opcion.toLowerCase().startsWith(valor));
+    const match = sugerencias.find(opcion =>
+      opcion.toLowerCase().startsWith(valor)
+    );
+
     if (match && valor !== match.toLowerCase()) {
       input.value = match;
       input.setSelectionRange(valor.length, match.length); // subraya lo sugerido
