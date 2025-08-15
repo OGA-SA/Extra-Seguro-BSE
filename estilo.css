@@ -138,7 +138,6 @@ h3 {
 }
 .form-group input,
 .columna-derecha input {
-  border: 1px solid #ccc;
   padding: 2px 4px;
   font: inherit;            /* Igual fuente que el label */
   width: auto;              /* Que no ocupe todo el contenedor */
