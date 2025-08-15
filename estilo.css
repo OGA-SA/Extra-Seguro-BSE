@@ -211,7 +211,15 @@ h3 {
   border: none;
   margin-bottom: 40px;
   margin-top: 20px;
-  gap: 30px;
+  gap: 0.5em;
+}
+.columna-derecha .fecha input {
+  border: 1px solid #ccc;
+  padding: 2px 4px;
+  font: inherit;            /* Igual fuente que el label */
+  width: auto;              /* Que no ocupe todo el contenedor */
+  min-width: 5ch;           /* Ancho mínimo en caracteres */
+  max-width: 100%;          /* Evita desbordes */
 }
 
 .columna-derecha .fecha label.Fecha {
