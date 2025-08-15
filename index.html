@@ -128,7 +128,28 @@
   <!-- Scripts -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  
+<script>
+const input = document.getElementById("text");
 
+input.addEventListener("input", function() {
+  // Crea un elemento temporal para medir el texto
+  const span = document.createElement("span");
+  span.style.visibility = "hidden";
+  span.style.position = "absolute";
+  span.style.whiteSpace = "pre";
+  span.style.font = window.getComputedStyle(input).font;
+
+  span.textContent = input.value || input.placeholder;
+
+  document.body.appendChild(span);
+  const ancho = span.offsetWidth + 10; // +10 px de margen para no cortar letras
+  document.body.removeChild(span);
+
+  input.style.width = ancho + "px";
+});
+</script>
+  
   <script>
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
