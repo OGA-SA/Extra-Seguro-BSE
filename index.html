@@ -386,3 +386,18 @@ if (!nombreArchivo) {
     ultimaEntrada = valor;
   });
 </script>
+  <script>  
+function formatearFecha(input) {
+  const fecha = input.value; // ejemplo: "2025-08-15"
+  if (!fecha) return "";
+  const [anio, mes, dia] = fecha.split("-");
+  return `${dia}/${mes}/${anio}`;
+}
+
+// Antes de generar el PDF
+const fechaInput = document.getElementById("fecha"); // tu input date
+const fechaFormateada = formatearFecha(fechaInput);
+fechaInput.type = "text"; // cambiar a texto para que muestre como lo queremos
+fechaInput.value = fechaFormateada;
+
+    </script>
