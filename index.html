@@ -369,21 +369,21 @@ if (!nombreArchivo) {
   let ultimaEntrada = "";
 
   input.addEventListener("input", () => {
-    const valor = input.value.toLowerCase();
+    const valor = input.value;
+    const valorLower = valor.toLowerCase();
 
-    // Evita sugerir si el usuario está borrando
-    if (valor.length < ultimaEntrada.length) {
-      ultimaEntrada = valor;
-      return;
-    }
+    const match = sugerencias.find(opcion =>
+      opcion.toLowerCase().startsWith(valorLower)
+    );
 
-    const match = sugerencias.find(opcion => opcion.toLowerCase().startsWith(valor));
-    if (match && valor !== match.toLowerCase()) {
+    if (match && valorLower !== match.toLowerCase()) {
+      // Ponemos la sugerencia completa
       input.value = match;
-      input.setSelectionRange(valor.length, match.length); // subraya lo sugerido
+      // Seleccionamos la parte sugerida
+      input.setSelectionRange(valor.length, match.length);
     }
 
-    ultimaEntrada = valor;
+    ultimaEntrada = valorLower;
   });
 </script>
     
