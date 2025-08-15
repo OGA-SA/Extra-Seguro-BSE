@@ -136,16 +136,14 @@ h3 {
   border-radius: 4px;
   text-align: center;
 }
-
 .form-group input,
 .columna-derecha input {
-  border: none;
-  outline: none;
-  padding: 5px;
-  background-color: transparent;
-  font-size: 14px;
-  width: 100%;
-  text-align: center;
+  border: 1px solid #ccc;
+  padding: 2px 4px;
+  font: inherit;            /* Igual fuente que el label */
+  width: auto;              /* Que no ocupe todo el contenedor */
+  min-width: 5ch;           /* Ancho mínimo en caracteres */
+  max-width: 100%;          /* Evita desbordes */
 }
 
 .form-group label span,
