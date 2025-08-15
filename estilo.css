@@ -211,7 +211,6 @@ h3 {
   gap: 0.5em;
 }
 .columna-derecha .fecha input {
-  border: 1px solid #ccc;
   padding: 2px 4px;
   font: inherit;            /* Igual fuente que el label */
   width: auto;              /* Que no ocupe todo el contenedor */
