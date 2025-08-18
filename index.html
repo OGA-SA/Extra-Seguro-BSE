@@ -253,10 +253,10 @@ document.getElementById("boton").addEventListener("submit", function (event) {
   const taller = document.getElementById("taller").value.trim();
   const serieNumero = document.getElementById("serieNumero").value.trim();
   const siniestro = document.getElementById("siniestro").value.trim();
-  const fecha = document.getElementById("fecha").value.trim();
+  const fechaInput = document.getElementById("fecha");
   const dificultadVisual = document.getElementById("dificultadVisual").value.trim();
 
-  if (!taller || !serieNumero || !siniestro || !fecha) {
+  if (!taller || !serieNumero || !siniestro || !fechaInput.value) {
     alert("Por favor complete todos los campos antes de generar el PDF.");
     return;
   }
@@ -266,8 +266,25 @@ document.getElementById("boton").addEventListener("submit", function (event) {
     return;
   }
 
+   // ✅ Convertir la fecha a dd/mm/aaaa
+  const fechaParts = fechaInput.value.split("-"); // [aaaa, mm, dd]
+  const fechaFormateada = `${fechaParts[2]}/${fechaParts[1]}/${fechaParts[0]}`;
+
+  // Mostrar la fecha formateada en el DOM antes de generar PDF
+  const fechaLabel = fechaInput.parentElement; 
+  const spanFecha = document.createElement("span");
+  spanFecha.textContent = fechaFormateada;
+  fechaLabel.appendChild(spanFecha);
+
+  // Ocultar el input en el PDF (solo mostrar el span)
+  fechaInput.style.display = "none";
+  
   const confirmar = confirm("Verifica que el número de siniestro esté tipeado correctamente. ¿Deseas continuar?");
-  if (!confirmar) return;
+  if (!confirmar) {
+    fechaInput.style.display = "inline"; // restaurar si cancela
+    fechaLabel.removeChild(spanFecha);
+    return;
+  }
 
   const botones = document.querySelectorAll("button");
   botones.forEach(btn => btn.style.display = "none");
@@ -313,6 +330,9 @@ if (!nombreArchivo) {
         body.classList.remove("modo-pdf");
         escalado.style.transform = transformAnterior;
         botones.forEach(btn => btn.style.display = "inline-block");
+        // restaurar input
+        fechaInput.style.display = "inline";
+        fechaLabel.removeChild(spanFecha);
         escalarPagina();
       });
   }, 200);
