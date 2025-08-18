@@ -297,12 +297,12 @@ document.getElementById("boton").addEventListener("submit", function (event) {
   );
 
   try {
-    const respuesta = await fetch("http://localhost:3000/upload", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        filename: nombreArchivo,
-        fileBase64: base64
+    await fetch("http://localhost:3000/upload", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    filename: nombreArchivo,
+    fileBase64: base64
       })
     });
 
