@@ -413,10 +413,13 @@ td input {
   max-width: 100%;
   height: auto;
 }
+.modo-pdf .texto{
+  margin-top: 0;
+}
 
 .modo-pdf h3{
   font-size: 9pt;
-}
+  }
 
 /* Tablas completas y sin cortes */
 .modo-pdf table {
