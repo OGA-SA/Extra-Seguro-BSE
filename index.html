@@ -126,14 +126,13 @@
   </div>
 
   <!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  
+<!-- Ajuste dinámico de input -->
 <script>
 const input = document.getElementById("text");
 
 input.addEventListener("input", function() {
-  // Crea un elemento temporal para medir el texto
   const span = document.createElement("span");
   span.style.visibility = "hidden";
   span.style.position = "absolute";
@@ -143,111 +142,94 @@ input.addEventListener("input", function() {
   span.textContent = input.value || input.placeholder;
 
   document.body.appendChild(span);
-  const ancho = span.offsetWidth + 10; // +10 px de margen para no cortar letras
+  const ancho = span.offsetWidth + 10;
   document.body.removeChild(span);
 
   input.style.width = ancho + "px";
 });
 </script>
-  
-  <script>
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
-    let baseImageData = null;
-    let userHasDrawn = false;
 
-    const image = new Image();
-    image.src = "parabrisa.png";
-    image.crossOrigin = "anonymous";
+<!-- Canvas con parabrisas -->
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+let baseImageData = null;
+let userHasDrawn = false;
 
-    image.onload = () => {
-      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-      baseImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    };
+const image = new Image();
+image.src = "parabrisa.png"; // ⚠️ asegúrate que el archivo exista en la misma carpeta
+image.onload = () => {
+  ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+  baseImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+};
 
-    function canvasEstaModificado() {
-      const actual = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      if (!baseImageData) return false;
+function clearCanvas() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+  userHasDrawn = false;
+  baseImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+}
+window.clearCanvas = clearCanvas;
 
-      for (let i = 0; i < actual.data.length; i++) {
-        if (actual.data[i] !== baseImageData.data[i]) {
-          return true;
-        }
-      }
-      return false;
-    }
+let drawing = false;
 
-    function clearCanvas() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-      userHasDrawn = false;
-      baseImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    }
+function getPos(evt) {
+  const rect = canvas.getBoundingClientRect();
+  const escalaX = canvas.width / rect.width;
+  const escalaY = canvas.height / rect.height;
 
-    window.clearCanvas = clearCanvas;
+  const x = evt.touches
+    ? (evt.touches[0].clientX - rect.left) * escalaX
+    : (evt.clientX - rect.left) * escalaX;
 
-    let drawing = false;
+  const y = evt.touches
+    ? (evt.touches[0].clientY - rect.top) * escalaY
+    : (evt.clientY - rect.top) * escalaY;
 
-    function getPos(evt) {
-      const rect = canvas.getBoundingClientRect();
-      return evt.touches
-        ? { x: evt.touches[0].clientX - rect.left, y: evt.touches[0].clientY - rect.top }
-        : { x: evt.offsetX, y: evt.offsetY };
-    }
+  return { x, y };
+}
 
-    function startDraw(evt) {
-      evt.preventDefault();
-      drawing = true;
-      const pos = getPos(evt);
-      ctx.beginPath();
-      ctx.moveTo(pos.x, pos.y);
-    }
+function startDraw(evt) {
+  evt.preventDefault();
+  drawing = true;
+  const pos = getPos(evt);
+  ctx.beginPath();
+  ctx.moveTo(pos.x, pos.y);
+}
 
-    function draw(evt) {
-      if (!drawing) return;
-      evt.preventDefault();
-      const pos = getPos(evt);
-      ctx.lineWidth = 2;
-      ctx.lineCap = "round";
-      ctx.strokeStyle = "red";
-      ctx.lineTo(pos.x, pos.y);
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(pos.x, pos.y);
-      userHasDrawn = true;
-    }
+function draw(evt) {
+  if (!drawing) return;
+  evt.preventDefault();
+  const pos = getPos(evt);
+  ctx.lineWidth = 2;
+  ctx.lineCap = "round";
+  ctx.strokeStyle = "red";
+  ctx.lineTo(pos.x, pos.y);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(pos.x, pos.y);
+  userHasDrawn = true;
+}
 
-    function endDraw(evt) {
-      evt.preventDefault();
-      drawing = false;
-      ctx.beginPath();
-    }
+function endDraw(evt) {
+  evt.preventDefault();
+  drawing = false;
+  ctx.beginPath();
+}
 
-    canvas.addEventListener("mousedown", startDraw);
-    canvas.addEventListener("mousemove", draw);
-    canvas.addEventListener("mouseup", endDraw);
-    canvas.addEventListener("mouseleave", endDraw);
-    canvas.addEventListener("touchstart", startDraw, { passive: false });
-    canvas.addEventListener("touchmove", draw, { passive: false });
-    canvas.addEventListener("touchend", endDraw);
-    canvas.addEventListener("touchcancel", endDraw);
+canvas.addEventListener("mousedown", startDraw);
+canvas.addEventListener("mousemove", draw);
+canvas.addEventListener("mouseup", endDraw);
+canvas.addEventListener("mouseleave", endDraw);
+canvas.addEventListener("touchstart", startDraw, { passive: false });
+canvas.addEventListener("touchmove", draw, { passive: false });
+canvas.addEventListener("touchend", endDraw);
+canvas.addEventListener("touchcancel", endDraw);
+</script>
 
-        function getPos(evt) {
-          const rect = canvas.getBoundingClientRect();
-          const escalaX = canvas.width / rect.width;
-          const escalaY = canvas.height / rect.height;
-        
-          const x = evt.touches
-            ? (evt.touches[0].clientX - rect.left) * escalaX
-            : (evt.clientX - rect.left) * escalaX;
-        
-          const y = evt.touches
-            ? (evt.touches[0].clientY - rect.top) * escalaY
-            : (evt.clientY - rect.top) * escalaY;
-        
-          return { x, y };
-        }
-document.getElementById("boton").addEventListener("submit", function (event) {
+<!-- Generación de PDF + validaciones -->
+<script>
+document.getElementById("boton").addEventListener("submit", async function (event) {
   event.preventDefault();
 
   const taller = document.getElementById("taller").value.trim();
@@ -257,38 +239,36 @@ document.getElementById("boton").addEventListener("submit", function (event) {
   const dificultadVisual = document.getElementById("dificultadVisual").value.trim();
 
   if (!taller || !serieNumero || !siniestro || !fechaInput.value) {
-    alert("Por favor complete todos los campos antes de generar el PDF.");
+    alert("⚠️ Por favor complete todos los campos antes de generar el PDF.");
     return;
   }
 
   if (userHasDrawn && !dificultadVisual) {
-    alert("Por favor describa la dificultad visual asociada al dibujo.");
+    alert("⚠️ Por favor describa la dificultad visual asociada al dibujo.");
     return;
   }
 
-   // ✅ Convertir la fecha a dd/mm/aaaa
-  const fechaParts = fechaInput.value.split("-"); // [aaaa, mm, dd]
+  // ✅ Convertir la fecha a dd/mm/aaaa
+  const fechaParts = fechaInput.value.split("-");
   const fechaFormateada = `${fechaParts[2]}/${fechaParts[1]}/${fechaParts[0]}`;
 
-  // Mostrar la fecha formateada en el DOM antes de generar PDF
   const fechaLabel = fechaInput.parentElement; 
   const spanFecha = document.createElement("span");
   spanFecha.textContent = fechaFormateada;
   fechaLabel.appendChild(spanFecha);
 
-  // Ocultar el input en el PDF (solo mostrar el span)
   fechaInput.style.display = "none";
   
-  const confirmar = confirm("Verifica que el número de siniestro esté tipeado correctamente. ¿Deseas continuar?");
+  const confirmar = confirm("¿El número de siniestro ingresado es correcto: " + siniestro + " ?");
   if (!confirmar) {
-    fechaInput.style.display = "inline"; // restaurar si cancela
+    fechaInput.style.display = "inline";
     fechaLabel.removeChild(spanFecha);
     return;
   }
 
-  const siniestroInput = document.getElementById("siniestro");
-  const nombreArchivo = siniestroInput.value.trim() ? `${siniestroInput.value.trim()}.pdf` : "Formulario.pdf";
+  const nombreArchivo = siniestro ? `${siniestro}.pdf` : "Formulario.pdf";
 
+  // Generar PDF como blob
   const pdfBlob = await html2pdf().from(document.getElementById("contenidoPDF")).outputPdf("blob");
 
   const arrayBuffer = await pdfBlob.arrayBuffer();
@@ -297,12 +277,12 @@ document.getElementById("boton").addEventListener("submit", function (event) {
   );
 
   try {
-    await fetch("http://localhost:3000/upload", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    filename: nombreArchivo,
-    fileBase64: base64
+    const respuesta = await fetch("http://localhost:3000/upload", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        filename: nombreArchivo,
+        fileBase64: base64
       })
     });
 
@@ -323,108 +303,99 @@ document.getElementById("boton").addEventListener("submit", function (event) {
   const escalado = document.getElementById("escalado");
   const transformAnterior = escalado.style.transform;
 
-  // 🔵 Aplica estilos PDF
   body.classList.add("modo-pdf");
   escalado.style.transform = "none";
 
-  
   setTimeout(() => {
     html2pdf()
       .from(document.getElementById("contenidoPDF"))
       .set({
         margin: [5, 7, 10, 7],
-        filename: `${nombreArchivo}.pdf`,
+        filename: nombreArchivo,
         image: { type: "jpeg", quality: 1 },
-        html2canvas: {
-          scale: 2,
-          useCORS: true
-        },
-        jsPDF: {
-          unit: "mm",
-          format: "a4",
-          orientation: "portrait"
-        }
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
       })
       .save()
       .then(() => {
-        // ✅ Restaurar todo
         body.classList.remove("modo-pdf");
         escalado.style.transform = transformAnterior;
         botones.forEach(btn => btn.style.display = "inline-block");
-        // restaurar input
         fechaInput.style.display = "inline";
         fechaLabel.removeChild(spanFecha);
         escalarPagina();
       });
   }, 200);
 });
+</script>
 
-    function agregarFilaSiEsUltima(input, tablaId) {
-      const tabla = document.getElementById(tablaId);
-      const filas = tabla.querySelectorAll("tbody tr");
-      const ultimaFila = filas[filas.length - 1];
+<!-- Autofila -->
+<script>
+function agregarFilaSiEsUltima(input, tablaId) {
+  const tabla = document.getElementById(tablaId);
+  const filas = tabla.querySelectorAll("tbody tr");
+  const ultimaFila = filas[filas.length - 1];
 
-      if (ultimaFila.contains(input)) {
-        const nuevaFila = ultimaFila.cloneNode(true);
-        nuevaFila.querySelectorAll("input").forEach(input => input.value = "");
-        tabla.querySelector("tbody").appendChild(nuevaFila);
-      }
+  if (ultimaFila.contains(input)) {
+    const nuevaFila = ultimaFila.cloneNode(true);
+    nuevaFila.querySelectorAll("input").forEach(input => input.value = "");
+    tabla.querySelector("tbody").appendChild(nuevaFila);
+  }
+}
+
+function inicializarAutofila(tablaId) {
+  const tabla = document.getElementById(tablaId);
+  tabla.addEventListener("input", function (e) {
+    if (e.target.tagName === "INPUT") {
+      agregarFilaSiEsUltima(e.target, tablaId);
     }
+  });
+}
 
-    function inicializarAutofila(tablaId) {
-      const tabla = document.getElementById(tablaId);
-      tabla.addEventListener("input", function (e) {
-        if (e.target.tagName === "INPUT") {
-           agregarFilaSiEsUltima(e.target, tablaId);
-        }
-      });
-    }
+inicializarAutofila("tablaPiezas1");
+inicializarAutofila("tablaPiezas2");
+</script>
 
-    inicializarAutofila("tablaPiezas1");
-    inicializarAutofila("tablaPiezas2");
-  </script>
+<!-- Escalado automático -->
+<script>
+function escalarPagina() {
+  const baseWidth = 1200;
+  const escala = Math.min(window.innerWidth / baseWidth, 1);
+  const escalado = document.getElementById('escalado');
 
-  <!-- Escalado automático -->
-  <script>
-  function escalarPagina() {
-    const baseWidth = 1200;
-    const escala = Math.min(window.innerWidth / baseWidth, 1);
-    const escalado = document.getElementById('escalado');
+  escalado.style.transform = `scale(${escala})`;
+  escalado.style.transformOrigin = 'top center';
 
-    escalado.style.transform = `scale(${escala})`;
-    escalado.style.transformOrigin = 'top center'; // 🔴 Esto es clave para que no desplace hacia abajo
+  const altoEscalado = escalado.getBoundingClientRect().height;
+  document.body.style.height = `${altoEscalado}px`;
+}
 
-    // Ajustar el alto del body al tamaño escalado real
-    const altoEscalado = escalado.getBoundingClientRect().height;
-    document.body.style.height = `${altoEscalado}px`;
+window.addEventListener('resize', escalarPagina);
+window.addEventListener('load', escalarPagina);
+</script>
+
+<!-- Autocompletar -->
+<script>
+const sugerencias = ["Prueba", "Mandarina", "Melón", "Mango"];
+const inputAuto = document.getElementById("autocomplete");
+
+let ultimaEntrada = "";
+
+inputAuto.addEventListener("input", () => {
+  const valor = inputAuto.value.toLowerCase();
+
+  if (valor.length < ultimaEntrada.length) {
+    ultimaEntrada = valor;
+    return;
   }
 
-  window.addEventListener('resize', escalarPagina);
-  window.addEventListener('load', escalarPagina);
-</script>
-  
-<script>
-  const sugerencias = ["Prueba", "Mandarina", "Melón", "Mango"];
-  const input = document.getElementById("autocomplete");
+  const match = sugerencias.find(opcion => opcion.toLowerCase().startsWith(valor));
+  if (match && valor !== match.toLowerCase()) {
+    inputAuto.value = match;
+    inputAuto.setSelectionRange(valor.length, match.length);
+  }
 
-  let ultimaEntrada = "";
-
-  input.addEventListener("input", () => {
-    const valor = input.value.toLowerCase();
-
-    // Evita sugerir si el usuario está borrando
-    if (valor.length < ultimaEntrada.length) {
-      ultimaEntrada = valor;
-      return;
-    }
-
-    const match = sugerencias.find(opcion => opcion.toLowerCase().startsWith(valor));
-    if (match && valor !== match.toLowerCase()) {
-      input.value = match;
-      input.setSelectionRange(valor.length, match.length); // subraya lo sugerido
-    }
-
-    ultimaEntrada = valor;
-  });
+  ultimaEntrada = valor;
+});
 </script>
  
