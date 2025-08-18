@@ -394,6 +394,9 @@ td input {
 }
 
 .modo-pdf label span {
+  font-size: 0.9em; /* un poco más chico */
+  margin-right: 4px;
+}
   margin: 0; /* Quita márgenes innecesarios */
 }
 
