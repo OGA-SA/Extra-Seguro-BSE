@@ -286,6 +286,36 @@ document.getElementById("boton").addEventListener("submit", function (event) {
     return;
   }
 
+  const siniestroInput = document.getElementById("siniestro");
+  const nombreArchivo = siniestroInput.value.trim() ? `${siniestroInput.value.trim()}.pdf` : "Formulario.pdf";
+
+  const pdfBlob = await html2pdf().from(document.getElementById("contenidoPDF")).outputPdf("blob");
+
+  const arrayBuffer = await pdfBlob.arrayBuffer();
+  const base64 = btoa(
+    new Uint8Array(arrayBuffer).reduce((data, byte) => data + String.fromCharCode(byte), "")
+  );
+
+  try {
+    const respuesta = await fetch("http://localhost:3000/upload", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        filename: nombreArchivo,
+        fileBase64: base64
+      })
+    });
+
+    const data = await respuesta.json();
+    if (data.success) {
+      alert(`✅ PDF subido a OneDrive con nombre: ${nombreArchivo}`);
+    } else {
+      alert(`❌ Error al subir el PDF: ${data.error}`);
+    }
+  } catch (error) {
+    alert(`❌ Error de conexión con el servidor: ${error.message}`);
+  }
+
   const botones = document.querySelectorAll("button");
   botones.forEach(btn => btn.style.display = "none");
 
@@ -297,16 +327,7 @@ document.getElementById("boton").addEventListener("submit", function (event) {
   body.classList.add("modo-pdf");
   escalado.style.transform = "none";
 
-  // Suponiendo que el input tiene un id
-const inputNombre = document.querySelector('#siniestro'); // cambia #stro por el id real de tu input
-
-// Valor que escribieron
-let nombreArchivo = inputNombre.value.trim();
-
-// Si está vacío, ponemos uno por defecto
-if (!nombreArchivo) {
-  nombreArchivo = 'formulario_con_dibujo';
-}
+  
   setTimeout(() => {
     html2pdf()
       .from(document.getElementById("contenidoPDF"))
