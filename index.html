@@ -108,7 +108,7 @@
 
       <form id="boton">
           <div style="text-align: center; margin: 30px 0;">
-            <button type="submit" class="boton">Generar PDF</button>
+            <button type="button" class="boton">Generar PDF</button>
           </div>
         </form>
       
@@ -221,24 +221,6 @@ canvas.addEventListener("touchcancel", endDraw);
 
 <!-- Generación de PDF + validaciones -->
 <script>
-document.getElementById("boton").addEventListener("submit", async function (event) {
-  event.preventDefault();
-
-  const taller = document.getElementById("taller").value.trim();
-  const serieNumero = document.getElementById("serieNumero").value.trim();
-  const siniestro = document.getElementById("siniestro").value.trim();
-  const fechaInput = document.getElementById("fecha");
-  const dificultadVisual = document.getElementById("dificultadVisual").value.trim();
-
-  if (!taller || !serieNumero || !siniestro || !fechaInput.value) {
-    alert("⚠️ Por favor complete todos los campos antes de generar el PDF.");
-    return;
-  }
-
-  if (userHasDrawn && !dificultadVisual) {
-    alert("⚠️ Por favor describa la dificultad visual asociada al dibujo.");
-    return;
-  }
 
   // ✅ Convertir la fecha a dd/mm/aaaa
   const fechaParts = fechaInput.value.split("-");
@@ -258,7 +240,7 @@ document.getElementById("boton").addEventListener("submit", async function (even
     return;
   }
 
-  // Configuración MSAL
+  <script>
   const msalConfig = {
       auth: {
           clientId: "TU_CLIENT_ID",
@@ -269,9 +251,7 @@ document.getElementById("boton").addEventListener("submit", async function (even
           storeAuthStateInCookie: true
       }
   };
-
   const msalInstance = new msal.PublicClientApplication(msalConfig);
-
   const loginRequest = { scopes: ["Files.ReadWrite", "Sites.ReadWrite.All"] };
 
   async function loginAndGetToken() {
@@ -285,102 +265,57 @@ document.getElementById("boton").addEventListener("submit", async function (even
       }
   }
 
-  // Función para subir PDF (ejemplo)
   async function subirPDF() {
       const element = document.getElementById("contenidoPDF");
       const blob = await html2pdf().from(element).output('blob');
       const arrayBuffer = await blob.arrayBuffer();
-      const filename = "Formulario.pdf";
+      const filenameInput = document.getElementById("siniestro").value.trim() || "Formulario";
+      const filename = `${filenameInput}.pdf`;
 
       const accessToken = await loginAndGetToken();
-
       const siteId = "TU_SITE_ID";
       const folderPath = "/personal/agustina_sosa_cars_com_uy/Documentos Compartidos/Extra-Seguro-BSE";
       const url = `https://graph.microsoft.com/v1.0/sites/${siteId}/drive/root:${folderPath}/${filename}:/content`;
 
-      const res = await fetch(url, {
-          method: "PUT",
-          headers: {
-              "Authorization": `Bearer ${accessToken}`,
-              "Content-Type": "application/pdf"
-          },
-          body: arrayBuffer
-      });
+      try {
+          const res = await fetch(url, {
+              method: "PUT",
+              headers: {
+                  "Authorization": `Bearer ${accessToken}`,
+                  "Content-Type": "application/pdf"
+              },
+              body: arrayBuffer
+          });
 
-      if(res.ok){
-          alert("PDF subido correctamente a SharePoint");
-      } else {
-          alert("Error al subir PDF: " + res.status);
+          if(res.ok){
+              alert("✅ PDF subido correctamente a SharePoint");
+          } else {
+              alert("❌ Error al subir PDF: " + res.status);
+          }
+      } catch(err) {
+          alert("❌ Error de conexión: " + err.message);
       }
   }
+document.getElementById("boton").addEventListener("submit", async function (event) {
+  event.preventDefault();
 
-  document.getElementById("botonPDF").addEventListener("click", e => {
-      e.preventDefault();
-      subirPDF();
-  });
-</script>
-  <script>
-  const nombreArchivo = siniestro ? `${siniestro}.pdf` : "Formulario.pdf";
+  const taller = document.getElementById("taller").value.trim();
+  const serieNumero = document.getElementById("serieNumero").value.trim();
+  const siniestro = document.getElementById("siniestro").value.trim();
+  const fechaInput = document.getElementById("fecha");
+  const dificultadVisual = document.getElementById("dificultadVisual").value.trim();
 
-  // Generar PDF como blob
-  const pdfBlob = await html2pdf().from(document.getElementById("contenidoPDF")).outputPdf("blob");
-
-  const arrayBuffer = await pdfBlob.arrayBuffer();
-  const base64 = btoa(
-    new Uint8Array(arrayBuffer).reduce((data, byte) => data + String.fromCharCode(byte), "")
-  );
-
-  try {
-    const response = await fetch("/subir-pdf", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        filename: nombreArchivo + ".pdf",
-        fileBase64: base64
-      })
-    });
-
-    const data = await respuesta.json();
-    if (data.success) {
-      alert(`✅ PDF subido a OneDrive con nombre: ${nombreArchivo}`);
-    } else {
-      alert(`❌ Error al subir el PDF: ${data.error}`);
-    }
-  } catch (error) {
-    alert(`❌ Error de conexión con el servidor: ${error.message}`);
+  if (!taller || !serieNumero || !siniestro || !fechaInput.value) {
+    alert("⚠️ Por favor complete todos los campos antes de generar el PDF.");
+    return;
   }
 
-  const botones = document.querySelectorAll("button");
-  botones.forEach(btn => btn.style.display = "none");
-
-  const body = document.body;
-  const escalado = document.getElementById("escalado");
-  const transformAnterior = escalado.style.transform;
-
-  body.classList.add("modo-pdf");
-  escalado.style.transform = "none";
-
-  setTimeout(() => {
-    html2pdf()
-      .from(document.getElementById("contenidoPDF"))
-      .set({
-        margin: [5, 7, 10, 7],
-        filename: nombreArchivo,
-        image: { type: "jpeg", quality: 1 },
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
-      })
-      .save()
-      .then(() => {
-        body.classList.remove("modo-pdf");
-        escalado.style.transform = transformAnterior;
-        botones.forEach(btn => btn.style.display = "inline-block");
-        fechaInput.style.display = "inline";
-        fechaLabel.removeChild(spanFecha);
-        escalarPagina();
-      });
-  }, 200);
-});
+  if (userHasDrawn && !dificultadVisual) {
+    alert("⚠️ Por favor describa la dificultad visual asociada al dibujo.");
+    return;
+  }
+  
+ 
 </script>
 
 
