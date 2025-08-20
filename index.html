@@ -118,7 +118,7 @@
 
   <!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <script src="https://alcdn.msauth.net/browser/2.36.0/js/msal-browser.min.js"></script>
+<script src="https://alcdn.msauth.net/browser/2.36.0/js/msal-browser.min.js"></script>
 
 <!-- Ajuste dinámico de input -->
 <script>
@@ -219,105 +219,107 @@ canvas.addEventListener("touchend", endDraw);
 canvas.addEventListener("touchcancel", endDraw);
 </script>
 
-<!-- Generación de PDF + validaciones -->
+<!-- Generación de PDF + subida a OneDrive -->
 <script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelector("#boton .boton").addEventListener("click", async (e) => {
+    e.preventDefault();
 
-  // ✅ Convertir la fecha a dd/mm/aaaa
-  const fechaParts = fechaInput.value.split("-");
-  const fechaFormateada = `${fechaParts[2]}/${fechaParts[1]}/${fechaParts[0]}`;
+    const taller = document.getElementById("taller").value.trim();
+    const serieNumero = document.getElementById("serieNumero").value.trim();
+    const siniestro = document.getElementById("siniestro").value.trim();
+    const fechaInput = document.getElementById("fecha");
+    const dificultadVisual = document.getElementById("dificultadVisual").value.trim();
 
-  const fechaLabel = fechaInput.parentElement; 
-  const spanFecha = document.createElement("span");
-  spanFecha.textContent = fechaFormateada;
-  fechaLabel.appendChild(spanFecha);
+    if (!taller || !serieNumero || !siniestro || !fechaInput.value) {
+      alert("⚠️ Por favor complete todos los campos antes de generar el PDF.");
+      return;
+    }
 
-  fechaInput.style.display = "none";
-  
-  const confirmar = confirm("¿El número de siniestro ingresado es correcto: " + siniestro + " ?");
-  if (!confirmar) {
-    fechaInput.style.display = "inline";
-    fechaLabel.removeChild(spanFecha);
-    return;
-  }
+    if (userHasDrawn && !dificultadVisual) {
+      alert("⚠️ Por favor describa la dificultad visual asociada al dibujo.");
+      return;
+    }
 
-  <script>
-  const msalConfig = {
+    // Formateo de fecha dd/mm/aaaa
+    const fechaParts = fechaInput.value.split("-");
+    const fechaFormateada = `${fechaParts[2]}/${fechaParts[1]}/${fechaParts[0]}`;
+    const fechaLabel = fechaInput.parentElement;
+    const spanFecha = document.createElement("span");
+    spanFecha.textContent = fechaFormateada;
+    fechaLabel.appendChild(spanFecha);
+    fechaInput.style.display = "none";
+
+    const confirmar = confirm("¿El número de siniestro ingresado es correcto: " + siniestro + " ?");
+    if (!confirmar) {
+      fechaInput.style.display = "inline";
+      fechaLabel.removeChild(spanFecha);
+      return;
+    }
+
+    // Configuración MSAL
+    const msalConfig = {
       auth: {
-          clientId: "TU_CLIENT_ID",
-          redirectUri: window.location.href
+        clientId: "TU_CLIENT_ID",
+        redirectUri: window.location.href
       },
       cache: {
-          cacheLocation: "localStorage",
-          storeAuthStateInCookie: true
+        cacheLocation: "localStorage",
+        storeAuthStateInCookie: true
       }
-  };
-  const msalInstance = new msal.PublicClientApplication(msalConfig);
-  const loginRequest = { scopes: ["Files.ReadWrite", "Sites.ReadWrite.All"] };
+    };
+    const msalInstance = new msal.PublicClientApplication(msalConfig);
+    const loginRequest = { scopes: ["Files.ReadWrite.All"] };
 
-  async function loginAndGetToken() {
+    async function loginAndGetToken() {
       try {
-          const tokenResponse = await msalInstance.acquireTokenSilent(loginRequest);
-          return tokenResponse.accessToken;
+        const tokenResponse = await msalInstance.acquireTokenSilent(loginRequest);
+        return tokenResponse.accessToken;
       } catch {
-          await msalInstance.loginPopup(loginRequest);
-          const tokenResponse = await msalInstance.acquireTokenPopup(loginRequest);
-          return tokenResponse.accessToken;
+        await msalInstance.loginPopup(loginRequest);
+        const tokenResponse = await msalInstance.acquireTokenPopup(loginRequest);
+        return tokenResponse.accessToken;
       }
-  }
+    }
 
-  async function subirPDF() {
+    async function subirPDF() {
       const element = document.getElementById("contenidoPDF");
       const blob = await html2pdf().from(element).output('blob');
       const arrayBuffer = await blob.arrayBuffer();
       const filenameInput = document.getElementById("siniestro").value.trim() || "Formulario";
       const filename = `${filenameInput}.pdf`;
-
       const accessToken = await loginAndGetToken();
-      const filename = `${document.getElementById("siniestro").value || "Formulario"}.pdf`;
       const url = `https://graph.microsoft.com/v1.0/me/drive/root:/Extra-Seguro-BSE/${filename}:/content`;
 
       try {
-          const res = await fetch(url, {
-              method: "PUT",
-              headers: {
-                  "Authorization": `Bearer ${accessToken}`,
-                  "Content-Type": "application/pdf"
-              },
-              body: arrayBuffer
-          });
+        const res = await fetch(url, {
+          method: "PUT",
+          headers: {
+            "Authorization": `Bearer ${accessToken}`,
+            "Content-Type": "application/pdf"
+          },
+          body: arrayBuffer
+        });
 
-          if(res.ok){
-              alert("✅ PDF subido correctamente a SharePoint");
-          } else {
-              alert("❌ Error al subir PDF: " + res.status);
-          }
+        if(res.ok){
+          alert("✅ PDF subido correctamente a SharePoint");
+        } else {
+          alert("❌ Error al subir PDF: " + res.status);
+        }
       } catch(err) {
-          alert("❌ Error de conexión: " + err.message);
+        alert("❌ Error de conexión: " + err.message);
       }
-  }
+    }
 
+    // Subir PDF
+    await subirPDF();
 
-  const taller = document.getElementById("taller").value.trim();
-  const serieNumero = document.getElementById("serieNumero").value.trim();
-  const siniestro = document.getElementById("siniestro").value.trim();
-  const fechaInput = document.getElementById("fecha");
-  const dificultadVisual = document.getElementById("dificultadVisual").value.trim();
-
-  if (!taller || !serieNumero || !siniestro || !fechaInput.value) {
-    alert("⚠️ Por favor complete todos los campos antes de generar el PDF.");
-    return;
-  }
-
-  if (userHasDrawn && !dificultadVisual) {
-    alert("⚠️ Por favor describa la dificultad visual asociada al dibujo.");
-    return;
-  }
-document.addEventListener("DOMContentLoaded", () => {
-    document.querySelector("#boton .boton").addEventListener("click", e => {
-        e.preventDefault();  
- 
+    // Restaurar estado del formulario
+    fechaInput.style.display = "inline";
+    fechaLabel.removeChild(spanFecha);
+  });
+});
 </script>
-
 
 <!-- Escalado automático -->
 <script>
@@ -337,11 +339,10 @@ window.addEventListener('resize', escalarPagina);
 window.addEventListener('load', escalarPagina);
 </script>
 
-<script>
 <!-- Autocompletar -->
+<script>
 const sugerencias = ["PUNTERA P/GOLPE DEL DER", "PUNTERA P/GOLPE DEL IZQ", "SEÑALERO DEL DER", "SEÑALERO DEL IZQ", "PUNTERA P/GOLPE TRAS DER", "PUNTERA P/GOLPE TRAS IZQ", "LUNETA TRASERA", "MOLDURA sup tapa caja", "FRENTE DE CHAPA", "PORTON LATERAL DERECHO", "CHORIZO DE TECHO IZQ"];
 
-// Función para aplicar autocompletado a un input
 function aplicarAutocompletado(inputAuto) {
   let ultimaEntrada = "";
 
@@ -362,10 +363,9 @@ function aplicarAutocompletado(inputAuto) {
     ultimaEntrada = valor;
   });
 }
-// Inicializar autocompletado en todos los inputs existentes
+
 document.querySelectorAll(".autocomplete").forEach(aplicarAutocompletado);
 
-// Reaplicar autocompletado cuando se agregue una nueva fila
 function agregarFilaSiEsUltima(input, tablaId) {
   const tabla = document.getElementById(tablaId);
   const filas = tabla.querySelectorAll("tbody tr");
@@ -375,8 +375,6 @@ function agregarFilaSiEsUltima(input, tablaId) {
     const nuevaFila = ultimaFila.cloneNode(true);
     nuevaFila.querySelectorAll("input").forEach(input => input.value = "");
     tabla.querySelector("tbody").appendChild(nuevaFila);
-
-    // Aplicar autocompletado a los nuevos inputs
     nuevaFila.querySelectorAll(".autocomplete").forEach(aplicarAutocompletado);
   }
 }
@@ -392,4 +390,4 @@ function inicializarAutofila(tablaId) {
 
 inicializarAutofila("tablaPiezas1");
 inicializarAutofila("tablaPiezas2");
- </script>
+</script>
