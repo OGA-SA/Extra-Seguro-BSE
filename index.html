@@ -295,8 +295,8 @@ canvas.addEventListener("touchcancel", endDraw);
           alert("❌ Error de conexión: " + err.message);
       }
   }
-document.getElementById("boton").addEventListener("submit", async function (event) {
-  event.preventDefault();
+document.querySelector("#boton .boton").addEventListener("click", e => {
+    e.preventDefault();
 
   const taller = document.getElementById("taller").value.trim();
   const serieNumero = document.getElementById("serieNumero").value.trim();
