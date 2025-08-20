@@ -295,8 +295,7 @@ canvas.addEventListener("touchcancel", endDraw);
           alert("❌ Error de conexión: " + err.message);
       }
   }
-document.querySelector("#boton .boton").addEventListener("click", e => {
-    e.preventDefault();
+
 
   const taller = document.getElementById("taller").value.trim();
   const serieNumero = document.getElementById("serieNumero").value.trim();
@@ -313,7 +312,9 @@ document.querySelector("#boton .boton").addEventListener("click", e => {
     alert("⚠️ Por favor describa la dificultad visual asociada al dibujo.");
     return;
   }
-  
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelector("#boton .boton").addEventListener("click", e => {
+        e.preventDefault();  
  
 </script>
 
