@@ -268,7 +268,7 @@ document.getElementById("boton").addEventListener("submit", async function (even
   );
 
   try {
-    const respuesta = await fetch("https://extra-seguro-backend.onrender.com/upload", {
+    const response = await fetch("/subir-pdf", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
