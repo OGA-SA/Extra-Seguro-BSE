@@ -268,7 +268,7 @@ document.getElementById("boton").addEventListener("submit", async function (even
   );
 
   try {
-    const respuesta = await fetch("http://localhost:3000/upload", {
+    const respuesta = await fetch("https://extra-seguro-backend.onrender.com/upload", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
