@@ -118,7 +118,7 @@
 
   <!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script src="https://alcdn.msauth.net/browser/2.36.0/js/msal-browser.min.js"></script>
+
 
 <!-- Ajuste dinámico de input -->
 <script>
@@ -220,75 +220,81 @@ canvas.addEventListener("touchcancel", endDraw);
 </script>
 
 <!-- Generación de PDF + subida a OneDrive -->
+<script src="https://alcdn.msauth.net/browser/2.36.0/js/msal-browser.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelector("#boton .boton").addEventListener("click", async (e) => {
-    e.preventDefault();
+  if (typeof msal === "undefined") {
+    console.error("❌ MSAL no cargó correctamente");
+    return;
+  }
 
-    const taller = document.getElementById("taller").value.trim();
-    const serieNumero = document.getElementById("serieNumero").value.trim();
-    const siniestro = document.getElementById("siniestro").value.trim();
-    const fechaInput = document.getElementById("fecha");
-    const dificultadVisual = document.getElementById("dificultadVisual").value.trim();
-
-    if (!taller || !serieNumero || !siniestro || !fechaInput.value) {
-      alert("⚠️ Por favor complete todos los campos antes de generar el PDF.");
-      return;
+  // Configuración MSAL
+  const msalConfig = {
+    auth: {
+      clientId: "TU_CLIENT_ID", // Reemplaza con tu Client ID de Azure AD
+      redirectUri: window.location.href
+    },
+    cache: {
+      cacheLocation: "localStorage",
+      storeAuthStateInCookie: true
     }
+  };
+  const msalInstance = new msal.PublicClientApplication(msalConfig);
+  const loginRequest = { scopes: ["Files.ReadWrite", "Sites.ReadWrite.All"] };
 
-    if (userHasDrawn && !dificultadVisual) {
-      alert("⚠️ Por favor describa la dificultad visual asociada al dibujo.");
-      return;
+  // Función para login y obtención de token
+  async function loginAndGetToken() {
+    try {
+      const tokenResponse = await msalInstance.acquireTokenSilent(loginRequest);
+      return tokenResponse.accessToken;
+    } catch {
+      await msalInstance.loginPopup(loginRequest);
+      const tokenResponse = await msalInstance.acquireTokenPopup(loginRequest);
+      return tokenResponse.accessToken;
     }
+  }
 
-    // Formateo de fecha dd/mm/aaaa
-    const fechaParts = fechaInput.value.split("-");
-    const fechaFormateada = `${fechaParts[2]}/${fechaParts[1]}/${fechaParts[0]}`;
-    const fechaLabel = fechaInput.parentElement;
-    const spanFecha = document.createElement("span");
-    spanFecha.textContent = fechaFormateada;
-    fechaLabel.appendChild(spanFecha);
-    fechaInput.style.display = "none";
+  // Botón para generar y subir PDF
+  const boton = document.querySelector("#boton .boton");
+  if (boton) {
+    boton.addEventListener("click", async (e) => {
+      e.preventDefault();
 
-    const confirmar = confirm("¿El número de siniestro ingresado es correcto: " + siniestro + " ?");
-    if (!confirmar) {
-      fechaInput.style.display = "inline";
-      fechaLabel.removeChild(spanFecha);
-      return;
-    }
+      // 1️⃣ Obtener valores de los inputs
+      const taller = document.getElementById("taller").value.trim();
+      const serieNumero = document.getElementById("serieNumero").value.trim();
+      const siniestro = document.getElementById("siniestro").value.trim();
+      const fechaInput = document.getElementById("fecha");
+      const dificultadVisual = document.getElementById("dificultadVisual").value.trim();
 
-    // Configuración MSAL
-    const msalConfig = {
-      auth: {
-        clientId: "TU_CLIENT_ID",
-        redirectUri: window.location.href
-      },
-      cache: {
-        cacheLocation: "localStorage",
-        storeAuthStateInCookie: true
+      if (!taller || !serieNumero || !siniestro || !fechaInput.value) {
+        alert("⚠️ Complete todos los campos antes de generar el PDF.");
+        return;
       }
-    };
-    const msalInstance = new msal.PublicClientApplication(msalConfig);
-    const loginRequest = { scopes: ["Files.ReadWrite.All"] };
-
-    async function loginAndGetToken() {
-      try {
-        const tokenResponse = await msalInstance.acquireTokenSilent(loginRequest);
-        return tokenResponse.accessToken;
-      } catch {
-        await msalInstance.loginPopup(loginRequest);
-        const tokenResponse = await msalInstance.acquireTokenPopup(loginRequest);
-        return tokenResponse.accessToken;
+      if (userHasDrawn && !dificultadVisual) {
+        alert("⚠️ Describa la dificultad visual asociada al dibujo.");
+        return;
       }
-    }
 
-    async function subirPDF() {
+      // 2️⃣ Formatear la fecha
+      const fechaParts = fechaInput.value.split("-");
+      const fechaFormateada = `${fechaParts[2]}/${fechaParts[1]}/${fechaParts[0]}`;
+
+      // 3️⃣ Confirmar siniestro
+      if (!confirm("¿El número de siniestro ingresado es correcto: " + siniestro + "?")) {
+        return;
+      }
+
+      // 4️⃣ Generar PDF como blob
       const element = document.getElementById("contenidoPDF");
       const blob = await html2pdf().from(element).output('blob');
-      const arrayBuffer = await blob.arrayBuffer();
-      const filenameInput = document.getElementById("siniestro").value.trim() || "Formulario";
-      const filename = `${filenameInput}.pdf`;
+
+      // 5️⃣ Obtener token de MSAL
       const accessToken = await loginAndGetToken();
+
+      // 6️⃣ Subir PDF a OneDrive / SharePoint
+      const arrayBuffer = await blob.arrayBuffer();
+      const filename = `${siniestro || "Formulario"}.pdf`;
       const url = `https://graph.microsoft.com/v1.0/me/drive/root:/Extra-Seguro-BSE/${filename}:/content`;
 
       try {
@@ -309,17 +315,14 @@ document.addEventListener("DOMContentLoaded", () => {
       } catch(err) {
         alert("❌ Error de conexión: " + err.message);
       }
-    }
-
-    // Subir PDF
-    await subirPDF();
-
-    // Restaurar estado del formulario
-    fechaInput.style.display = "inline";
-    fechaLabel.removeChild(spanFecha);
-  });
+    });
+  } else {
+    console.error("❌ No se encontró el botón #boton .boton");
+  }
 });
 </script>
+
+   
 
 <!-- Escalado automático -->
 <script>
