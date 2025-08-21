@@ -119,8 +119,47 @@
   <!-- Scripts -->
 <!-- Librerías necesarias -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<!-- Cargar MSAL primero -->
-<script src="https://alcdn.msauth.net/browser/2.36.0/js/msal-browser.min.js"></script>
+
+<!-- Loader dinámico de MSAL (reemplaza el <script src="...msal-browser.min.js"> estático) -->
+<script>
+(function () {
+  const candidates = [
+    "https://alcdn.msauth.net/browser/2.45.0/js/msal-browser.min.js",
+    "https://cdn.jsdelivr.net/npm/@azure/msal-browser@2.45.0/lib/msal-browser.min.js",
+    "https://unpkg.com/@azure/msal-browser@2.45.0/lib/msal-browser.min.js"
+  ];
+
+  function loadScript(url) {
+    return new Promise((resolve, reject) => {
+      const s = document.createElement("script");
+      s.src = url;
+      s.async = true;
+      s.onload = () => resolve(url);
+      s.onerror = () => reject(url);
+      document.head.appendChild(s);
+    });
+  }
+
+  async function ensureMsal() {
+    if (window.msal) return "preloaded";
+    for (const url of candidates) {
+      try {
+        await loadScript(url);
+        if (window.msal) {
+          console.log("✅ MSAL cargado desde:", url);
+          return url;
+        }
+      } catch (e) {
+        console.warn("No se pudo cargar MSAL desde:", url);
+      }
+    }
+    throw new Error("MSAL no se pudo cargar desde ningún CDN.");
+  }
+
+  // Exponer para que otros scripts esperen a MSAL
+  window.ensureMsal = ensureMsal;
+})();
+</script>
 
 <!-- Ajuste dinámico de input (con guardas para evitar null) -->
 <script>
@@ -305,10 +344,17 @@ window.addEventListener('load', escalarPagina);
 
 <!-- MSAL + Generación y subida del PDF -->
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  // Verificar si MSAL está disponible
+document.addEventListener("DOMContentLoaded", async () => {
+  // Esperar a que el loader dinámico cargue MSAL
+  try {
+    await (window.ensureMsal ? window.ensureMsal() : Promise.reject(new Error("ensureMsal no definido")));
+  } catch (e) {
+    console.error("❌ MSAL no cargó correctamente. Revisa conectividad/CDN:", e.message);
+    return;
+  }
+
   if (typeof msal === "undefined") {
-    console.error("❌ MSAL no cargó correctamente. Revisa la URL del script.");
+    console.error("❌ MSAL sigue sin estar disponible.");
     return;
   }
 
@@ -316,7 +362,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const msalConfig = {
     auth: {
       clientId: "TU_CLIENT_ID", // ⬅️ Reemplaza por tu Client ID real
-      redirectUri: window.location.origin // solo dominio, no URL completa
+      redirectUri: window.location.origin // solo dominio
     },
     cache: {
       cacheLocation: "localStorage",
@@ -328,10 +374,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function loginAndGetToken() {
     try {
-      const tokenResponse = await msalInstance.acquireTokenSilent(loginRequest);
-      return tokenResponse.accessToken;
-    } catch {
+      const accounts = msalInstance.getAllAccounts();
+      if (accounts.length) {
+        const tokenResponse = await msalInstance.acquireTokenSilent({ ...loginRequest, account: accounts[0] });
+        return tokenResponse.accessToken;
+      }
       await msalInstance.loginPopup(loginRequest);
+      const account = msalInstance.getAllAccounts()[0];
+      const tokenResponse = await msalInstance.acquireTokenSilent({ ...loginRequest, account });
+      return tokenResponse.accessToken;
+    } catch (err) {
+      console.warn("Silent falló, intentando con popup:", err?.message);
       const tokenResponse = await msalInstance.acquireTokenPopup(loginRequest);
       return tokenResponse.accessToken;
     }
@@ -406,6 +459,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const arrayBuffer = await blob.arrayBuffer();
     const filename = `${siniestro || "Formulario"}.pdf`;
+    // Sube a OneDrive personal del usuario, carpeta "Extra-Seguro-BSE"
     const url = `https://graph.microsoft.com/v1.0/me/drive/root:/Extra-Seguro-BSE/${filename}:/content`;
 
     try {
