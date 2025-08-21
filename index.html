@@ -117,110 +117,192 @@
   </div>
 
   <!-- Scripts -->
+<!-- Librerías necesarias -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://alcdn.msauth.net/browser/2.36.0/js/msal-browser.min.js"></script>
 
-
-<!-- Ajuste dinámico de input -->
+<!-- Ajuste dinámico de input (con guardas para evitar null) -->
 <script>
-const input = document.getElementById("text");
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("text");
+  if (!input) return; // evita errores si no existe el input con id="text"
 
-input.addEventListener("input", function() {
-  const span = document.createElement("span");
-  span.style.visibility = "hidden";
-  span.style.position = "absolute";
-  span.style.whiteSpace = "pre";
-  span.style.font = window.getComputedStyle(input).font;
+  input.addEventListener("input", function() {
+    const span = document.createElement("span");
+    span.style.visibility = "hidden";
+    span.style.position = "absolute";
+    span.style.whiteSpace = "pre";
+    span.style.font = window.getComputedStyle(input).font;
 
-  span.textContent = input.value || input.placeholder;
+    span.textContent = input.value || input.placeholder;
 
-  document.body.appendChild(span);
-  const ancho = span.offsetWidth + 10;
-  document.body.removeChild(span);
+    document.body.appendChild(span);
+    const ancho = span.offsetWidth + 10;
+    document.body.removeChild(span);
 
-  input.style.width = ancho + "px";
+    input.style.width = ancho + "px";
+  });
 });
 </script>
 
 <!-- Canvas con parabrisas -->
 <script>
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-let baseImageData = null;
-let userHasDrawn = false;
+document.addEventListener("DOMContentLoaded", () => {
+  const canvas = document.getElementById("canvas");
+  if (!canvas) return; // por si el canvas no está
 
-const image = new Image();
-image.src = "parabrisa.png"; // ⚠️ asegúrate que el archivo exista en la misma carpeta
-image.onload = () => {
-  ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-  baseImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-};
+  const ctx = canvas.getContext("2d");
+  let baseImageData = null;
+  window.userHasDrawn = false; // dejar accesible en otros scripts
 
-function clearCanvas() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-  userHasDrawn = false;
-  baseImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-}
-window.clearCanvas = clearCanvas;
+  const image = new Image();
+  image.src = "parabrisa.png"; // ⚠️ asegurate que exista en la misma carpeta
+  image.onload = () => {
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+    baseImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  };
 
-let drawing = false;
+  function clearCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+    window.userHasDrawn = false;
+    baseImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  }
+  window.clearCanvas = clearCanvas;
 
-function getPos(evt) {
-  const rect = canvas.getBoundingClientRect();
-  const escalaX = canvas.width / rect.width;
-  const escalaY = canvas.height / rect.height;
+  let drawing = false;
 
-  const x = evt.touches
-    ? (evt.touches[0].clientX - rect.left) * escalaX
-    : (evt.clientX - rect.left) * escalaX;
+  function getPos(evt) {
+    const rect = canvas.getBoundingClientRect();
+    const escalaX = canvas.width / rect.width;
+    const escalaY = canvas.height / rect.height;
 
-  const y = evt.touches
-    ? (evt.touches[0].clientY - rect.top) * escalaY
-    : (evt.clientY - rect.top) * escalaY;
+    const x = evt.touches
+      ? (evt.touches[0].clientX - rect.left) * escalaX
+      : (evt.clientX - rect.left) * escalaX;
 
-  return { x, y };
-}
+    const y = evt.touches
+      ? (evt.touches[0].clientY - rect.top) * escalaY
+      : (evt.clientY - rect.top) * escalaY;
 
-function startDraw(evt) {
-  evt.preventDefault();
-  drawing = true;
-  const pos = getPos(evt);
-  ctx.beginPath();
-  ctx.moveTo(pos.x, pos.y);
-}
+    return { x, y };
+  }
 
-function draw(evt) {
-  if (!drawing) return;
-  evt.preventDefault();
-  const pos = getPos(evt);
-  ctx.lineWidth = 2;
-  ctx.lineCap = "round";
-  ctx.strokeStyle = "red";
-  ctx.lineTo(pos.x, pos.y);
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.moveTo(pos.x, pos.y);
-  userHasDrawn = true;
-}
+  function startDraw(evt) {
+    evt.preventDefault();
+    drawing = true;
+    const pos = getPos(evt);
+    ctx.beginPath();
+    ctx.moveTo(pos.x, pos.y);
+  }
 
-function endDraw(evt) {
-  evt.preventDefault();
-  drawing = false;
-  ctx.beginPath();
-}
+  function draw(evt) {
+    if (!drawing) return;
+    evt.preventDefault();
+    const pos = getPos(evt);
+    ctx.lineWidth = 2;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "red";
+    ctx.lineTo(pos.x, pos.y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(pos.x, pos.y);
+    window.userHasDrawn = true;
+  }
 
-canvas.addEventListener("mousedown", startDraw);
-canvas.addEventListener("mousemove", draw);
-canvas.addEventListener("mouseup", endDraw);
-canvas.addEventListener("mouseleave", endDraw);
-canvas.addEventListener("touchstart", startDraw, { passive: false });
-canvas.addEventListener("touchmove", draw, { passive: false });
-canvas.addEventListener("touchend", endDraw);
-canvas.addEventListener("touchcancel", endDraw);
+  function endDraw(evt) {
+    evt.preventDefault();
+    drawing = false;
+    ctx.beginPath();
+  }
+
+  canvas.addEventListener("mousedown", startDraw);
+  canvas.addEventListener("mousemove", draw);
+  canvas.addEventListener("mouseup", endDraw);
+  canvas.addEventListener("mouseleave", endDraw);
+  canvas.addEventListener("touchstart", startDraw, { passive: false });
+  canvas.addEventListener("touchmove", draw, { passive: false });
+  canvas.addEventListener("touchend", endDraw);
+  canvas.addEventListener("touchcancel", endDraw);
+});
 </script>
 
-<!-- Generación de PDF + subida a OneDrive -->
-<script src="https://alcdn.msauth.net/browser/2.36.0/js/msal-browser.min.js"></script>
+<!-- Autocompletar -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const sugerencias = [
+    "PUNTERA P/GOLPE DEL DER", "PUNTERA P/GOLPE DEL IZQ", "SEÑALERO DEL DER",
+    "SEÑALERO DEL IZQ", "PUNTERA P/GOLPE TRAS DER", "PUNTERA P/GOLPE TRAS IZQ",
+    "LUNETA TRASERA", "MOLDURA sup tapa caja", "FRENTE DE CHAPA",
+    "PORTON LATERAL DERECHO", "CHORIZO DE TECHO IZQ"
+  ];
+
+  function aplicarAutocompletado(inputAuto) {
+    let ultimaEntrada = "";
+    inputAuto.addEventListener("input", () => {
+      const valor = inputAuto.value.toLowerCase();
+      if (valor.length < ultimaEntrada.length) {
+        ultimaEntrada = valor;
+        return;
+      }
+      const match = sugerencias.find(opcion => opcion.toLowerCase().startsWith(valor));
+      if (match && valor !== match.toLowerCase()) {
+        inputAuto.value = match;
+        inputAuto.setSelectionRange(valor.length, match.length);
+      }
+      ultimaEntrada = valor;
+    });
+  }
+
+  document.querySelectorAll(".autocomplete").forEach(aplicarAutocompletado);
+
+  function agregarFilaSiEsUltima(input, tablaId) {
+    const tabla = document.getElementById(tablaId);
+    const filas = tabla.querySelectorAll("tbody tr");
+    const ultimaFila = filas[filas.length - 1];
+
+    if (ultimaFila.contains(input)) {
+      const nuevaFila = ultimaFila.cloneNode(true);
+      nuevaFila.querySelectorAll("input").forEach(input => input.value = "");
+      tabla.querySelector("tbody").appendChild(nuevaFila);
+      nuevaFila.querySelectorAll(".autocomplete").forEach(aplicarAutocompletado);
+    }
+  }
+
+  function inicializarAutofila(tablaId) {
+    const tabla = document.getElementById(tablaId);
+    tabla.addEventListener("input", function (e) {
+      if (e.target.tagName === "INPUT") {
+        agregarFilaSiEsUltima(e.target, tablaId);
+      }
+    });
+  }
+
+  inicializarAutofila("tablaPiezas1");
+  inicializarAutofila("tablaPiezas2");
+});
+</script>
+
+<!-- Escalado automático -->
+<script>
+function escalarPagina() {
+  const baseWidth = 1200;
+  const escala = Math.min(window.innerWidth / baseWidth, 1);
+  const escalado = document.getElementById('escalado');
+
+  if (!escalado) return;
+
+  escalado.style.transform = `scale(${escala})`;
+  escalado.style.transformOrigin = 'top center';
+
+  const altoEscalado = escalado.getBoundingClientRect().height;
+  document.body.style.height = `${altoEscalado}px`;
+}
+window.addEventListener('resize', escalarPagina);
+window.addEventListener('load', escalarPagina);
+</script>
+
+<!-- MSAL + Generación y subida del PDF (mantiene el botón existente) -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   if (typeof msal === "undefined") {
@@ -231,7 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Configuración MSAL
   const msalConfig = {
     auth: {
-      clientId: "TU_CLIENT_ID", // Reemplaza con tu Client ID de Azure AD
+      clientId: "TU_CLIENT_ID", // ⬅️ Reemplazar por tu Application (client) ID
       redirectUri: window.location.href
     },
     cache: {
@@ -240,9 +322,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
   const msalInstance = new msal.PublicClientApplication(msalConfig);
-  const loginRequest = { scopes: ["Files.ReadWrite", "Sites.ReadWrite.All"] };
+  const loginRequest = { scopes: ["Files.ReadWrite.All"] }; // permisos para OneDrive/SharePoint personal
 
-  // Función para login y obtención de token
   async function loginAndGetToken() {
     try {
       const tokenResponse = await msalInstance.acquireTokenSilent(loginRequest);
@@ -254,143 +335,106 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Botón para generar y subir PDF
   const boton = document.querySelector("#boton .boton");
-  if (boton) {
-    boton.addEventListener("click", async (e) => {
-      e.preventDefault();
-
-      // 1️⃣ Obtener valores de los inputs
-      const taller = document.getElementById("taller").value.trim();
-      const serieNumero = document.getElementById("serieNumero").value.trim();
-      const siniestro = document.getElementById("siniestro").value.trim();
-      const fechaInput = document.getElementById("fecha");
-      const dificultadVisual = document.getElementById("dificultadVisual").value.trim();
-
-      if (!taller || !serieNumero || !siniestro || !fechaInput.value) {
-        alert("⚠️ Complete todos los campos antes de generar el PDF.");
-        return;
-      }
-      if (userHasDrawn && !dificultadVisual) {
-        alert("⚠️ Describa la dificultad visual asociada al dibujo.");
-        return;
-      }
-
-      // 2️⃣ Formatear la fecha
-      const fechaParts = fechaInput.value.split("-");
-      const fechaFormateada = `${fechaParts[2]}/${fechaParts[1]}/${fechaParts[0]}`;
-
-      // 3️⃣ Confirmar siniestro
-      if (!confirm("¿El número de siniestro ingresado es correcto: " + siniestro + "?")) {
-        return;
-      }
-
-      // 4️⃣ Generar PDF como blob
-      const element = document.getElementById("contenidoPDF");
-      const blob = await html2pdf().from(element).output('blob');
-
-      // 5️⃣ Obtener token de MSAL
-      const accessToken = await loginAndGetToken();
-
-      // 6️⃣ Subir PDF a OneDrive / SharePoint
-      const arrayBuffer = await blob.arrayBuffer();
-      const filename = `${siniestro || "Formulario"}.pdf`;
-      const url = `https://graph.microsoft.com/v1.0/me/drive/root:/Extra-Seguro-BSE/${filename}:/content`;
-
-      try {
-        const res = await fetch(url, {
-          method: "PUT",
-          headers: {
-            "Authorization": `Bearer ${accessToken}`,
-            "Content-Type": "application/pdf"
-          },
-          body: arrayBuffer
-        });
-
-        if(res.ok){
-          alert("✅ PDF subido correctamente a SharePoint");
-        } else {
-          alert("❌ Error al subir PDF: " + res.status);
-        }
-      } catch(err) {
-        alert("❌ Error de conexión: " + err.message);
-      }
-    });
-  } else {
+  if (!boton) {
     console.error("❌ No se encontró el botón #boton .boton");
+    return;
   }
-});
-</script>
 
-   
+  boton.addEventListener("click", async (e) => {
+    e.preventDefault();
 
-<!-- Escalado automático -->
-<script>
-function escalarPagina() {
-  const baseWidth = 1200;
-  const escala = Math.min(window.innerWidth / baseWidth, 1);
-  const escalado = document.getElementById('escalado');
+    // 1) Validaciones
+    const taller = (document.getElementById("taller") || {}).value?.trim() || "";
+    const serieNumero = (document.getElementById("serieNumero") || {}).value?.trim() || "";
+    const siniestro = (document.getElementById("siniestro") || {}).value?.trim() || "";
+    const fechaInput = document.getElementById("fecha");
+    const dificultadVisual = (document.getElementById("dificultadVisual") || {}).value?.trim() || "";
 
-  escalado.style.transform = `scale(${escala})`;
-  escalado.style.transformOrigin = 'top center';
-
-  const altoEscalado = escalado.getBoundingClientRect().height;
-  document.body.style.height = `${altoEscalado}px`;
-}
-
-window.addEventListener('resize', escalarPagina);
-window.addEventListener('load', escalarPagina);
-</script>
-
-<!-- Autocompletar -->
-<script>
-const sugerencias = ["PUNTERA P/GOLPE DEL DER", "PUNTERA P/GOLPE DEL IZQ", "SEÑALERO DEL DER", "SEÑALERO DEL IZQ", "PUNTERA P/GOLPE TRAS DER", "PUNTERA P/GOLPE TRAS IZQ", "LUNETA TRASERA", "MOLDURA sup tapa caja", "FRENTE DE CHAPA", "PORTON LATERAL DERECHO", "CHORIZO DE TECHO IZQ"];
-
-function aplicarAutocompletado(inputAuto) {
-  let ultimaEntrada = "";
-
-  inputAuto.addEventListener("input", () => {
-    const valor = inputAuto.value.toLowerCase();
-
-    if (valor.length < ultimaEntrada.length) {
-      ultimaEntrada = valor;
+    if (!taller || !serieNumero || !siniestro || !fechaInput || !fechaInput.value) {
+      alert("⚠️ Complete todos los campos antes de generar el PDF.");
+      return;
+    }
+    if (window.userHasDrawn && !dificultadVisual) {
+      alert("⚠️ Describa la dificultad visual asociada al dibujo.");
       return;
     }
 
-    const match = sugerencias.find(opcion => opcion.toLowerCase().startsWith(valor));
-    if (match && valor !== match.toLowerCase()) {
-      inputAuto.value = match;
-      inputAuto.setSelectionRange(valor.length, match.length);
+    // 2) Formatear fecha y mostrarla en la vista previa del PDF (oculta el input mientras se renderiza)
+    const fechaParts = fechaInput.value.split("-");
+    const fechaFormateada = `${fechaParts[2]}/${fechaParts[1]}/${fechaParts[0]}`;
+    const fechaLabel = fechaInput.parentElement;
+    const spanFecha = document.createElement("span");
+    spanFecha.textContent = fechaFormateada;
+    fechaLabel.appendChild(spanFecha);
+    fechaInput.style.display = "none";
+
+    // 3) Confirmar siniestro
+    const ok = confirm("¿El número de siniestro ingresado es correcto: " + siniestro + "?");
+    if (!ok) {
+      fechaInput.style.display = "inline";
+      fechaLabel.removeChild(spanFecha);
+      return;
     }
 
-    ultimaEntrada = valor;
-  });
-}
+    // 4) Generar PDF como blob
+    const element = document.getElementById("contenidoPDF");
+    if (!element) {
+      alert("❌ No se encontró el contenido a exportar (#contenidoPDF).");
+      fechaInput.style.display = "inline";
+      fechaLabel.removeChild(spanFecha);
+      return;
+    }
 
-document.querySelectorAll(".autocomplete").forEach(aplicarAutocompletado);
+    let blob;
+    try {
+      blob = await html2pdf().from(element).output('blob');
+    } catch (err) {
+      alert("❌ Error generando el PDF: " + err.message);
+      fechaInput.style.display = "inline";
+      fechaLabel.removeChild(spanFecha);
+      return;
+    }
 
-function agregarFilaSiEsUltima(input, tablaId) {
-  const tabla = document.getElementById(tablaId);
-  const filas = tabla.querySelectorAll("tbody tr");
-  const ultimaFila = filas[filas.length - 1];
+    // 5) Token de acceso
+    let accessToken = "";
+    try {
+      accessToken = await loginAndGetToken();
+    } catch (err) {
+      alert("❌ Error autenticando con Microsoft: " + err.message);
+      fechaInput.style.display = "inline";
+      fechaLabel.removeChild(spanFecha);
+      return;
+    }
 
-  if (ultimaFila.contains(input)) {
-    const nuevaFila = ultimaFila.cloneNode(true);
-    nuevaFila.querySelectorAll("input").forEach(input => input.value = "");
-    tabla.querySelector("tbody").appendChild(nuevaFila);
-    nuevaFila.querySelectorAll(".autocomplete").forEach(aplicarAutocompletado);
-  }
-}
+    // 6) Subida a OneDrive (carpeta existente Extra-Seguro-BSE)
+    const arrayBuffer = await blob.arrayBuffer();
+    const filename = `${siniestro || "Formulario"}.pdf`;
+    const url = `https://graph.microsoft.com/v1.0/me/drive/root:/Extra-Seguro-BSE/${filename}:/content`;
 
-function inicializarAutofila(tablaId) {
-  const tabla = document.getElementById(tablaId);
-  tabla.addEventListener("input", function (e) {
-    if (e.target.tagName === "INPUT") {
-      agregarFilaSiEsUltima(e.target, tablaId);
+    try {
+      const res = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${accessToken}`,
+          "Content-Type": "application/pdf"
+        },
+        body: arrayBuffer
+      });
+
+      if (res.ok) {
+        alert("✅ PDF subido correctamente a OneDrive/SharePoint.");
+      } else {
+        const text = await res.text().catch(() => "");
+        alert("❌ Error al subir PDF: " + res.status + (text ? ` - ${text}` : ""));
+      }
+    } catch (err) {
+      alert("❌ Error de conexión: " + err.message);
+    } finally {
+      // 7) Restaurar UI
+      fechaInput.style.display = "inline";
+      fechaLabel.removeChild(spanFecha);
     }
   });
-}
-
-inicializarAutofila("tablaPiezas1");
-inicializarAutofila("tablaPiezas2");
+});
 </script>
