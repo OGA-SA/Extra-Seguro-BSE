@@ -116,16 +116,14 @@
     
   </div>
 
-  <!-- Scripts -->
 <!-- Librerías necesarias -->
-  <script src="https://alcdn.msauth.net/browser/2.45.0/js/msal-browser.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <!-- Loader dinámico de MSAL (reemplaza el <script src="...msal-browser.min.js"> estático) -->
 <script>
 (function () {
   const candidates = [
-    "https://alcdn.msauth.net/browser/3.0.19/js/msal-browser.min.js",
+    "https://alcdn.msauth.net/browser/2.45.0/js/msal-browser.min.js",
     "https://cdn.jsdelivr.net/npm/@azure/msal-browser@2.45.0/lib/msal-browser.min.js",
     "https://unpkg.com/@azure/msal-browser@2.45.0/lib/msal-browser.min.js"
   ];
@@ -345,18 +343,24 @@ window.addEventListener('load', escalarPagina);
 
 <!-- MSAL + Generación y subida del PDF -->
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  if (typeof msal === "undefined") {
-    console.error("❌ MSAL no está disponible. Revisá que 'js/msal-browser.min.js' exista.");
+document.addEventListener("DOMContentLoaded", async () => {
+  // Esperar a que el loader dinámico cargue MSAL
+  try {
+    await (window.ensureMsal ? window.ensureMsal() : Promise.reject(new Error("ensureMsal no definido")));
+  } catch (e) {
+    console.error("❌ MSAL no cargó correctamente. Revisa conectividad/CDN:", e.message);
     return;
   }
-  console.log("✅ MSAL disponible localmente.");
-  
+
+  if (typeof msal === "undefined") {
+    console.error("❌ MSAL sigue sin estar disponible.");
+    return;
+  }
 
   // Configuración MSAL
   const msalConfig = {
     auth: {
-      clientId: "f1b18efc-5ceb-455a-912e-d5e6f27f621e", // ⬅️ Reemplaza por tu Client ID real
+      clientId: "TU_CLIENT_ID", // ⬅️ Reemplaza por tu Client ID real
       redirectUri: window.location.origin // solo dominio
     },
     cache: {
