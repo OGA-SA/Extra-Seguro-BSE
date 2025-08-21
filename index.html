@@ -119,7 +119,7 @@
   <!-- Scripts -->
 <!-- Librerías necesarias -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
+<script src="js/msal-browser.min.js"></script>
 <!-- Loader dinámico de MSAL (reemplaza el <script src="...msal-browser.min.js"> estático) -->
 <script>
 (function () {
@@ -344,18 +344,12 @@ window.addEventListener('load', escalarPagina);
 
 <!-- MSAL + Generación y subida del PDF -->
 <script>
-document.addEventListener("DOMContentLoaded", async () => {
-  // Esperar a que el loader dinámico cargue MSAL
-  try {
-    await (window.ensureMsal ? window.ensureMsal() : Promise.reject(new Error("ensureMsal no definido")));
-  } catch (e) {
-    console.error("❌ MSAL no cargó correctamente. Revisa conectividad/CDN:", e.message);
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof msal === "undefined") {
+    console.error("❌ MSAL no está disponible. Revisá que 'js/msal-browser.min.js' exista.");
     return;
   }
-
-  if (typeof msal === "undefined") {
-    console.error("❌ MSAL sigue sin estar disponible.");
-    return;
+  console.log("✅ MSAL disponible localmente.");
   }
 
   // Configuración MSAL
