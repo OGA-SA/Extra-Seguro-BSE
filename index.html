@@ -119,13 +119,14 @@
   <!-- Scripts -->
 <!-- Librerías necesarias -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<!-- Cargar MSAL primero -->
 <script src="https://alcdn.msauth.net/browser/2.36.0/js/msal-browser.min.js"></script>
 
 <!-- Ajuste dinámico de input (con guardas para evitar null) -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("text");
-  if (!input) return; // evita errores si no existe el input con id="text"
+  if (!input) return;
 
   input.addEventListener("input", function() {
     const span = document.createElement("span");
@@ -149,14 +150,14 @@ document.addEventListener("DOMContentLoaded", () => {
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("canvas");
-  if (!canvas) return; // por si el canvas no está
+  if (!canvas) return;
 
   const ctx = canvas.getContext("2d");
   let baseImageData = null;
-  window.userHasDrawn = false; // dejar accesible en otros scripts
+  window.userHasDrawn = false;
 
   const image = new Image();
-  image.src = "parabrisa.png"; // ⚠️ asegurate que exista en la misma carpeta
+  image.src = "parabrisa.png";
   image.onload = () => {
     ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
     baseImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -302,19 +303,20 @@ window.addEventListener('resize', escalarPagina);
 window.addEventListener('load', escalarPagina);
 </script>
 
-<!-- MSAL + Generación y subida del PDF (mantiene el botón existente) -->
+<!-- MSAL + Generación y subida del PDF -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+  // Verificar si MSAL está disponible
   if (typeof msal === "undefined") {
-    console.error("❌ MSAL no cargó correctamente");
+    console.error("❌ MSAL no cargó correctamente. Revisa la URL del script.");
     return;
   }
 
   // Configuración MSAL
   const msalConfig = {
     auth: {
-      clientId: "TU_CLIENT_ID", // ⬅️ Reemplazar por tu Application (client) ID
-      redirectUri: window.location.href
+      clientId: "TU_CLIENT_ID", // ⬅️ Reemplaza por tu Client ID real
+      redirectUri: window.location.origin // solo dominio, no URL completa
     },
     cache: {
       cacheLocation: "localStorage",
@@ -322,7 +324,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
   const msalInstance = new msal.PublicClientApplication(msalConfig);
-  const loginRequest = { scopes: ["Files.ReadWrite.All"] }; // permisos para OneDrive/SharePoint personal
+  const loginRequest = { scopes: ["Files.ReadWrite.All"] };
 
   async function loginAndGetToken() {
     try {
@@ -344,7 +346,6 @@ document.addEventListener("DOMContentLoaded", () => {
   boton.addEventListener("click", async (e) => {
     e.preventDefault();
 
-    // 1) Validaciones
     const taller = (document.getElementById("taller") || {}).value?.trim() || "";
     const serieNumero = (document.getElementById("serieNumero") || {}).value?.trim() || "";
     const siniestro = (document.getElementById("siniestro") || {}).value?.trim() || "";
@@ -360,7 +361,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // 2) Formatear fecha y mostrarla en la vista previa del PDF (oculta el input mientras se renderiza)
     const fechaParts = fechaInput.value.split("-");
     const fechaFormateada = `${fechaParts[2]}/${fechaParts[1]}/${fechaParts[0]}`;
     const fechaLabel = fechaInput.parentElement;
@@ -369,7 +369,6 @@ document.addEventListener("DOMContentLoaded", () => {
     fechaLabel.appendChild(spanFecha);
     fechaInput.style.display = "none";
 
-    // 3) Confirmar siniestro
     const ok = confirm("¿El número de siniestro ingresado es correcto: " + siniestro + "?");
     if (!ok) {
       fechaInput.style.display = "inline";
@@ -377,7 +376,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // 4) Generar PDF como blob
     const element = document.getElementById("contenidoPDF");
     if (!element) {
       alert("❌ No se encontró el contenido a exportar (#contenidoPDF).");
@@ -396,7 +394,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // 5) Token de acceso
     let accessToken = "";
     try {
       accessToken = await loginAndGetToken();
@@ -407,7 +404,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // 6) Subida a OneDrive (carpeta existente Extra-Seguro-BSE)
     const arrayBuffer = await blob.arrayBuffer();
     const filename = `${siniestro || "Formulario"}.pdf`;
     const url = `https://graph.microsoft.com/v1.0/me/drive/root:/Extra-Seguro-BSE/${filename}:/content`;
@@ -431,10 +427,10 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (err) {
       alert("❌ Error de conexión: " + err.message);
     } finally {
-      // 7) Restaurar UI
       fechaInput.style.display = "inline";
       fechaLabel.removeChild(spanFecha);
     }
   });
 });
 </script>
+
