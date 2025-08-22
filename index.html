@@ -390,6 +390,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
   const boton = document.querySelector("#boton .boton");
   if (!boton) {
     console.error("❌ No se encontró el botón #boton .boton");
@@ -447,33 +449,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    let accessToken = "";
-    try {
-      accessToken = await loginAndGetToken();
-    } catch (err) {
-      alert("❌ Error autenticando con Microsoft: " + err.message);
-      fechaInput.style.display = "inline";
-      fechaLabel.removeChild(spanFecha);
-      return;
-    }
-
-    const arrayBuffer = await blob.arrayBuffer();
-    const filename = `${siniestro || "Formulario"}.pdf`;
-    // Sube a OneDrive personal del usuario, carpeta "Extra-Seguro-BSE"
-    const url = `https://graph.microsoft.com/v1.0/me/drive/root:/Extra-Seguro-BSE/${filename}:/content`;
+    // --- Subir PDF a tu backend Render ---
+    const formData = new FormData();
+    formData.append('pdf', blob, `${siniestro}.pdf`);
 
     try {
-      const res = await fetch(url, {
-        method: "PUT",
-        headers: {
-          "Authorization": `Bearer ${accessToken}`,
-          "Content-Type": "application/pdf"
-        },
-        body: arrayBuffer
+      const res = await fetch('https://extra-seguro-backend.onrender.com/upload', {
+        method: 'POST',
+        body: formData
       });
 
       if (res.ok) {
-        alert("✅ PDF subido correctamente a OneDrive/SharePoint.");
+        alert("✅ PDF enviado al backend correctamente");
       } else {
         const text = await res.text().catch(() => "");
         alert("❌ Error al subir PDF: " + res.status + (text ? ` - ${text}` : ""));
