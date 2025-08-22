@@ -450,7 +450,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       const accessToken = await loginAndGetToken();
       const arrayBuffer = await blob.arrayBuffer();
       const filename = `${siniestro}.pdf`;
-      const url = `https://graph.microsoft.com/v1.0/me/drive/root:/Extra-Seguro-BSE/${filename}:/content`;
+      const url = `https://graph.microsoft.com/v1.0/me/drive/special/approot:/${filename}:/content`;
+    
 
       const res = await fetch(url, {
         method: "PUT",
