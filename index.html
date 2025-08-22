@@ -368,7 +368,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   };
   const msalInstance = new msal.PublicClientApplication(msalConfig);
-  const loginRequest = { scopes: ["Files.ReadWrite.All"] };
+  const loginRequest = { scopes: ["Files.ReadWrite.AppFolder"] };
 
   async function loginAndGetToken() {
     try {
