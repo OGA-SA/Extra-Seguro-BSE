@@ -408,7 +408,65 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
     if (window.userHasDrawn && !dificultadVisual) {
-      alert("⚠️ Describa la dificultad visual asociada
+      alert("⚠️ Describa la dificultad visual asociada al dibujo.");
+      return;
+    }
 
+    const fechaParts = fechaInput.value.split("-");
+    const fechaFormateada = `${fechaParts[2]}/${fechaParts[1]}/${fechaParts[0]}`;
+    const fechaLabel = fechaInput.parentElement;
+    const spanFecha = document.createElement("span");
+    spanFecha.textContent = fechaFormateada;
+    fechaLabel.appendChild(spanFecha);
+    fechaInput.style.display = "none";
+
+    const ok = confirm("¿El número de siniestro ingresado es correcto: " + siniestro + "?");
+    if (!ok) {
+      fechaInput.style.display = "inline";
+      fechaLabel.removeChild(spanFecha);
+      return;
+    }
+
+    const element = document.getElementById("contenidoPDF");
+    if (!element) {
+      alert("❌ No se encontró el contenido a exportar (#contenidoPDF).");
+      fechaInput.style.display = "inline";
+      fechaLabel.removeChild(spanFecha);
+      return;
+    }
+
+    let blob;
+    try {
+      blob = await html2pdf().from(element).output('blob');
+    } catch (err) {
+      alert("❌ Error generando el PDF: " + err.message);
+      fechaInput.style.display = "inline";
+      fechaLabel.removeChild(spanFecha);
+      return;
+    }
+
+    // --- Subir PDF a tu backend Render ---
+    const formData = new FormData();
+    formData.append('pdf', blob, `${siniestro}.pdf`);
+
+    try {
+      const res = await fetch('https://extra-seguro-backend.onrender.com/upload', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (res.ok) {
+        alert("✅ PDF enviado al backend correctamente");
+      } else {
+        const text = await res.text().catch(() => "");
+        alert("❌ Error al subir PDF: " + res.status + (text ? ` - ${text}` : ""));
+      }
+    } catch (err) {
+      alert("❌ Error de conexión: " + err.message);
+    } finally {
+      fechaInput.style.display = "inline";
+      fechaLabel.removeChild(spanFecha);
+    }
+  });
+});
 </script>
-
