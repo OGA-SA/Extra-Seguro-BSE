@@ -341,7 +341,7 @@ window.addEventListener('resize', escalarPagina);
 window.addEventListener('load', escalarPagina);
 </script>
 
-<!-- MSAL + Generación y subida del PDF -->
+<!-- MSAL + Generación y subida del PDF a OneDrive -->
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
   try {
@@ -445,24 +445,30 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    // --- Subir PDF a tu backend Render ---
-    const formData = new FormData();
-    formData.append('pdf', blob, `${siniestro}.pdf`);
-
+    // --- Subir PDF a OneDrive usando Graph API ---
     try {
-      const res = await fetch('https://extra-seguro-backend.onrender.com/upload', {
-        method: 'POST',
-        body: formData
+      const accessToken = await loginAndGetToken();
+      const arrayBuffer = await blob.arrayBuffer();
+      const filename = `${siniestro}.pdf`;
+      const url = `https://graph.microsoft.com/v1.0/me/drive/root:/Extra-Seguro-BSE/${filename}:/content`;
+
+      const res = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${accessToken}`,
+          "Content-Type": "application/pdf"
+        },
+        body: arrayBuffer
       });
 
       if (res.ok) {
-        alert("✅ PDF enviado al backend correctamente");
+        alert("✅ PDF subido correctamente a OneDrive");
       } else {
         const text = await res.text().catch(() => "");
-        alert("❌ Error al subir PDF: " + res.status + (text ? ` - ${text}` : ""));
+        alert("❌ Error al subir PDF a OneDrive: " + res.status + (text ? ` - ${text}` : ""));
       }
     } catch (err) {
-      alert("❌ Error de conexión: " + err.message);
+      alert("❌ Error de conexión o autenticación: " + err.message);
     } finally {
       fechaInput.style.display = "inline";
       fechaLabel.removeChild(spanFecha);
