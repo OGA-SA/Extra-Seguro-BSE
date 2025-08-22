@@ -361,6 +361,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const msalConfig = {
     auth: {
       clientId: "f1b18efc-5ceb-455a-912e-d5e6f27f621e", // ⬅️ Reemplaza por tu Client ID real
+      authority: "https://login.microsoftonline.com/e3cdf199-0408-4ad9-b37c-4e8d682211b9", // <- tenant específico
       redirectUri: window.location.origin // solo dominio
     },
     cache: {
