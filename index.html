@@ -118,7 +118,8 @@
 
 <!-- Librerías necesarias -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script src="js/msal-browser.min.js"></script>
+
+
 
 <!-- Loader dinámico de MSAL -->
 <script>
@@ -342,53 +343,10 @@ window.addEventListener('load', escalarPagina);
 </script>
 
 <!-- MSAL + Generación y subida del PDF a OneDrive -->
+
 <script>
-document.addEventListener("DOMContentLoaded", async () => {
-  try {
-    await (window.ensureMsal ? window.ensureMsal() : Promise.reject(new Error("ensureMsal no definido")));
-  } catch (e) {
-    console.error("❌ MSAL no cargó correctamente. Revisa conectividad/CDN:", e.message);
-    return;
-  }
-
-  if (typeof msal === "undefined") {
-    console.error("❌ MSAL sigue sin estar disponible.");
-    return;
-  }
-
-  const msalConfig = {
-    auth: {
-      clientId: "f1b18efc-5ceb-455a-912e-d5e6f27f621e",
-      authority: "https://login.microsoftonline.com/e3cdf199-0408-4ad9-b37c-4e8d682211b9",
-      redirectUri: "https://agussosa24.github.io/Extra-Seguro-BSE"
-    },
-    cache: {
-      cacheLocation: "localStorage",
-      storeAuthStateInCookie: true
-    }
-  };
-  const msalInstance = new msal.PublicClientApplication(msalConfig);
-  const loginRequest = { scopes: ["Files.ReadWrite.AppFolder"] };
-
-  async function loginAndGetToken() {
-    try {
-      const accounts = msalInstance.getAllAccounts();
-      if (accounts.length) {
-        const tokenResponse = await msalInstance.acquireTokenSilent({ ...loginRequest, account: accounts[0] });
-        return tokenResponse.accessToken;
-      }
-      await msalInstance.loginPopup(loginRequest);
-      const account = msalInstance.getAllAccounts()[0];
-      const tokenResponse = await msalInstance.acquireTokenSilent({ ...loginRequest, account });
-      return tokenResponse.accessToken;
-    } catch (err) {
-      console.warn("Silent falló, intentando con popup:", err?.message);
-      const tokenResponse = await msalInstance.acquireTokenPopup(loginRequest);
-      return tokenResponse.accessToken;
-    }
-  }
-
-  const boton = document.querySelector("#boton .boton");
+document.addEventListener("DOMContentLoaded", () => {
+  const boton = document.querySelector("#boton .boton"); // Ajusta si tu selector es otro
   if (!boton) {
     console.error("❌ No se encontró el botón #boton .boton");
     return;
@@ -412,6 +370,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
+    // Mostrar fecha formateada en el DOM antes de generar el PDF (si así lo necesitas)
     const fechaParts = fechaInput.value.split("-");
     const fechaFormateada = `${fechaParts[2]}/${fechaParts[1]}/${fechaParts[0]}`;
     const fechaLabel = fechaInput.parentElement;
@@ -435,42 +394,35 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    let blob;
     try {
-      blob = await html2pdf().from(element).output('blob');
-    } catch (err) {
-      alert("❌ Error generando el PDF: " + err.message);
-      fechaInput.style.display = "inline";
-      fechaLabel.removeChild(spanFecha);
-      return;
-    }
+      // 1) Generar PDF como Blob
+      const blob = await html2pdf().from(element).output('blob');
 
-    // --- Subir PDF a OneDrive usando Graph API ---
-    try {
-      const accessToken = await loginAndGetToken();
-      const arrayBuffer = await blob.arrayBuffer();
-      const filename = `${siniestro}.pdf`;
-      const url = `https://graph.microsoft.com/v1.0/me/drive/special/approot:/${filename}:/content`;
-    
+      // 2) Armar FormData para backend
+      const formData = new FormData();
+      formData.append('pdf', blob, `${siniestro || "Formulario"}.pdf`);
+      formData.append('filename', `${siniestro || "Formulario"}.pdf`);
 
-      const res = await fetch(url, {
-        method: "PUT",
-        headers: {
-          "Authorization": `Bearer ${accessToken}`,
-          "Content-Type": "application/pdf"
-        },
-        body: arrayBuffer
+      // 3) Enviar al backend (Render)
+      const res = await fetch('https://extra-seguro-backend.onrender.com/upload', {
+        method: 'POST',
+        body: formData
       });
 
       if (res.ok) {
-        alert("✅ PDF subido correctamente a OneDrive");
+        const data = await res.json().catch(() => ({}));
+        alert("✅ PDF enviado y subido correctamente");
+        if (data?.webUrl) {
+          console.log("🔗 Archivo en OneDrive:", data.webUrl);
+        }
       } else {
         const text = await res.text().catch(() => "");
-        alert("❌ Error al subir PDF a OneDrive: " + res.status + (text ? ` - ${text}` : ""));
+        alert("❌ Error al subir PDF: " + res.status + (text ? ` - ${text}` : ""));
       }
     } catch (err) {
-      alert("❌ Error de conexión o autenticación: " + err.message);
+      alert("❌ Error generando o subiendo el PDF: " + (err?.message || err));
     } finally {
+      // Restaurar UI
       fechaInput.style.display = "inline";
       fechaLabel.removeChild(spanFecha);
     }
