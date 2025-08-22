@@ -119,7 +119,8 @@
 <!-- Librerías necesarias -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="js/msal-browser.min.js"></script>
-<!-- Loader dinámico de MSAL (reemplaza el <script src="...msal-browser.min.js"> estático) -->
+
+<!-- Loader dinámico de MSAL -->
 <script>
 (function () {
   const candidates = [
@@ -155,12 +156,11 @@
     throw new Error("MSAL no se pudo cargar desde ningún CDN.");
   }
 
-  // Exponer para que otros scripts esperen a MSAL
   window.ensureMsal = ensureMsal;
 })();
 </script>
 
-<!-- Ajuste dinámico de input (con guardas para evitar null) -->
+<!-- Ajuste dinámico de input -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("text");
@@ -344,7 +344,6 @@ window.addEventListener('load', escalarPagina);
 <!-- MSAL + Generación y subida del PDF -->
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
-  // Esperar a que el loader dinámico cargue MSAL
   try {
     await (window.ensureMsal ? window.ensureMsal() : Promise.reject(new Error("ensureMsal no definido")));
   } catch (e) {
@@ -357,12 +356,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  // Configuración MSAL
   const msalConfig = {
     auth: {
-      clientId: "f1b18efc-5ceb-455a-912e-d5e6f27f621e", // ⬅️ Reemplaza por tu Client ID real
-      authority: "https://login.microsoftonline.com/e3cdf199-0408-4ad9-b37c-4e8d682211b9", // <- tenant específico
-      redirectUri: window.location.origin // solo dominio
+      clientId: "f1b18efc-5ceb-455a-912e-d5e6f27f621e",
+      authority: "https://login.microsoftonline.com/e3cdf199-0408-4ad9-b37c-4e8d682211b9",
+      redirectUri: window.location.origin
     },
     cache: {
       cacheLocation: "localStorage",
@@ -390,7 +388,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-document.addEventListener("DOMContentLoaded", () => {
   const boton = document.querySelector("#boton .boton");
   if (!boton) {
     console.error("❌ No se encontró el botón #boton .boton");
@@ -411,66 +408,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
     if (window.userHasDrawn && !dificultadVisual) {
-      alert("⚠️ Describa la dificultad visual asociada al dibujo.");
-      return;
-    }
+      alert("⚠️ Describa la dificultad visual asociada
 
-    const fechaParts = fechaInput.value.split("-");
-    const fechaFormateada = `${fechaParts[2]}/${fechaParts[1]}/${fechaParts[0]}`;
-    const fechaLabel = fechaInput.parentElement;
-    const spanFecha = document.createElement("span");
-    spanFecha.textContent = fechaFormateada;
-    fechaLabel.appendChild(spanFecha);
-    fechaInput.style.display = "none";
-
-    const ok = confirm("¿El número de siniestro ingresado es correcto: " + siniestro + "?");
-    if (!ok) {
-      fechaInput.style.display = "inline";
-      fechaLabel.removeChild(spanFecha);
-      return;
-    }
-
-    const element = document.getElementById("contenidoPDF");
-    if (!element) {
-      alert("❌ No se encontró el contenido a exportar (#contenidoPDF).");
-      fechaInput.style.display = "inline";
-      fechaLabel.removeChild(spanFecha);
-      return;
-    }
-
-    let blob;
-    try {
-      blob = await html2pdf().from(element).output('blob');
-    } catch (err) {
-      alert("❌ Error generando el PDF: " + err.message);
-      fechaInput.style.display = "inline";
-      fechaLabel.removeChild(spanFecha);
-      return;
-    }
-
-    // --- Subir PDF a tu backend Render ---
-    const formData = new FormData();
-    formData.append('pdf', blob, `${siniestro}.pdf`);
-
-    try {
-      const res = await fetch('https://extra-seguro-backend.onrender.com/upload', {
-        method: 'POST',
-        body: formData
-      });
-
-      if (res.ok) {
-        alert("✅ PDF enviado al backend correctamente");
-      } else {
-        const text = await res.text().catch(() => "");
-        alert("❌ Error al subir PDF: " + res.status + (text ? ` - ${text}` : ""));
-      }
-    } catch (err) {
-      alert("❌ Error de conexión: " + err.message);
-    } finally {
-      fechaInput.style.display = "inline";
-      fechaLabel.removeChild(spanFecha);
-    }
-  });
-});
 </script>
 
