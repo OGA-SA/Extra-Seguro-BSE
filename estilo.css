@@ -264,6 +264,14 @@ h3 {
   margin-top: 50px;
 }
 
+.columna-derecha .stro label.siniestro span {
+  min-width: auto;        /* deja que el texto se adapte */
+  font-size: 0.9em;
+]
+.columna-derecha .stro label.siniestro input{
+  flex: 1;                /* que los inputs se expandan proporcionalmente */
+  min-width: 60px;        /* ancho mínimo para no colapsar */
+}
 table {
   border-collapse: collapse;
   margin: 0 auto;
