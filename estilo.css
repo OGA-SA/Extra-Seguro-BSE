@@ -330,6 +330,16 @@ td input {
   transform: none !important;
 }
 
+@media print {
+  body {
+    -webkit-print-color-adjust: exact; /* mantiene colores */
+  }
+}
+
+.no-break {
+  page-break-inside: avoid;
+}
+
 .modo-pdf body{
   margin: 0;
 }
