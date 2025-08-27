@@ -120,6 +120,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script> src="https://graph.microsoft.com/v1.0/me/drive/root:/Extra Seguro/miArchivo.pdf:/content"</script>
 
+   <script>
+  function generarPDF() {
+    const element = document.getElementById("contenidoPDF");
+
+    const opt = {
+      margin:       [10, 10, 10, 10],
+      filename:     'formulario.pdf',
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2, useCORS: true },
+      jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(element).save();
+  }
+  </script>
 
 <!-- Loader dinámico de MSAL -->
 <script>
