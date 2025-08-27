@@ -121,22 +121,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script> src="https://graph.microsoft.com/v1.0/me/drive/root:/Extra Seguro/miArchivo.pdf:/content"</script>
 
-   <script>
-  function generarPDF() {
-    const element = document.getElementById("contenidoPDF");
-
-    const opt = {
-      margin:       [10, 10, 10, 10],
-      filename:     'formulario.pdf',
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2, useCORS: true },
-      jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    };
-
-    html2pdf().set(opt).from(element).save();
-  }
-  </script>
-
 <!-- Loader dinámico de MSAL -->
 <script>
 (function () {
@@ -358,11 +342,10 @@ window.addEventListener('resize', escalarPagina);
 window.addEventListener('load', escalarPagina);
 </script>
 
-<!-- MSAL + Generación y subida del PDF a OneDrive -->
-
+<!-- MSAL + Generación y subida del PDF a OneDrive (modificado con .modo-pdf) -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const boton = document.querySelector("#boton .boton"); // Ajusta si tu selector es otro
+  const boton = document.querySelector("#boton .boton"); 
   if (!boton) {
     console.error("❌ No se encontró el botón #boton .boton");
     return;
@@ -386,7 +369,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Mostrar fecha formateada en el DOM antes de generar el PDF (si así lo necesitas)
+    // Mostrar fecha formateada en el DOM antes de generar el PDF
     const fechaParts = fechaInput.value.split("-");
     const fechaFormateada = `${fechaParts[2]}/${fechaParts[1]}/${fechaParts[0]}`;
     const fechaLabel = fechaInput.parentElement;
@@ -411,15 +394,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      // 1) Generar PDF como Blob
-      const blob = await html2pdf().from(element).output('blob');
+      // 1) Forzar estilos A4
+      document.body.classList.add("modo-pdf");
 
-      // 2) Armar FormData para backend
+      // 2) Generar PDF como Blob
+      const opt = {
+        margin: [0, 0, 0, 0],
+        filename: `${siniestro || "Formulario"}.pdf`,
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+      };
+
+      const blob = await html2pdf().set(opt).from(element).output('blob');
+
+      // 3) Enviar al backend
       const formData = new FormData();
       formData.append('pdf', blob, `${siniestro || "Formulario"}.pdf`);
       formData.append('filename', `${siniestro || "Formulario"}.pdf`);
 
-      // 3) Enviar al backend (Render)
       const res = await fetch('https://extra-seguro-backend.onrender.com/upload', {
         method: 'POST',
         body: formData
@@ -429,7 +422,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = await res.json().catch(() => ({}));
         alert("✅ PDF enviado y subido correctamente");
         if (data?.webUrl) {
-          console.log("🔗 Archivo en OneDrive:", data.webUrl);
+          console.log("🔗 Archivo en SharePoint/OneDrive:", data.webUrl);
         }
       } else {
         const text = await res.text().catch(() => "");
@@ -438,7 +431,8 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (err) {
       alert("❌ Error generando o subiendo el PDF: " + (err?.message || err));
     } finally {
-      // Restaurar UI
+      // 4) Restaurar UI
+      document.body.classList.remove("modo-pdf");
       fechaInput.style.display = "inline";
       fechaLabel.removeChild(spanFecha);
     }
