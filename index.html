@@ -361,12 +361,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const taller = (document.getElementById("taller") || {}).value?.trim() || "";
     const serieNumero = (document.getElementById("serieNumero") || {}).value?.trim() || "";
-    const siniestroParte1 = (document.getElementById("siniestro1") || {}).value?.trim() || "";
-    const siniestroParte2 = (document.getElementById("siniestro2") || {}).value?.trim() || "";
+    const siniestro1 = (document.getElementById("siniestro1") || {}).value?.trim() || "";
+    const siniestro2 = (document.getElementById("siniestro2") || {}).value?.trim() || "";
     const fechaInput = document.getElementById("fecha");
     const dificultadVisual = (document.getElementById("dificultadVisual") || {}).value?.trim() || "";
 
-    if (!taller || !serieNumero || !siniestro || !fechaInput || !fechaInput.value) {
+    if (!taller || !serieNumero || !siniestro1 || !siniestro2 || !fechaInput || !fechaInput.value) {
       alert("⚠️ Complete todos los campos antes de generar el PDF.");
       return;
     }
@@ -384,7 +384,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fechaLabel.appendChild(spanFecha);
     fechaInput.style.display = "none";
 
-    const ok = confirm("¿El número de siniestro ingresado es correcto:" + siniestroParte1 + "-" + siniestroParte2 + "?");
+    const ok = confirm("¿El número de siniestro ingresado es correcto:" + siniestro1 + "-" + siniestro2 + "?");
     if (!ok) {
       fechaInput.style.display = "inline";
       fechaLabel.removeChild(spanFecha);
@@ -415,10 +415,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const blob = await html2pdf().set(opt).from(element).output('blob');
 
       // 3) Enviar al backend
+      const nombreArchivo = `${siniestro1 || "Siniestro"}-${siniestro2 || ""}.pdf`;
       const formData = new FormData();
-      formData.append('pdf', blob, `${siniestro || "Formulario"}.pdf`);
-      formData.append('filename', `${siniestro || "Formulario"}.pdf`);
-
+      formData.append('pdf', blob, nombreArchivo);
+      formData.append('filename', nombreArchivo);
+      
       const res = await fetch('https://extra-seguro-backend.onrender.com/upload', {
         method: 'POST',
         body: formData
