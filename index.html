@@ -384,7 +384,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fechaLabel.appendChild(spanFecha);
     fechaInput.style.display = "none";
 
-    const ok = confirm("¿El número de siniestro ingresado es correcto: " + siniestro + "?");
+    const ok = confirm("¿El número de siniestro ingresado es correcto:" + siniestroParte1 + "-" + siniestroParte2 + "?");
     if (!ok) {
       fechaInput.style.display = "inline";
       fechaLabel.removeChild(spanFecha);
@@ -406,7 +406,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // 2) Generar PDF como Blob
       const opt = {
         margin: [0, 0, 0, 0],
-        filename: `${siniestro || "Formulario"}.pdf`,
+        filename: `${siniestro1 || "Siniestro"}-${siniestro2 || ""}.pdf`,
         image: { type: "jpeg", quality: 0.98 },
         html2canvas: { scale: 2, useCORS: true },
         jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
