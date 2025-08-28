@@ -392,7 +392,7 @@ td input {
 }
 
 .modo-pdf .stro {
-  width: 90%;
+  width: 95%;
   box-sizing: border-box;
   margin-right: 35px;
   margin-top: -25px;
@@ -416,6 +416,10 @@ td input {
 .modo-pdf .fecha span {
   text-align: center;
   
+}
+
+.modo-pdf .form-group label{
+  margin-left: 15px;
 }
 
 .modo-pdf label span {
