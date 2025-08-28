@@ -258,6 +258,7 @@ h3 {
   justify-content: center;
   text-align: center;
   margin-bottom: 20px;
+  vertical-align: middle;
 }
 
 .columna-derecha .stro label.siniestro {
