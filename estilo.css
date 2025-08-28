@@ -391,10 +391,11 @@ td input {
 }
 
 .modo-pdf .stro {
-  width: 80%;
+  width: 90%;
   box-sizing: border-box;
   margin-right: 35px;
   margin-top: -25px;
+  height: auto;
 }
 .modo-pdf label.siniestro{
   padding: 3px 6px;
