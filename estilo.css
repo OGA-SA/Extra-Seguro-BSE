@@ -437,6 +437,10 @@ td input {
   box-sizing: border-box;
 }
 
+.modo-pdf .columna-derecha .visual{
+  white-space: nowrap;
+}
+
 .modo-pdf canvas {
   max-width: 100%;
   height: auto;
