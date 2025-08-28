@@ -387,8 +387,13 @@ td input {
   gap: 2px;
   
 }
+
 .modo-pdf .columna-derecha .stro label.siniestro{
   margin-top: o;
+}
+
+.modo-pdf .fila-formulario{
+  margin-left: 15px;
 }
 
 .modo-pdf .stro {
@@ -411,15 +416,10 @@ td input {
 
 .modo-pdf .fecha {
   width: 60%;
-  
-}
-.modo-pdf .fecha span {
-  text-align: center;
-  
 }
 
-.modo-pdf .form-group label{
-  margin-left: 15px;
+.modo-pdf .fecha span {
+  text-align: center;
 }
 
 .modo-pdf label span {
@@ -449,6 +449,7 @@ td input {
   max-width: 100%;
   height: auto;
 }
+
 .modo-pdf .texto{
   margin-top: -20px;
 }
