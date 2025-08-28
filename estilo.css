@@ -151,6 +151,7 @@ h3 {
 .columna-derecha span {
   text-align: center;
   min-width: 80px;
+  vertical-align: middle;
 }
 
 .imagen-y-campos {
