@@ -398,7 +398,7 @@ td input {
   justify-content: flex-start;
   text-align: center;
   margin-right: 10px;
-  gap: 20px;
+  gap: 40px;
   height: 25px; /* 🔹 CAMBIO: todos los labels con misma altura que Fecha */
   align-items: center; /* 🔹 Asegura centrado vertical */
 }
