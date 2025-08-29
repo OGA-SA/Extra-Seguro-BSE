@@ -379,9 +379,10 @@ td input {
   box-sizing: border-box;
 }
 
-.modo-pdf .form-group label{
+.modo-pdf .fila-formulario label{
   height: 25px;
 }
+
 .modo-pdf h2 {
   margin-top: 10px;
   width: 100%;
@@ -397,7 +398,7 @@ td input {
   justify-content: flex-start;
   text-align: center;
   margin-right: 10px;
-  gap: 2px;
+  gap: 20px;
   height: 25px; /* 🔹 CAMBIO: todos los labels con misma altura que Fecha */
   align-items: center; /* 🔹 Asegura centrado vertical */
 }
@@ -411,7 +412,7 @@ td input {
 }
 
 .modo-pdf .columna-derecha .fecha label.Fecha {
-  margin-left: 20px; /* 🔹 CAMBIO: separación de Serie y Número */
+  margin-left: 40px; /* 🔹 CAMBIO: separación de Serie y Número */
 }
 
 .modo-pdf .fila-formulario{
