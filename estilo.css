@@ -413,7 +413,8 @@ td input {
 /* 🔹 Ajuste especial para SINIESTRO */
 .modo-pdf label.siniestro {
   display: flex;
-  flex-wrap: wrap;   /* permite que no se salga del borde */
+  flex-wrap: nowrap;     /* ✅ todo en una sola línea */
+  white-space: nowrap;   /* ✅ no permite salto de línea */
   gap: 8px;
   justify-content: flex-start;
   align-items: center;
@@ -421,6 +422,7 @@ td input {
   border: 1px solid #999;
   border-radius: 4px;
   box-sizing: border-box;
+  width: 100%;           /* ocupa todo el ancho disponible */
 }
 .modo-pdf label.siniestro span {
   min-width: 40px;
