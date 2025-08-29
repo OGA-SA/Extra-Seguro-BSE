@@ -403,9 +403,6 @@ td input {
   align-items: center; /* 🔹 Asegura centrado vertical */
 }
 
-.modo-pdf .columna-derecha .stro label.siniestro{
-  margin-top: 15px;
-}
 
 .modo-pdf .columna-derecha .stro label.visual {
   margin-top: 50px;
