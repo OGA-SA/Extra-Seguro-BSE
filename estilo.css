@@ -422,6 +422,7 @@ td input {
 
 .modo-pdf .fecha {
   width: 60%;
+  margin-left: 15px;
 }
 
 .modo-pdf .fecha span {
