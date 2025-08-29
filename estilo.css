@@ -383,6 +383,12 @@ td input {
   height: 25px;
 }
 
+/* 🔹 ESPACIO INTERNO EN TODOS LOS LABELS */
+.modo-pdf label {
+  padding: 6px 10px; /* espacio interno uniforme */
+  box-sizing: border-box;
+}
+
 .modo-pdf h2 {
   margin-top: 10px;
   width: 100%;
@@ -400,8 +406,30 @@ td input {
   margin-right: 10px;
   padding:10px;
   gap: 40px;
-  height: 25px; /* 🔹 CAMBIO: todos los labels con misma altura que Fecha */
-  align-items: center; /* 🔹 Asegura centrado vertical */
+  height: 25px; /* 🔹 misma altura */
+  align-items: center; /* 🔹 centrado vertical */
+}
+
+/* 🔹 Ajuste especial para SINIESTRO */
+.modo-pdf label.siniestro {
+  display: flex;
+  flex-wrap: wrap;   /* permite que no se salga del borde */
+  gap: 8px;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 8px 12px; /* espacio interno */
+  border: 1px solid #999;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.modo-pdf label.siniestro span {
+  min-width: 40px;
+}
+.modo-pdf label.siniestro input {
+  flex: 1;
+  min-width: 60px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .modo-pdf .columna-derecha input{
@@ -413,7 +441,7 @@ td input {
 }
 
 .modo-pdf .columna-derecha .fecha label.Fecha {
-  margin-left: 40px; /* 🔹 CAMBIO: separación de Serie y Número */
+  margin-left: 40px; /* 🔹 separación de Serie y Número */
 }
 
 .modo-pdf .fila-formulario{
@@ -425,12 +453,7 @@ td input {
   box-sizing: border-box;
   height: auto;
 }
-.modo-pdf label.siniestro{
-  padding: 10px;
-  border-radius: 4px;
-  max-width: 100%;
-  box-sizing: border-box;
-}
+
 .modo-pdf .form-group{
   width: 100%;
   margin-left: 20px;
@@ -523,4 +546,5 @@ td input {
   font-size: 8pt;
   text-align: left;
 }
+
 
