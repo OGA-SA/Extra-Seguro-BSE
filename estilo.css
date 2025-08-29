@@ -422,8 +422,6 @@ td input {
 .modo-pdf .stro {
   width: 100%;
   box-sizing: border-box;
-  margin-right: 35px;
-  margin-top: -25px;
   height: auto;
 }
 .modo-pdf label.siniestro{
