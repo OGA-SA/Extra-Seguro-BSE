@@ -199,7 +199,7 @@ h3 {
   border: 1px solid #999;
   padding: 10px;
   border-radius: 4px;
-  gap: 35px;
+  gap: 45px;
   width: auto;
   margin-left: auto;
   margin-right: auto;
@@ -390,7 +390,7 @@ td input {
 }
 .modo-pdf .columna-derecha .fecha{
   margin-left: 25px;
-  margin-bottom: 35px;
+
 }
 
 .modo-pdf .columna-derecha label {
