@@ -396,7 +396,7 @@ td input {
 
 .modo-pdf .columna-derecha .stro label.siniestro{
   margin-top: o;
-  height: auto;
+  height: 15px;
 }
 
 .modo-pdf .fila-formulario{
