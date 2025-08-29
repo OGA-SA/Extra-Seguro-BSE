@@ -379,6 +379,9 @@ td input {
   box-sizing: border-box;
 }
 
+.modo-pdf .form-group label{
+  height: 25px;
+}
 .modo-pdf h2 {
   margin-top: 10px;
   width: 100%;
