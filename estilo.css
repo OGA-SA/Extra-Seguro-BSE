@@ -398,11 +398,15 @@ td input {
   justify-content: flex-start;
   text-align: center;
   margin-right: 10px;
+  padding:10px;
   gap: 40px;
   height: 25px; /* 🔹 CAMBIO: todos los labels con misma altura que Fecha */
   align-items: center; /* 🔹 Asegura centrado vertical */
 }
 
+.modo-pdf .columna-derecha input{
+  padding: 2px 4px;
+}
 
 .modo-pdf .columna-derecha .stro label.visual {
   margin-top: 50px;
@@ -422,7 +426,7 @@ td input {
   height: auto;
 }
 .modo-pdf label.siniestro{
-  padding: 6px 8px;
+  padding: 10px;
   border-radius: 4px;
   max-width: 100%;
   box-sizing: border-box;
