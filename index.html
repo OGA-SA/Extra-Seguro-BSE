@@ -422,7 +422,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const blob = await html2pdf().set(opt).from(element).output('blob');
 
       // 3) Enviar al backend
-      const nombreArchivo = `${siniestro1 || "Siniestro"}-${siniestro2 || ""}.pdf`;
+      const nombreArchivo = `${siniestro1 || "Siniestro1"}_${siniestro2 || "Siniestro2"}_Extra_Seguro.pdf`;
       const formData = new FormData();
       formData.append('pdf', blob, nombreArchivo);
       formData.append('filename', nombreArchivo);
