@@ -39,10 +39,19 @@
           </div>
           <div class="stro">
             <label class="siniestro"> 
-                <span>Siniestro:</span><input type="text" id="siniestro1" required />
+                <span>Siniestro:</span>
+                <input type="text" id="siniestro1" required />
+              
                 <span>-</span>
-                <span>Año:</span> <input type="text" id="siniestro2" required />
-              </label>
+              
+                <span>Año:</span>
+                <input type="text" id="siniestro2" 
+                       maxlength="4" 
+                       required  
+                       placeholder="2025" 
+                       title="Debe ingresar el año completo con 4 dígitos (ej: 2025)"
+                       pattern="\d{4}" />
+            </label>
             <label class="visual"><span>¿Dificulta visual?:</span> <input type="text" id="dificultadVisual" /></label>
           </div>
         </form>
