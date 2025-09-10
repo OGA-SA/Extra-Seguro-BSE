@@ -426,6 +426,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const formData = new FormData();
       formData.append('pdf', blob, nombreArchivo);
       formData.append('filename', nombreArchivo);
+      formData.append("folder", "Formulario 1"); 
       
       const res = await fetch('https://extra-seguro-backend.onrender.com/upload', {
         method: 'POST',
