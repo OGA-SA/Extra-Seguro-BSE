@@ -351,6 +351,16 @@ td input {
   }
 }
 
+@media print {
+  .clear-button {
+    display: none !important; /* oculta el botón al imprimir / exportar a PDF */
+  }
+}
+@media print {
+  .boton {
+    display: none !important; /* oculta el botón al imprimir / exportar a PDF */
+  }
+}
 .no-break {
   page-break-inside: avoid;
 }
