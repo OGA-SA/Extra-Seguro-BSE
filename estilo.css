@@ -53,6 +53,10 @@ img.logo {
   height: auto;
      }
 
+label input{
+  text-align: center;
+}
+
 h2 {
   text-align: center;
   margin: 0 auto 20px auto;
