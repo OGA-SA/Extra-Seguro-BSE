@@ -563,4 +563,7 @@ td input {
   text-align: left;
 }
 
-
+.modo-pdf .boton,
+.modo-pdf .clear-button {
+  display: none !important;
+}
