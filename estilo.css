@@ -336,7 +336,8 @@ td input {
   background: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   display: block;
-  margin: 0 auto;        /* asegura que quede centrado */
+  margin: 0 auto;  
+  align-items: flex-start;/* asegura que quede centrado */
 }
 
 .boton-firma{
