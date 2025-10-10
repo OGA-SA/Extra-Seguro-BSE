@@ -328,8 +328,9 @@ td input {
   display: flex;
   flex-direction: column;
   align-items: flex-start;   /* centra el canvas */
+  justify-content: flex-start;
   position: relative;
-  margin: 20px 10px;
+  margin: 40px 10px;
 }
 
 .firma canvas {
