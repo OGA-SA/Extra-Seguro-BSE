@@ -118,11 +118,19 @@
       </table>
       
       </div>
-
-      <form id="boton">
-          <div style="text-align: center; margin: 30px 0;">
-              <button class="boton" onclick="generarPDF()">Generar PDF</button>
-          </div>
+      
+       <div class="firma">
+                <canvas id="canvas1" width="600" height="200"></canvas>
+                   </div>
+      
+              <div class="boton-firma">
+                 <button class="clear-button" type="button" onclick="clearCanvas1()">Limpiar Firma</button>
+              </div>
+            <form id="boton">
+                <div style="text-align: center; margin: 30px 0;">
+                    <button class="boton" onclick="generarPDF()">Generar PDF</button>
+                </div>
+        
         </form>
       
     </div>
