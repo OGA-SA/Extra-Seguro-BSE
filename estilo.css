@@ -331,7 +331,7 @@ td input {
   justify-content: flex-start;
   width: 95%;
   max-width: 1200px;
-  margin: 40px auto 10px auto; /* mismo centrado general que las tablas */
+  margin: 40px 10PX 10px auto; /* mismo centrado general que las tablas */
   position: relative;
 }
 
