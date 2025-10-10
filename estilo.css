@@ -604,3 +604,7 @@ td input {
 .modo-pdf .clear-button {
   display: none !important;
 }
+
+.modo-pdf input[placeholder="Escribe..."] {
+  display: none;
+}
