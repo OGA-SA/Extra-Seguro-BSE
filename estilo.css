@@ -324,6 +324,43 @@ td input {
   margin-top: 0;
 }
 
+.firma {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* centra el canvas */
+  position: relative;
+  margin: 20px 0;
+}
+
+.firma canvas {
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: block;
+  margin: 0 auto;        /* asegura que quede centrado */
+}
+
+.boton-firma{
+  display: flex;
+  justify-content: flex-end;
+  width: 78%;
+  margin-top: -10px;
+  }
+
+.boton-firma button{
+  align-self: flex-end;
+}
+
+
+/* Texto sobre canvas */
+.firma-texto {
+  position: absolute;
+  bottom: 5px;
+  left: 8px;
+  font-size: 14px;
+  font-family: sans-serif;
+  color: #333;
+}
+
 .boton {
   padding: 6px 12px;
   background-color: #005f9e;
