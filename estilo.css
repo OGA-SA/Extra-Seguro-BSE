@@ -595,6 +595,10 @@ td input {
   display: none !important;
 }
 
-.modo-pdf input[placeholder="Escribe..."] {
-  display: none;
+.modo-pdf .firma label {
+  display: inline-flex !important;
+  white-space: nowrap !important;  /* ✅ nunca separar texto del input */
+  border-bottom: 2px solid #000;
+  padding: 5px 10px;
+  align-items: center;
 }
