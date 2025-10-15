@@ -421,6 +421,8 @@ td input {
   flex-direction: column;
   gap: 10px;
   box-sizing: border-box;
+  padding-top: 5mm;
+  padding-bottom: 5mm;
 }
 
 .modo-pdf .fila-formulario label{
