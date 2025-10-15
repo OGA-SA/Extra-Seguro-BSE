@@ -422,8 +422,12 @@ td input {
   flex-direction: column;
   gap: 1px;
   box-sizing: border-box;
-  padding-top: 1mm;
-  padding-bottom: 1mm;
+  padding: 0;
+}
+
+.modo-pdf .contenedor-izquierda > div,
+.modo-pdf .columna-derecha > div {
+  margin: 0; /* 🔹 quita márgenes verticales dentro */
 }
 
 .modo-pdf .fila-formulario label{
