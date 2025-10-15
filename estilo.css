@@ -217,13 +217,14 @@ h3 {
   margin-top: 20px;
   gap: 0.5em;
 }
+
 .columna-derecha .fecha input {
   padding: 2px 4px;
   font: inherit;            /* Igual fuente que el label */
   width: auto;              /* Que no ocupe todo el contenedor */
   min-width: 5ch;           /* Ancho mínimo en caracteres */
   max-width: 100%;
-  vertical-align: middle;/* Evita desbordes */
+  vertical-align: middle; /* Evita desbordes */
 }
 
 .columna-derecha .fecha label.Fecha {
@@ -419,10 +420,10 @@ td input {
 .modo-pdf .columna-derecha {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 3px;
   box-sizing: border-box;
-  padding-top: 5mm;
-  padding-bottom: 5mm;
+  padding-top: 3mm;
+  padding-bottom: 3mm;
 }
 
 .modo-pdf .fila-formulario label{
@@ -431,7 +432,7 @@ td input {
 
 /* 🔹 ESPACIO INTERNO EN TODOS LOS LABELS */
 .modo-pdf label {
-  padding: 6px 10px; /* espacio interno uniforme */
+  padding: 4px 8px; /* espacio interno uniforme */
   box-sizing: border-box;
 }
 
@@ -450,8 +451,8 @@ td input {
   justify-content: flex-start;
   text-align: center;
   margin-right: 10px;
-  padding:10px;
-  gap: 40px;
+  padding: 5px;
+  gap: 20px;
   height: 25px; /* 🔹 misma altura */
   align-items: center; /* 🔹 centrado vertical */
 }
