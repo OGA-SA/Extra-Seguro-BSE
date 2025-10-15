@@ -477,7 +477,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const fechaInput = document.getElementById("fecha");
     const dificultadVisual = (document.getElementById("dificultadVisual") || {}).value?.trim() || "";
 
-    if (!taller || !serieNumero || !siniestro1 || !siniestro2 || !QUIEN || !fechaInput || !fechaInput.value) {
+    if (!taller || !serieNumero || !siniestro1 || !siniestro2 || !fechaInput || !fechaInput.value) {
       alert("⚠️ Complete todos los campos antes de generar el PDF.");
       return;
     }
