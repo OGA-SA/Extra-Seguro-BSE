@@ -562,7 +562,7 @@ td input {
   word-break: break-word;
   page-break-inside: auto;
   font-size: 0.80em;        /* reduce el tamaño del texto */
-  line-height: 1.1; 
+  line-height: 1; 
   
 }
 
