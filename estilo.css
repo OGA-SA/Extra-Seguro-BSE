@@ -437,9 +437,10 @@ td input {
 }
 
 .modo-pdf h2 {
-  margin-top: 10px;
+  margin-top: 6px;
   width: 100%;
   margin-bottom: 0px;
+  font-size: 0.85em;
 }
 .modo-pdf .columna-derecha .fecha{
   margin-left: 25px;
