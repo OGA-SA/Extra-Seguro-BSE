@@ -422,7 +422,7 @@ td input {
   flex-direction: column;
   gap: 1px;
   box-sizing: border-box;
-  padding: 5px;
+   padding: 0;
 }
 
 
