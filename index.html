@@ -473,10 +473,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const serieNumero = (document.getElementById("serieNumero") || {}).value?.trim() || "";
     const siniestro1 = (document.getElementById("siniestro1") || {}).value?.trim() || "";
     const siniestro2 = (document.getElementById("siniestro2") || {}).value?.trim() || "";
+    const QUIEN = (document.getElementById("QUIEN") || {}).value?.trim() || "";
     const fechaInput = document.getElementById("fecha");
     const dificultadVisual = (document.getElementById("dificultadVisual") || {}).value?.trim() || "";
 
-    if (!taller || !serieNumero || !siniestro1 || !siniestro2 || !fechaInput || !fechaInput.value) {
+    if (!taller || !serieNumero || !siniestro1 || !siniestro2 || !QUIEN || !fechaInput || !fechaInput.value) {
       alert("⚠️ Complete todos los campos antes de generar el PDF.");
       return;
     }
@@ -484,7 +485,12 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("⚠️ Describa la dificultad visual asociada al dibujo.");
       return;
     }
-
+    
+  if (!QUIEN) {
+      alert("⚠️ Debe registrar el nombre del técnico que completó este formulario.");
+      return;
+    }
+    
     // Mostrar fecha formateada en el DOM antes de generar el PDF
     const fechaParts = fechaInput.value.split("-");
     const fechaFormateada = `${fechaParts[2]}/${fechaParts[1]}/${fechaParts[0]}`;
