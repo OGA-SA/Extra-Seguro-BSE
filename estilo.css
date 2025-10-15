@@ -555,6 +555,8 @@ td input {
   table-layout: auto;
   word-break: break-word;
   page-break-inside: auto;
+  font-size: 0.85em;        /* reduce el tamaño del texto */
+  line-height: 1.1; 
   
 }
 
@@ -565,9 +567,11 @@ td input {
 
 .modo-pdf td, 
 .modo-pdf th {
-  padding: 4px;
+  padding: 2px 4px;
+  margin: 0;
   font-size: 8pt;
   white-space: normal;
+  vertical-align: middle;
 }
 
 /* Si la tabla es más ancha, se agrega scroll horizontal */
