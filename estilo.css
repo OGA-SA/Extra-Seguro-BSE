@@ -425,10 +425,6 @@ td input {
   padding: 0;
 }
 
-.modo-pdf .contenedor-izquierda > div,
-.modo-pdf .columna-derecha > div {
-  margin: 0; /* 🔹 quita márgenes verticales dentro */
-}
 
 .modo-pdf .fila-formulario label{
   height: 25px;
