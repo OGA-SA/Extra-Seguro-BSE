@@ -432,7 +432,7 @@ td input {
 
 /* 🔹 ESPACIO INTERNO EN TODOS LOS LABELS */
 .modo-pdf label {
-  padding: 4px 8px; /* espacio interno uniforme */
+  padding: 2px 6px;
   box-sizing: border-box;
 }
 
