@@ -561,7 +561,7 @@ td input {
   table-layout: auto;
   word-break: break-word;
   page-break-inside: auto;
-  font-size: 0.85em;        /* reduce el tamaño del texto */
+  font-size: 0.80em;        /* reduce el tamaño del texto */
   line-height: 1.1; 
   
 }
