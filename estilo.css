@@ -420,10 +420,10 @@ td input {
 .modo-pdf .columna-derecha {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 1px;
   box-sizing: border-box;
-  padding-top: 3mm;
-  padding-bottom: 3mm;
+  padding-top: 1mm;
+  padding-bottom: 1mm;
 }
 
 .modo-pdf .fila-formulario label{
