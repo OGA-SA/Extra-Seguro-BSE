@@ -370,7 +370,8 @@ td input {
   min-height: 297mm; /* límite real A4 */
   margin: 0 auto; /* centrado horizontal */
   margin-top: 0;
-  padding: 10mm;
+  padding-top: 5mm;    /* antes 10mm */
+  padding-bottom: 5mm; /* antes 10mm */
   background: white;
   box-sizing: border-box;
   transform: none !important;
@@ -410,6 +411,8 @@ td input {
   box-sizing: border-box; /* evitar que padding sume ancho extra */
   font-size: 10pt;
   margin-left: 25px;
+  margin-top: 0;
+  margin-bottom: 0;
  }
  
 .modo-pdf .contenedor-izquierda,
