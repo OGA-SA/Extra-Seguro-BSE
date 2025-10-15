@@ -491,7 +491,7 @@ td input {
 }
 
 .modo-pdf .columna-derecha .fecha label.Fecha {
-  margin-left: 40px; /* 🔹 separación de Serie y Número */
+  margin-left: 5px; /* 🔹 separación de Serie y Número */
 }
 
 .modo-pdf .fila-formulario{
