@@ -605,7 +605,7 @@ td input {
 .modo-pdf .tablas-piezas {
   width: 100%;
   overflow-x: auto;
-  margin-top: 0px;
+  margin-top: 3px;
 }
 
 .modo-pdf .tablas-piezas table {
