@@ -423,7 +423,7 @@ td input {
   gap: 1px;
   box-sizing: border-box;
    padding: 0;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 
@@ -493,7 +493,7 @@ td input {
 }
 
 .modo-pdf .columna-derecha .stro{
-  margin-bottom: 6px;
+  margin-bottom: 10px;
 }
 
 .modo-pdf .columna-derecha .fecha label.Fecha {
@@ -636,5 +636,5 @@ td input {
 }
 
 .modo-pdf .columna-derecha{
-   margin-top: 4px;
+   margin-top: 1px;
 }
