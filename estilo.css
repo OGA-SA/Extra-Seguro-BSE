@@ -614,3 +614,10 @@ td input {
   padding: 5px 10px;
   align-items: center;
 }
+.modo-pdf .contenedor-izquierda,
+.modo-pdf .columna-derecha {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
