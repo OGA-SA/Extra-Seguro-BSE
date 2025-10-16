@@ -567,7 +567,8 @@ td input {
 }
 
 .modo-pdf .texto{
-  margin-top: -20px;
+  margin-top: -22px;
+  margin-bottom: 4px;
 }
 
 .modo-pdf h3{
