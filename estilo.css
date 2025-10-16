@@ -630,6 +630,7 @@ td input {
 
 .modo-pdf .firma{
   margin-top: 0;
+  padding-bottom: 5px;
 }
   
 .modo-pdf .firma label {
