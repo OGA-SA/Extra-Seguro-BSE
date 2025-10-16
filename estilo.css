@@ -423,10 +423,12 @@ td input {
   gap: 1px;
   box-sizing: border-box;
    padding: 0;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
-
+.modo-pdf .contenedor-izquierda,
+  margin-top: 6px;
+}
 .modo-pdf .fila-formulario label{
   height: 25px;
 }
