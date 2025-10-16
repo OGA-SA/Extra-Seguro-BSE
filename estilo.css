@@ -423,6 +423,7 @@ td input {
   gap: 1px;
   box-sizing: border-box;
    padding: 0;
+  margin-top: 8px;
 }
 
 
@@ -491,13 +492,21 @@ td input {
   margin-top: 5px;
 }
 
+.modo-pdf .columna-derecha .stro{
+  margin-bottom: 6px;
+}
+
 .modo-pdf .columna-derecha .fecha label.Fecha {
   margin-left: 5px; /* 🔹 separación de Serie y Número */
 }
 
+.modo-pdf .columna-derecha .fecha {
+  margin-top: 6px;
+}
+
 .modo-pdf .fila-formulario{
-  margin-top: 0;
-  margin-bottom: 0;
+  margin-top: 2px;
+  margin-bottom: 2px;
   padding: 0;
   gap: 2px;
   margin-left: 30px;
@@ -624,4 +633,8 @@ td input {
   margin-bottom: 0;
   padding-top: 0;
   padding-bottom: 0;
+}
+
+.modo-pdf .columna-derecha{
+   margin-top: 4px;
 }
