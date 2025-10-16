@@ -426,7 +426,7 @@ td input {
  }
 
 .modo-pdf .contenedor-izquierda{
-  margin-top: 14px;
+  margin-top: 20px;
 }
 
 .modo-pdf .fila-formulario label{
@@ -495,7 +495,8 @@ td input {
 }
 
 .modo-pdf .columna-derecha .stro{
-  margin-bottom: 10px;
+  margin-top: -6px;  /* sube todo el bloque visual */
+  margin-bottom: 4px; /* mantiene espacio con lo de abajo */
 }
 
 .modo-pdf .columna-derecha .fecha label.Fecha {
@@ -561,7 +562,7 @@ td input {
 .modo-pdf canvas {
   max-width: 100%;
   height: auto;
-  margin-top: -10px; /* lo acerca a los labels superiores */
+  margin-top: -15px; /* lo acerca a los labels superiores */
   margin-bottom: 0;
 }
 
