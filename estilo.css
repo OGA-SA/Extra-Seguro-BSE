@@ -629,7 +629,7 @@ td input {
 }
 
 .modo-pdf .firma {
-  margin-top: 4px !important;      /* antes 0 o 40px, reducimos espacio */
+  margin-top: 6px !important;      /* antes 0 o 40px, reducimos espacio */
   padding-top: 0 !important;
   padding-bottom: 2px !important;
   page-break-inside: avoid;        /* ✅ evita que se corte en dos páginas */
