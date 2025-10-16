@@ -628,6 +628,10 @@ td input {
   display: none !important;
 }
 
+.modo-pdf .firma{
+  margin-top: 0;
+}
+  
 .modo-pdf .firma label {
   display: inline-flex !important;
   white-space: nowrap !important;  /* ✅ nunca separar texto del input */
