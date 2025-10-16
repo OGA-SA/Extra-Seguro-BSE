@@ -488,7 +488,7 @@ td input {
 }
 
 .modo-pdf .columna-derecha .stro label.visual {
-  margin-top: 30px;
+  margin-top: 5px;
 }
 
 .modo-pdf .columna-derecha .fecha label.Fecha {
@@ -500,7 +500,7 @@ td input {
   margin-bottom: 0;
   padding: 0;
   gap: 2px;
-  margin-left: 25px;
+  margin-left: 30px;
 }
 
 .modo-pdf .stro {
