@@ -562,7 +562,7 @@ td input {
 .modo-pdf canvas {
   max-width: 100%;
   height: auto;
-  margin-top: -15px; /* lo acerca a los labels superiores */
+  margin-top: -18px; /* lo acerca a los labels superiores */
   margin-bottom: 0;
 }
 
@@ -641,5 +641,5 @@ td input {
 }
 
 .modo-pdf .columna-derecha{
-   margin-top: -6px;
+   margin-top: -12px;
 }
