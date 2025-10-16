@@ -495,9 +495,8 @@ td input {
 }
 
 .modo-pdf .columna-derecha .stro{
-  margin-top: -6px;  /* sube todo el bloque visual */
-  margin-bottom: 4px; /* mantiene espacio con lo de abajo */
-}
+  margin-top: -18px;  /* sube todo el bloque visual */
+ }
 
 .modo-pdf .columna-derecha .fecha label.Fecha {
   margin-left: 5px; /* 🔹 separación de Serie y Número */
