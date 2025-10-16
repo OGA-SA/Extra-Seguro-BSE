@@ -496,6 +496,10 @@ td input {
 }
 
 .modo-pdf .fila-formulario{
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+  gap: 2px;
   margin-left: 25px;
 }
 
