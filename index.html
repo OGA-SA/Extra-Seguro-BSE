@@ -138,28 +138,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script> src="https://graph.microsoft.com/v1.0/me/drive/root:/Extra Seguro/miArchivo.pdf:/content"</script>
 
-  <script>  
-  function limpiarFilasVacias(tablaId) {
-  const tabla = document.getElementById(tablaId);
-  const filas = tabla.querySelectorAll("tbody tr");
-
-  filas.forEach(fila => {
-    // Recorre todos los inputs de la fila
-    const inputs = fila.querySelectorAll("input");
-    // Si todos los inputs están vacíos, elimina la fila
-    const todosVacios = Array.from(inputs).every(input => input.value.trim() === "");
-    if (todosVacios) {
-      fila.remove();
-    }
-  });
-}
-
-// Antes de generar el PDF:
-limpiarFilasVacias("tablaPiezas1");
-limpiarFilasVacias("tablaPiezas2");
-
-  </script>
-
+  
 <!-- Loader dinámico de MSAL -->
 <script>
 (function () {
