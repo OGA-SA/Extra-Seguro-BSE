@@ -334,6 +334,9 @@ td input {
   width: 100%;          /* ocupa todo el ancho de la celda */
   vertical-align: middle;
   text-transform: uppercase;
+  white-space: normal;        /* permite salto de línea */
+  overflow-wrap: break-word;   /* rompe palabras largas */
+  word-break: break-word;
 }
 
 #tablaPiezas1 td,
@@ -342,6 +345,7 @@ td input {
   font-size: 14px;
   text-transform: uppercase;
   font-weight: normal;  /* quita negrita si la hay */
+  word-break: break-word;
 }
 
 #tablaPiezas1 td:first-child input,
@@ -349,6 +353,7 @@ td input {
   padding-left: 0px;     /* igual que los demás */
   font-size: 14px;
   text-transform: uppercase;
+  word-break: break-word;
 }
 
 .firma {
