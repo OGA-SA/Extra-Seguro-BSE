@@ -337,6 +337,11 @@ td input {
   vertical-align: middle;
 }
 
+#tablaPiezas1 td:first-child input,
+#tablaPiezas2 td:first-child input {
+  padding-left: 6px;     /* igual que los demás */
+}
+
 .firma {
   display: flex;
   flex-direction: column;
