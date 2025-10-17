@@ -325,6 +325,14 @@ td input {
   margin-top: 0;
 }
 
+#tablaPiezas1 input,
+#tablaPiezas2 input {
+  font-family: sans-serif;   /* o la fuente que uses */
+  font-size: 14px;           /* mismo tamaño en todas las filas */
+  padding: 4px 6px;
+  box-sizing: border-box;
+}
+
 .firma {
   display: flex;
   flex-direction: column;
