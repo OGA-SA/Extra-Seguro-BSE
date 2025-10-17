@@ -360,6 +360,7 @@ td input {
   max-width: 1200px;
   margin: 40px 10PX 10px auto; /* mismo centrado general que las tablas */
   position: relative;
+  text-transform: uppercase;
 }
 
 .firma label {
@@ -377,7 +378,7 @@ td input {
   background: transparent; /* sin fondo */
   text-align: left;
   font-size: 1em;
-  text-transform: uppercase;
+  text-transform: uppercase !important;
 }
 .boton {
   padding: 6px 12px;
@@ -668,6 +669,7 @@ td input {
   margin-top: 6px !important;      /* antes 0 o 40px, reducimos espacio */
   padding-top: 0 !important;
   padding-bottom: 2px !important;
+  text-transform: uppercase !important;
   page-break-inside: avoid;        /* ✅ evita que se corte en dos páginas */
   page-break-before: avoid;        /* ✅ no inicia nueva hoja */
   page-break-after: avoid;         /* ✅ no genera salto luego */
