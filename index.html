@@ -311,33 +311,41 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  document.querySelectorAll(".autocomplete").forEach(aplicarAutocompletado);
-
-  function agregarFilaSiEsUltima(input, tablaId) {
-    const tabla = document.getElementById(tablaId);
-    const filas = tabla.querySelectorAll("tbody tr");
-    const ultimaFila = filas[filas.length - 1];
-
-    if (ultimaFila.contains(input)) {
-      const nuevaFila = ultimaFila.cloneNode(true);
-      nuevaFila.querySelectorAll("input").forEach(input => input.value = "");
-      tabla.querySelector("tbody").appendChild(nuevaFila);
-      nuevaFila.querySelectorAll(".autocomplete").forEach(aplicarAutocompletado);
-    }
-  }
-
-  function inicializarAutofila(tablaId) {
-    const tabla = document.getElementById(tablaId);
-    tabla.addEventListener("input", function (e) {
-      if (e.target.tagName === "INPUT") {
-        agregarFilaSiEsUltima(e.target, tablaId);
+       document.querySelectorAll(".autocomplete").forEach(aplicarAutocompletado);
+      
+      function agregarFilaSiEsUltima(input, tablaId) {
+        const tabla = document.getElementById(tablaId);
+        const filas = tabla.querySelectorAll("tbody tr");
+        const ultimaFila = filas[filas.length - 1];
+      
+        if (ultimaFila.contains(input)) {
+          const nuevaFila = ultimaFila.cloneNode(true);
+      
+          // 🔹 Limpia los valores de los inputs clonados
+          nuevaFila.querySelectorAll("input").forEach(input => {
+            input.value = "";
+            input.classList.add("nuevo"); // <--- 🔸 agrega la clase a cada input nuevo
+          });
+      
+          // 🔹 Inserta la nueva fila al final de la tabla
+          tabla.querySelector("tbody").appendChild(nuevaFila);
+      
+          // 🔹 Reactiva el autocompletado para los nuevos inputs
+          nuevaFila.querySelectorAll(".autocomplete").forEach(aplicarAutocompletado);
+        }
       }
-    });
-  }
-
-  inicializarAutofila("tablaPiezas1");
-  inicializarAutofila("tablaPiezas2");
-});
+      
+      function inicializarAutofila(tablaId) {
+        const tabla = document.getElementById(tablaId);
+        tabla.addEventListener("input", function (e) {
+          if (e.target.tagName === "INPUT") {
+            agregarFilaSiEsUltima(e.target, tablaId);
+          }
+        });
+      }
+      
+      inicializarAutofila("tablaPiezas1");
+      inicializarAutofila("tablaPiezas2");
 </script>
 
  <script>
