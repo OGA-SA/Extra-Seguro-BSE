@@ -657,6 +657,21 @@ td input {
   border-collapse: collapse;
 }
 
+.modo-pdf #tablaPiezas1 input,
+.modo-pdf #tablaPiezas2 input {
+  font-size: 8pt;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.modo-pdf #tablaPiezas1 td,
+.modo-pdf #tablaPiezas2 td {
+  white-space: normal;
+  vertical-align: top;
+  padding: 3px 4px;
+}
+
 .modo-pdf .tablas-piezas th,
 .modo-pdf .tablas-piezas td {
   padding: 6px;
