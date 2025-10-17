@@ -670,6 +670,8 @@ td input {
   white-space: normal;
   vertical-align: top;
   padding: 3px 4px;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .modo-pdf .tablas-piezas th,
