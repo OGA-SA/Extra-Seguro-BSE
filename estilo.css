@@ -333,12 +333,14 @@ td input {
   box-sizing: border-box;
   width: 100%;          /* ocupa todo el ancho de la celda */
   vertical-align: middle;
+  text-transform: uppercase;
 }
 
 #tablaPiezas1 td,
 #tablaPiezas2 td {
   font-family: sans-serif;
   font-size: 14px;
+  text-transform: uppercase;
   font-weight: normal;  /* quita negrita si la hay */
 }
 
@@ -346,6 +348,7 @@ td input {
 #tablaPiezas2 td:first-child input {
   padding-left: 0px;     /* igual que los demás */
   font-size: 14px;
+  text-transform: uppercase;
 }
 
 .firma {
