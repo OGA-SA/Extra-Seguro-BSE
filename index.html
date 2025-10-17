@@ -311,43 +311,50 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-       document.querySelectorAll(".autocomplete").forEach(aplicarAutocompletado);
-      
-      function agregarFilaSiEsUltima(input, tablaId) {
-        const tabla = document.getElementById(tablaId);
-        const filas = tabla.querySelectorAll("tbody tr");
-        const ultimaFila = filas[filas.length - 1];
-      
-        if (ultimaFila.contains(input)) {
-          const nuevaFila = ultimaFila.cloneNode(true);
-      
-          // 🔹 Limpia los valores de los inputs clonados
-          nuevaFila.querySelectorAll("input").forEach(input => {
-            input.value = "";
-            input.classList.add("nuevo"); // <--- 🔸 agrega la clase a cada input nuevo
-          });
-      
-          // 🔹 Inserta la nueva fila al final de la tabla
-          tabla.querySelector("tbody").appendChild(nuevaFila);
-      
-          // 🔹 Reactiva el autocompletado para los nuevos inputs
-          nuevaFila.querySelectorAll(".autocomplete").forEach(aplicarAutocompletado);
+  // Aplica autocompletado a los inputs existentes
+  document.querySelectorAll(".autocomplete").forEach(aplicarAutocompletado);
+  
+  function agregarFilaSiEsUltima(input, tablaId) {
+    const tabla = document.getElementById(tablaId);
+    const filas = tabla.querySelectorAll("tbody tr");
+    const ultimaFila = filas[filas.length - 1];
+
+    if (ultimaFila.contains(input)) {
+      const nuevaFila = ultimaFila.cloneNode(true);
+
+      // Limpia los valores y agrega clase "nuevo"
+      nuevaFila.querySelectorAll("input").forEach(input => {
+        input.value = "";
+        input.classList.add("nuevo");
+        // Asegúrate de que tenga la clase autocomplete
+        if (!input.classList.contains("autocomplete")) {
+          input.classList.add("autocomplete");
         }
+      });
+
+      // Inserta la nueva fila
+      tabla.querySelector("tbody").appendChild(nuevaFila);
+
+      // Reactiva autocompletado en los inputs clonados
+      nuevaFila.querySelectorAll(".autocomplete").forEach(aplicarAutocompletado);
+    }
+  }
+
+  function inicializarAutofila(tablaId) {
+    const tabla = document.getElementById(tablaId);
+    tabla.addEventListener("input", function (e) {
+      if (e.target.tagName === "INPUT") {
+        agregarFilaSiEsUltima(e.target, tablaId);
       }
-      
-      function inicializarAutofila(tablaId) {
-        const tabla = document.getElementById(tablaId);
-        tabla.addEventListener("input", function (e) {
-          if (e.target.tagName === "INPUT") {
-            agregarFilaSiEsUltima(e.target, tablaId);
-          }
-        });
-      }
-      
-      inicializarAutofila("tablaPiezas1");
-      inicializarAutofila("tablaPiezas2");
+    });
+  }
+
+  inicializarAutofila("tablaPiezas1");
+  inicializarAutofila("tablaPiezas2");
+});
 </script>
 
+  
  <script>
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("canvas1");
