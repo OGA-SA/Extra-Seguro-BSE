@@ -327,10 +327,14 @@ td input {
 
 #tablaPiezas1 input,
 #tablaPiezas2 input {
-  font-family: sans-serif;   /* o la fuente que uses */
-  font-size: 14px;           /* mismo tamaño en todas las filas */
+   font-family: sans-serif;
+  font-size: 14px;
   padding: 4px 6px;
   box-sizing: border-box;
+  width: 100%;          /* ocupa todo el ancho de la celda */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  vertical-align: middle;
 }
 
 .firma {
