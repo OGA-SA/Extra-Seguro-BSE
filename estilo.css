@@ -626,6 +626,7 @@ td input {
   page-break-inside: auto;
   font-size: 0.70em;        /* reduce el tamaño del texto */
   line-height: 1; 
+  margin-top: 5px;
   
 }
 
