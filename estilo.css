@@ -335,6 +335,12 @@ td input {
   vertical-align: middle;
 }
 
+#tablaPiezas1 td,
+#tablaPiezas2 td {
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: normal;  /* quita negrita si la hay */
+}
 
 #tablaPiezas1 td:first-child input,
 #tablaPiezas2 td:first-child input {
