@@ -334,6 +334,9 @@ td input {
   width: 100%;          /* ocupa todo el ancho de la celda */
   vertical-align: middle;
 }
+.autocomplete{
+  font-size: 16px;
+}
 
 #tablaPiezas1 td:first-child input,
 #tablaPiezas2 td:first-child input {
