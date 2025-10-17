@@ -328,19 +328,18 @@ td input {
 #tablaPiezas1 input,
 #tablaPiezas2 input {
    font-family: sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   padding: 0 6px;
   box-sizing: border-box;
   width: 100%;          /* ocupa todo el ancho de la celda */
   vertical-align: middle;
 }
-.autocomplete{
-  font-size: 20px;
-}
+
 
 #tablaPiezas1 td:first-child input,
 #tablaPiezas2 td:first-child input {
   padding-left: 0px;     /* igual que los demás */
+  font-size: 14px;
 }
 
 .firma {
