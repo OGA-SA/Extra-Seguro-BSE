@@ -569,6 +569,10 @@ td input {
   font-size: 8pt;
 }
 
+.modo-pdf input.nuevo {
+  font-size: 8pt;
+ }
+
 .modo-pdf input[type="text"],
 .modo-pdf input[type="date"],
 .modo-pdf select,
