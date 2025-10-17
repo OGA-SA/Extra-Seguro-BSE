@@ -482,6 +482,18 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  // 🔹 Función: eliminar última fila vacía solo para PDF
+  function eliminarUltimaFilaVacia(tablaId) {
+    const tabla = document.getElementById(tablaId);
+    if (!tabla) return;
+    const filas = tabla.querySelectorAll("tbody tr");
+    if (!filas.length) return;
+    const ultimaFila = filas[filas.length - 1];
+    const inputs = ultimaFila.querySelectorAll("input");
+    let vacia = true;
+    inputs.forEach(input => { if (input.value.trim() !== "") vacia = false; });
+    if (vacia) ultimaFila.remove();
+  
   boton.addEventListener("click", async (e) => {
     e.preventDefault();
 
