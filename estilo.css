@@ -328,7 +328,7 @@ td input {
 #tablaPiezas1 input,
 #tablaPiezas2 input {
    font-family: sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   padding: 0 6px;
   box-sizing: border-box;
   width: 100%;          /* ocupa todo el ancho de la celda */
