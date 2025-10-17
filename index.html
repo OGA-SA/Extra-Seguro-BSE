@@ -133,12 +133,10 @@
     </div>
     
   </div>
-
 <!-- Librerías necesarias -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script> src="https://graph.microsoft.com/v1.0/me/drive/root:/Extra Seguro/miArchivo.pdf:/content"</script>
+<script src="https://graph.microsoft.com/v1.0/me/drive/root:/Extra Seguro/miArchivo.pdf:/content"></script>
 
-  
 <!-- Loader dinámico de MSAL -->
 <script>
 (function () {
@@ -234,15 +232,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const rect = canvas.getBoundingClientRect();
     const escalaX = canvas.width / rect.width;
     const escalaY = canvas.height / rect.height;
-
-    const x = evt.touches
-      ? (evt.touches[0].clientX - rect.left) * escalaX
-      : (evt.clientX - rect.left) * escalaX;
-
-    const y = evt.touches
-      ? (evt.touches[0].clientY - rect.top) * escalaY
-      : (evt.clientY - rect.top) * escalaY;
-
+    const x = evt.touches ? (evt.touches[0].clientX - rect.left) * escalaX : (evt.clientX - rect.left) * escalaX;
+    const y = evt.touches ? (evt.touches[0].clientY - rect.top) * escalaY : (evt.clientY - rect.top) * escalaY;
     return { x, y };
   }
 
@@ -285,7 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<!-- Autocompletar -->
+<!-- Autocompletar + autofila -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const sugerencias = [
@@ -312,10 +303,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Aplica autocompletado a los inputs existentes
   document.querySelectorAll(".autocomplete").forEach(aplicarAutocompletado);
 
-  
   function agregarFilaSiEsUltima(input, tablaId) {
     const tabla = document.getElementById(tablaId);
     const filas = tabla.querySelectorAll("tbody tr");
@@ -323,21 +312,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (ultimaFila.contains(input)) {
       const nuevaFila = ultimaFila.cloneNode(true);
-
-      // Limpia los valores y agrega clase "nuevo"
       nuevaFila.querySelectorAll("input").forEach(input => {
         input.value = "";
         input.classList.add("nuevo");
-        // Asegúrate de que tenga la clase autocomplete
-        if (!input.classList.contains("autocomplete")) {
-          input.classList.add("autocomplete");
-        }
+        if (!input.classList.contains("autocomplete")) input.classList.add("autocomplete");
       });
-
-      // Inserta la nueva fila
       tabla.querySelector("tbody").appendChild(nuevaFila);
-
-      // Reactiva autocompletado en los inputs clonados
       nuevaFila.querySelectorAll(".autocomplete").forEach(aplicarAutocompletado);
     }
   }
@@ -345,9 +325,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function inicializarAutofila(tablaId) {
     const tabla = document.getElementById(tablaId);
     tabla.addEventListener("input", function (e) {
-      if (e.target.tagName === "INPUT") {
-        agregarFilaSiEsUltima(e.target, tablaId);
-      }
+      if (e.target.tagName === "INPUT") agregarFilaSiEsUltima(e.target, tablaId);
     });
   }
 
@@ -356,28 +334,22 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-  
- <script>
+<!-- Canvas "POR CARS:" -->
+<script>
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("canvas1");
   if (!canvas) return;
   const ctx = canvas.getContext("2d");
 
-  // 🟢 Dibuja "POR CARS:" con línea subrayada extendida
   function drawLabel() {
     const texto = "POR CARS:";
     ctx.font = "16px sans-serif";
     ctx.fillStyle = "#333";
-
-    const y = canvas.height - 20; // altura desde abajo
+    const y = canvas.height - 20;
     const startX = 10;
     const textWidth = ctx.measureText(texto).width;
-    const lineY = y + 4; // línea debajo del texto
-
-    // Texto
+    const lineY = y + 4;
     ctx.fillText(texto, startX, y);
-
-    // Línea que empieza después del texto y llega hasta el final
     ctx.beginPath();
     ctx.moveTo(startX + textWidth + 8, lineY);
     ctx.lineTo(canvas.width - 10, lineY);
@@ -386,14 +358,12 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx.stroke();
   }
 
-  // 🟢 Inicializa canvas con fondo blanco + texto
   function initCanvas() {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     drawLabel();
   }
 
-  // 🟢 Limpia el canvas sin borrar el texto
   function clearCanvas1() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "white";
@@ -402,9 +372,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   window.clearCanvas1 = clearCanvas1;
 
-  // 🔹 Variables y funciones para dibujar
   let drawing = false;
-
   function getPos(evt) {
     const rect = canvas.getBoundingClientRect();
     const escalaX = canvas.width / rect.width;
@@ -413,172 +381,51 @@ document.addEventListener("DOMContentLoaded", () => {
     const y = evt.touches ? (evt.touches[0].clientY - rect.top) * escalaY : (evt.clientY - rect.top) * escalaY;
     return { x, y };
   }
+  function startDraw(evt) { evt.preventDefault(); drawing = true; const pos = getPos(evt); ctx.beginPath(); ctx.moveTo(pos.x, pos.y); }
+  function draw(evt) { if (!drawing) return; evt.preventDefault(); const pos = getPos(evt); ctx.lineWidth = 2; ctx.lineCap = "round"; ctx.strokeStyle = "black"; ctx.lineTo(pos.x, pos.y); ctx.stroke(); ctx.beginPath(); ctx.moveTo(pos.x, pos.y); }
+  function endDraw(evt) { evt.preventDefault(); drawing = false; ctx.beginPath(); }
 
-  function startDraw(evt) {
-    evt.preventDefault();
-    drawing = true;
-    const pos = getPos(evt);
-    ctx.beginPath();
-    ctx.moveTo(pos.x, pos.y);
-  }
+  ["mousedown","mousemove","mouseup","mouseleave"].forEach(e => canvas.addEventListener(e, {mousedown:startDraw, mousemove:draw, mouseup:endDraw, mouseleave:endDraw}[e]));
+  ["touchstart","touchmove","touchend","touchcancel"].forEach(e => canvas.addEventListener(e, {touchstart:startDraw, touchmove:draw, touchend:endDraw, touchcancel:endDraw}[e], {passive:false}));
 
-  function draw(evt) {
-    if (!drawing) return;
-    evt.preventDefault();
-    const pos = getPos(evt);
-    ctx.lineWidth = 2;
-    ctx.lineCap = "round";
-    ctx.strokeStyle = "black";
-    ctx.lineTo(pos.x, pos.y);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(pos.x, pos.y);
-  }
-
-  function endDraw(evt) {
-    evt.preventDefault();
-    drawing = false;
-    ctx.beginPath();
-  }
-
-  // 🟢 Asignar eventos PC y móviles
-  canvas.addEventListener("mousedown", startDraw);
-  canvas.addEventListener("mousemove", draw);
-  canvas.addEventListener("mouseup", endDraw);
-  canvas.addEventListener("mouseleave", endDraw);
-  canvas.addEventListener("touchstart", startDraw, { passive: false });
-  canvas.addEventListener("touchmove", draw, { passive: false });
-  canvas.addEventListener("touchend", endDraw);
-  canvas.addEventListener("touchcancel", endDraw);
-
-  // 🟢 Inicializar al cargar
   initCanvas();
 });
 </script>
+
 <!-- Escalado automático -->
 <script>
 function escalarPagina() {
   const baseWidth = 1200;
   const escala = Math.min(window.innerWidth / baseWidth, 1);
   const escalado = document.getElementById('escalado');
-
   if (!escalado) return;
-
   escalado.style.transform = `scale(${escala})`;
   escalado.style.transformOrigin = 'top center';
-
-  const altoEscalado = escalado.getBoundingClientRect().height;
-  document.body.style.height = `${altoEscalado}px`;
+  document.body.style.height = `${escalado.getBoundingClientRect().height}px`;
 }
 window.addEventListener('resize', escalarPagina);
 window.addEventListener('load', escalarPagina);
 </script>
 
-<!-- MSAL + Generación y subida del PDF a OneDrive (modificado con .modo-pdf) -->
+<!-- MSAL + Generación y subida PDF con eliminación de última fila vacía -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const boton = document.querySelector("#boton .boton"); 
-  if (!boton) {
-    console.error("❌ No se encontró el botón #boton .boton");
-    return;
-  }
+  if (!boton) return;
 
-  boton.addEventListener("click", async (e) => {
-    e.preventDefault();
+  // 🔹 Función: eliminar última fila vacía solo para PDF
+  function eliminarUltimaFilaVacia(tablaId) {
+    const tabla = document.getElementById(tablaId);
+    if (!tabla) return;
+    const filas = tabla.querySelectorAll("tbody tr");
+    if (!filas.length) return;
+    const ultimaFila = filas[filas.length - 1];
+    const inputs = ultimaFila.querySelectorAll("input");
+    let vacia = true;
+    inputs.forEach(input => { if (input.value.trim() !== "") vacia = false; });
+    if (vacia) ultimaFila.remove();
+ 
 
-    const taller = (document.getElementById("taller") || {}).value?.trim() || "";
-    const serieNumero = (document.getElementById("serieNumero") || {}).value?.trim() || "";
-    const siniestro1 = (document.getElementById("siniestro1") || {}).value?.trim() || "";
-    const siniestro2 = (document.getElementById("siniestro2") || {}).value?.trim() || "";
-    const QUIEN = (document.getElementById("QUIEN") || {}).value?.trim() || "";
-    const fechaInput = document.getElementById("fecha");
-    const dificultadVisual = (document.getElementById("dificultadVisual") || {}).value?.trim() || "";
-
-    if (!taller || !serieNumero || !siniestro1 || !siniestro2 || !fechaInput || !fechaInput.value) {
-      alert("⚠️ Complete todos los campos antes de generar el PDF.");
-      return;
-    }
-    if (window.userHasDrawn && !dificultadVisual) {
-      alert("⚠️ Describa la dificultad visual asociada al dibujo.");
-      return;
-    }
-    
-  if (!QUIEN) {
-      alert("⚠️ Debe registrar el nombre del técnico que completó este formulario.");
-      return;
-    }
-    
-    // Mostrar fecha formateada en el DOM antes de generar el PDF
-    const fechaParts = fechaInput.value.split("-");
-    const fechaFormateada = `${fechaParts[2]}/${fechaParts[1]}/${fechaParts[0]}`;
-    const fechaLabel = fechaInput.parentElement;
-    const spanFecha = document.createElement("span");
-    spanFecha.textContent = fechaFormateada;
-    fechaLabel.appendChild(spanFecha);
-    fechaInput.style.display = "none";
-
-    const ok = confirm("¿El número de siniestro ingresado es correcto:" + siniestro1 + "-" + siniestro2 + "?");
-    if (!ok) {
-      fechaInput.style.display = "inline";
-      fechaLabel.removeChild(spanFecha);
-      return;
-    }
-
-    const element = document.getElementById("contenidoPDF");
-    if (!element) {
-      alert("❌ No se encontró el contenido a exportar (#contenidoPDF).");
-      fechaInput.style.display = "inline";
-      fechaLabel.removeChild(spanFecha);
-      return;
-    }
-
-    try {
-      // 1) Forzar estilos A4
-      document.body.classList.add("modo-pdf");
-
-      // 2) Generar PDF como Blob
-      const opt = {
-        margin: [0, 0, 0, 0],
-        filename: `${siniestro1 || "Siniestro"}-${siniestro2 || ""}.pdf`,
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
-      };
-
-      const blob = await html2pdf().set(opt).from(element).output('blob');
-
-      // 3) Enviar al backend
-      const nombreArchivo = `${siniestro1 || "Siniestro1"}_${siniestro2 || "Siniestro2"}_EXTRA_SEGURO.pdf`;
-      const formData = new FormData();
-      formData.append('pdf', blob, nombreArchivo);
-      formData.append('filename', nombreArchivo);
-      formData.append("folder", "Extra Seguro"); 
-      
-      const res = await fetch('https://extra-seguro-backend.onrender.com/upload', {
-        method: 'POST',
-        body: formData
-      });
-
-      if (res.ok) {
-        const data = await res.json().catch(() => ({}));
-        alert("✅ PDF enviado y subido correctamente");
-        if (data?.webUrl) {
-          console.log("🔗 Archivo en SharePoint/OneDrive:", data.webUrl);
-        }
-      } else {
-        const text = await res.text().catch(() => "");
-        alert("❌ Error al subir PDF: " + res.status + (text ? ` - ${text}` : ""));
-      }
-    } catch (err) {
-      alert("❌ Error generando o subiendo el PDF: " + (err?.message || err));
-    } finally {
-      // 4) Restaurar UI
-      document.body.classList.remove("modo-pdf");
-      fechaInput.style.display = "inline";
-      fechaLabel.removeChild(spanFecha);
-    }
-  });
-});
 </script>
 </body>
 </html>
