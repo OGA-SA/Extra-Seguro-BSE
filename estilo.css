@@ -578,6 +578,8 @@ td input {
   text-transform: uppercase;
   overflow-wrap: break-word;
   word-break: break-word;
+  word-wrap: break-word; /* permite que las palabras largas se rompan */
+  white-space: normal;    /* permite salto de línea dentro de la celda */
  }
 
 .modo-pdf input[type="text"],
