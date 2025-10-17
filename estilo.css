@@ -610,7 +610,7 @@ td input {
 
 .modo-pdf .texto{
   margin-top: -25px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .modo-pdf h3{
@@ -709,8 +709,7 @@ td input {
 
 .modo-pdf .firma input{
   text-transform: uppercase !important;
-}
-
+} 
 .modo-pdf .contenedor-izquierda,
 .modo-pdf .columna-derecha {
   margin-top: 0;
