@@ -493,6 +493,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let vacia = true;
     inputs.forEach(input => { if (input.value.trim() !== "") vacia = false; });
     if (vacia) ultimaFila.remove();
+  }
   
   boton.addEventListener("click", async (e) => {
     e.preventDefault();
