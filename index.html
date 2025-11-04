@@ -158,21 +158,47 @@
     });
   }
 
+ (async function () {
   async function ensureMsal() {
-    if (window.msal) return "preloaded";
+    console.log("🟡 Iniciando ensureMsal...");
+
+    // Si ya está cargado
+    if (window.msal) {
+      console.log("✅ MSAL ya estaba preloaded.");
+      return "preloaded";
+    }
+
+    // Lista de posibles CDNs (asegurate de tenerla definida)
+    const candidates = [
+      "https://alcdn.msauth.net/browser/2.32.0/js/msal-browser.min.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/msal/2.32.0/msal-browser.min.js",
+    ];
+
+    console.log("🔍 Probando carga de MSAL desde CDNs:", candidates);
+
     for (const url of candidates) {
+      console.log(`➡️ Intentando cargar: ${url}`);
       try {
-        await loadScript(url);
+        const result = await loadScript(url);
+        console.log(`📥 Script ${url} cargado correctamente:`, result);
+
         if (window.msal) {
-          console.log("✅ MSAL cargado desde:", url);
+          console.log("✅ MSAL cargado exitosamente desde:", url);
           return url;
+        } else {
+          console.warn("⚠️ Script cargado pero window.msal sigue indefinido.");
         }
       } catch (e) {
-        console.warn("No se pudo cargar MSAL desde:", url);
+        console.error(`❌ Error al cargar ${url}:`, e);
       }
     }
+
+    console.error("🚫 MSAL no se pudo cargar desde ningún CDN.");
     throw new Error("MSAL no se pudo cargar desde ningún CDN.");
   }
+
+  // 🔧 Si querés testear, podés llamar manualmente:
+  // ensureMsal().then(console.log).catch(console.error);
 
   window.ensureMsal = ensureMsal;
 })();
