@@ -271,7 +271,7 @@
       </div>
       
        <div class="firma">
-              <label><span>POR CARS:</span> <input type="text" id="QUIEN" required /></label>
+              <label><span>POR CARS:</span> <input type="text" id="QUIEN" class="autocomplete-nombres" required /></label>
                    </div>
       
               <form id="boton">
@@ -464,11 +464,20 @@ document.addEventListener("DOMContentLoaded", () => {
 <!-- Autocompletar -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+
   const sugerencias = [
     "PUNTERA P/GOLPE DEL DER", "PUNTERA P/GOLPE DEL IZQ", "SEÑALERO DEL DER",
     "SEÑALERO DEL IZQ", "PUNTERA P/GOLPE TRAS DER", "PUNTERA P/GOLPE TRAS IZQ",
     "LUNETA TRASERA", "MOLDURA sup tapa caja", "FRENTE DE CHAPA",
     "PORTON LATERAL DERECHO", "CHORIZO DE TECHO IZQ"
+  ];
+
+  // 👉 NUEVAS SUGERENCIAS (SOLO PARA POR CARS)
+  const sugerenciasNombres = [
+    "FEDERICO ALBISTUR",
+    "SEBASTIÁN DE ÁVILA",
+    "SANTIAGO DE ÁVILA",
+    "RODRIGO GINI"
   ];
 
   function aplicarAutocompletado(inputAuto) {
@@ -488,10 +497,33 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Aplica autocompletado a los inputs existentes
+  // 👉 NUEVA FUNCIÓN SOLO PARA NOMBRES
+  function aplicarAutocompletadoNombres(inputAuto) {
+    let ultimaEntrada = "";
+    inputAuto.addEventListener("input", () => {
+      const valor = inputAuto.value.toLowerCase();
+      if (valor.length < ultimaEntrada.length) {
+        ultimaEntrada = valor;
+        return;
+      }
+      const match = sugerenciasNombres.find(opcion => opcion.toLowerCase().startsWith(valor));
+      if (match && valor !== match.toLowerCase()) {
+        inputAuto.value = match;
+        inputAuto.setSelectionRange(valor.length, match.length);
+      }
+      ultimaEntrada = valor;
+    });
+  }
+
+  // Aplica autocompletado a tablas (SIN CAMBIOS)
   document.querySelectorAll(".autocomplete").forEach(aplicarAutocompletado);
 
-  
+  // 👉 APLICA SOLO AL INPUT POR CARS
+  const inputQuien = document.getElementById("QUIEN");
+  if (inputQuien) {
+    aplicarAutocompletadoNombres(inputQuien);
+  }
+
   function agregarFilaSiEsUltima(input, tablaId) {
     const tabla = document.getElementById(tablaId);
     const filas = tabla.querySelectorAll("tbody tr");
@@ -504,7 +536,6 @@ document.addEventListener("DOMContentLoaded", () => {
       nuevaFila.querySelectorAll("input").forEach(input => {
         input.value = "";
         input.classList.add("nuevo");
-        // Asegúrate de que tenga la clase autocomplete
         if (!input.classList.contains("autocomplete")) {
           input.classList.add("autocomplete");
         }
@@ -529,6 +560,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   inicializarAutofila("tablaPiezas1");
   inicializarAutofila("tablaPiezas2");
+
 });
 </script>
 
