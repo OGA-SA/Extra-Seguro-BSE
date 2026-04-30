@@ -2,357 +2,185 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/jpeg" href="Cars.JPG">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FORMULARIO EXTRA SEGURO</title>
   <link rel="stylesheet" href="estilo.css" />
 </head>
+
 <body>
-  <div id="escalado">
-    <div id="contenidoPDF">
-      <div class="header">
-         <img src="Cars.JPG" alt="Logo Cars" class="logo" />
-      </div>
-      <h2>FORMULARIO EXTRA SEGURO</h2>
+<div id="escalado">
+<div id="contenidoPDF">
 
-      <div class="datos">
-        <div class="contenedor-izquierda">
-          <form id="dataForm">
-            <div class="fila-formulario">
-              <div class="form-group">
-                <label><span>Taller N°:</span> <input type="text" id="taller" required /></label>
-                <label><span>Serie y N°:</span> <input type="text" id="serieNumero" required /></label>
-              </div>
-            </div>
-          </form>
+<div class="header">
+  <img src="Cars.JPG" alt="Logo Cars" class="logo" />
+</div>
 
-          <div class="imagen-y-campos">
-            <div class="canvas-section">
-              <canvas id="canvas" width="700" height="350"></canvas>
-              <button class="clear-button" type="button" onclick="clearCanvas()">Limpiar Dibujo</button>
-            </div>
-          </div>
-        </div>
+<h2>FORMULARIO EXTRA SEGURO</h2>
 
-        <form class="columna-derecha">
-          <div class="fecha">
-            <label class="Fecha"><span>Fecha:</span> <input type="date" id="fecha" required /></label>
-          </div>
-          <div class="stro">
-            <label class="siniestro"> 
-                <span>Siniestro:</span>
-                <input type="text" id="siniestro1" required />
-              
-                <span>-</span>
-              
-                <span>Año:</span>
-                <input type="text" id="siniestro2" 
-                       min="1900" max="2100" 
-                       required  
-                       placeholder="XXXX" 
-                       title="Debe ingresar el año completo con 4 dígitos (ej: 2025)"
-                       pattern="\d{4}" />
-            </label>
-            <label class="visual"><span>¿Dificulta visual?:</span> <input type="text" id="dificultadVisual" /></label>
-          </div>
-        </form>
-      </div>
+<div class="datos">
+<div class="contenedor-izquierda">
 
-      <div class="texto">
-        <h3>SE INFORMAN RUBROS CUYOS PORCENTAJES NO SE TENDRAN EN CUENTA EN FUTURAS RECLAMACIONES</h3>
-        <h3>ANULA / REMPLAZA EXTRA SEGURO DE FECHA:</h3>
-      </div>
+<form id="dataForm">
+<div class="fila-formulario">
+<div class="form-group">
+<label><span>Taller N°:</span> <input type="text" id="taller" required /></label>
+<label><span>Serie y N°:</span> <input type="text" id="serieNumero" required /></label>
+</div>
+</div>
+</form>
 
-      <div class="tablas-piezas">
-        <table id="tablaPiezas1">
-        <thead>
-          <tr>
-            <th>PIEZA / ACCESORIOS</th>
-            <th>CHAPA</th>
-            <th>PINTURA</th>
-          </tr>
-        </thead>
-        <tbody>
-       <tr>
-  <td>GUARDABARRO DEL DER</td>
-  <td><input type="text" class="autocomplete" id="guardabarro_del_der_desc" name="guardabarro_del_der_desc" autocomplete="off"></td>
-  <td><input type="text" id="guardabarro_del_der_obs" name="guardabarro_del_der_obs"></td>
-</tr>
+<div class="imagen-y-campos">
+<div class="canvas-section">
+<canvas id="canvas" width="700" height="350"></canvas>
+<button class="clear-button" type="button" onclick="clearCanvas()">Limpiar Dibujo</button>
+</div>
+</div>
 
+</div>
+
+<form class="columna-derecha">
+<div class="fecha">
+<label class="Fecha"><span>Fecha:</span> <input type="date" id="fecha" required /></label>
+</div>
+
+<div class="stro">
+<label class="siniestro">
+<span>Siniestro:</span>
+<input type="text" id="siniestro1" required />
+<span>-</span>
+<span>Año:</span>
+<input
+  type="text"
+  id="siniestro2"
+  pattern="\d{4}"
+  placeholder="XXXX"
+  title="Debe ingresar el año completo con 4 dígitos"
+  required
+/>
+</label>
+
+<label class="visual">
+<span>¿Dificulta visual?:</span>
+<input type="text" id="dificultadVisual" />
+</label>
+</div>
+</form>
+
+</div>
+
+<div class="texto">
+  <h3>SE INFORMAN RUBROS CUYOS PORCENTAJES NO SE TENDRAN EN CUENTA EN FUTURAS RECLAMACIONES</h3>
+  <h3>ANULA / REMPLAZA EXTRA SEGURO DE FECHA:</h3>
+</div>
+
+<div class="tablas-piezas">
+<table id="tablaPiezas1">
+<thead>
 <tr>
-  <td>GUARDABARRO DEL IZQ</td>
-  <td><input type="text" class="autocomplete" id="guardabarro_del_izq_desc" name="guardabarro_del_izq_desc" autocomplete="off"></td>
-  <td><input type="text" id="guardabarro_del_izq_obs" name="guardabarro_del_izq_obs"></td>
+<th>PIEZA / ACCESORIOS</th>
+<th>CHAPA</th>
+<th>PINTURA</th>
 </tr>
-
-<tr>
-  <td>CARETA</td>
-  <td><input type="text" class="autocomplete" id="careta_desc" name="careta_desc" autocomplete="off"></td>
-  <td><input type="text" id="careta_obs" name="careta_obs"></td>
-</tr>
-
-<tr>
-  <td>PARAGOLPE DELANTERO</td>
-  <td><input type="text" class="autocomplete" id="paragolpe_delantero_desc" name="paragolpe_delantero_desc" autocomplete="off"></td>
-  <td><input type="text" id="paragolpe_delantero_obs" name="paragolpe_delantero_obs"></td>
-</tr>
-
-<tr>
-  <td>ESPEJO DER</td>
-  <td><input type="text" class="autocomplete" id="espejo_der_desc" name="espejo_der_desc" autocomplete="off"></td>
-  <td><input type="text" id="espejo_der_obs" name="espejo_der_obs"></td>
-</tr>
-
-<tr>
-  <td>ESPEJO IZQ</td>
-  <td><input type="text" class="autocomplete" id="espejo_izq_desc" name="espejo_izq_desc" autocomplete="off"></td>
-  <td><input type="text" id="espejo_izq_obs" name="espejo_izq_obs"></td>
-</tr>
-
-<tr>
-  <td>SEMIOPTICA DERECHA</td>
-  <td><input type="text" class="autocomplete" id="semioptica_der_desc" name="semioptica_der_desc" autocomplete="off"></td>
-  <td><input type="text" id="semioptica_der_obs" name="semioptica_der_obs"></td>
-</tr>
-
-<tr>
-  <td>SEMIOPTICA IZQUIERDA</td>
-  <td><input type="text" class="autocomplete" id="semioptica_izq_desc" name="semioptica_izq_desc" autocomplete="off"></td>
-  <td><input type="text" id="semioptica_izq_obs" name="semioptica_izq_obs"></td>
-</tr>
-
-<tr>
-  <td>PUERTA DELANTERA DERECHA</td>
-  <td><input type="text" class="autocomplete" id="puerta_delantera_der_desc" name="puerta_delantera_der_desc" autocomplete="off"></td>
-  <td><input type="text" id="puerta_delantera_der_obs" name="puerta_delantera_der_obs"></td>
-</tr>
-
-<tr>
-  <td>PUERTA DELANTERA IZQUIERDA</td>
-  <td><input type="text" class="autocomplete" id="puerta_delantera_izq_desc" name="puerta_delantera_izq_desc" autocomplete="off"></td>
-  <td><input type="text" id="puerta_delantera_izq_obs" name="puerta_delantera_izq_obs"></td>
-</tr>
-
-<tr>
-  <td>PUERTA TRASERA DERECHA</td>
-  <td><input type="text" class="autocomplete" id="puerta_trasera_der_desc" name="puerta_trasera_der_desc" autocomplete="off"></td>
-  <td><input type="text" id="puerta_trasera_der_obs" name="puerta_trasera_der_obs"></td>
-</tr>
-
-<tr>
-  <td>PUERTA TRASERA IZQUIERDA</td>
-  <td><input type="text" class="autocomplete" id="puerta_trasera_izq_desc" name="puerta_trasera_izq_desc" autocomplete="off"></td>
-  <td><input type="text" id="puerta_trasera_izq_obs" name="puerta_trasera_izq_obs"></td>
-</tr>
-
-<tr>
-  <td>PORTON TRAS DER</td>
-  <td><input type="text" class="autocomplete" id="porton_tras_der_desc" name="porton_tras_der_desc" autocomplete="off"></td>
-  <td><input type="text" id="porton_tras_der_obs" name="porton_tras_der_obs"></td>
-</tr>
-
-<tr>
-  <td>PORTON TRAS IZQ</td>
-  <td><input type="text" class="autocomplete" id="porton_tras_izq_desc" name="porton_tras_izq_desc" autocomplete="off"></td>
-  <td><input type="text" id="porton_tras_izq_obs" name="porton_tras_izq_obs"></td>
-</tr>
-
-<tr>
-  <td><input class="autocomplete" type="text" id="pieza_extra_desc" name="pieza_extra_desc" autocomplete="off" spellcheck="false"></td>
-  <td><input type="text" id="pieza_extra_valor" name="pieza_extra_valor"></td>
-  <td><input type="text" id="pieza_extra_obs" name="pieza_extra_obs"></td>
-</tr>
-        </tbody>
-      </table>
-
-      <table id="tablaPiezas2">
-        <thead>
-          <tr>
-            <th>PIEZA / ACCESORIOS</th>
-            <th>CHAPA</th>
-            <th>PINTURA</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-  <td>ESPOLON</td>
-  <td><input type="text" class="autocomplete" id="espolon_desc" name="espolon_desc" autocomplete="off"></td>
-  <td><input type="text" id="espolon_obs" name="espolon_obs"></td>
-</tr>
-
-<tr>
-  <td>GUARDABARRO TRAS DER</td>
-  <td><input type="text" class="autocomplete" id="guardabarro_tras_der_desc" name="guardabarro_tras_der_desc" autocomplete="off"></td>
-  <td><input type="text" id="guardabarro_tras_der_obs" name="guardabarro_tras_der_obs"></td>
-</tr>
-
-<tr>
-  <td>GUARDABARRO TRAS IZQ</td>
-  <td><input type="text" class="autocomplete" id="guardabarro_tras_izq_desc" name="guardabarro_tras_izq_desc" autocomplete="off"></td>
-  <td><input type="text" id="guardabarro_tras_izq_obs" name="guardabarro_tras_izq_obs"></td>
-</tr>
-
-<tr>
-  <td>TECHO</td>
-  <td><input type="text" class="autocomplete" id="techo_desc" name="techo_desc" autocomplete="off"></td>
-  <td><input type="text" id="techo_obs" name="techo_obs"></td>
-</tr>
-
-<tr>
-  <td>PARABRISAS</td>
-  <td><input type="text" class="autocomplete" id="parabrisas_desc" name="parabrisas_desc" autocomplete="off"></td>
-  <td><input type="text" id="parabrisas_obs" name="parabrisas_obs"></td>
-</tr>
-
-<tr>
-  <td>PANEL TRASERO</td>
-  <td><input type="text" class="autocomplete" id="panel_trasero_desc" name="panel_trasero_desc" autocomplete="off"></td>
-  <td><input type="text" id="panel_trasero_obs" name="panel_trasero_obs"></td>
-</tr>
-
-<tr>
-  <td>TAPA VALIJA / PORTON TRAS.</td>
-  <td><input type="text" class="autocomplete" id="tapa_valija_porton_tras_desc" name="tapa_valija_porton_tras_desc" autocomplete="off"></td>
-  <td><input type="text" id="tapa_valija_porton_tras_obs" name="tapa_valija_porton_tras_obs"></td>
-</tr>
-
-<tr>
-  <td>PARAGOLPE TRASERO</td>
-  <td><input type="text" class="autocomplete" id="paragolpe_trasero_desc" name="paragolpe_trasero_desc" autocomplete="off"></td>
-  <td><input type="text" id="paragolpe_trasero_obs" name="paragolpe_trasero_obs"></td>
-</tr>
-
-<tr>
-  <td>ZOCALO DERECHO</td>
-  <td><input type="text" class="autocomplete" id="zocalo_derecho_desc" name="zocalo_derecho_desc" autocomplete="off"></td>
-  <td><input type="text" id="zocalo_derecho_obs" name="zocalo_derecho_obs"></td>
-</tr>
-
-<tr>
-  <td>ZOCALO IZQUIERDO</td>
-  <td><input type="text" class="autocomplete" id="zocalo_izquierdo_desc" name="zocalo_izquierdo_desc" autocomplete="off"></td>
-  <td><input type="text" id="zocalo_izquierdo_obs" name="zocalo_izquierdo_obs"></td>
-</tr>
-
-<tr>
-  <td>LATERAL DERECHO</td>
-  <td><input type="text" class="autocomplete" id="lateral_derecho_desc" name="lateral_derecho_desc" autocomplete="off"></td>
-  <td><input type="text" id="lateral_derecho_obs" name="lateral_derecho_obs"></td>
-</tr>
-
-<tr>
-  <td>LATERAL IZQUIERDO</td>
-  <td><input type="text" class="autocomplete" id="lateral_izquierdo_desc" name="lateral_izquierdo_desc" autocomplete="off"></td>
-  <td><input type="text" id="lateral_izquierdo_obs" name="lateral_izquierdo_obs"></td>
-</tr>
-
-<tr>
-  <td>FARO TRAS DER</td>
-  <td><input type="text" class="autocomplete" id="faro_tras_der_desc" name="faro_tras_der_desc" autocomplete="off"></td>
-  <td><input type="text" id="faro_tras_der_obs" name="faro_tras_der_obs"></td>
-</tr>
-
-<tr>
-  <td>FARO TRAS IZQ</td>
-  <td><input type="text" class="autocomplete" id="faro_tras_izq_desc" name="faro_tras_izq_desc" autocomplete="off"></td>
-  <td><input type="text" id="faro_tras_izq_obs" name="faro_tras_izq_obs"></td>
-</tr>
-
-<tr>
-  <td><input type="text" class="autocomplete" id="pieza_extra2_desc" name="pieza_extra2_desc" autocomplete="off"></td>
-  <td><input type="text" id="pieza_extra2_valor" name="pieza_extra2_valor"></td>
-  <td><input type="text" id="pieza_extra2_obs" name="pieza_extra2_obs"></td>
-</tr>
-
+</thead>
+<tbody>
+<tr><td>GUARDABARRO DEL DER</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>GUARDABARRO DEL IZQ</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>CARETA</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>PARAGOLPE DELANTERO</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>ESPEJO DER</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>ESPEJO IZQ</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>SEMIOPTICA DERECHA</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>SEMIOPTICA IZQUIERDA</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>PUERTA DELANTERA DERECHA</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>PUERTA DELANTERA IZQUIERDA</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>PUERTA TRASERA DERECHA</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>PUERTA TRASERA IZQUIERDA</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>PORTON TRAS DER</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>PORTON TRAS IZQ</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td><input class="autocomplete" type="text" autocomplete="off" spellcheck="false" /></td><td><input type="text" /></td><td><input type="text" /></td></tr>
 </tbody>
+</table>
 
-      </table>
-      
-      </div>
-      
-       <div class="firma">
-              <label><span>POR CARS:</span> <input type="text" id="QUIEN" class="autocomplete-nombres" required /></label>
-                   </div>
-      
-              <form id="boton">
-                <div style="text-align: center; margin: 30px 0;">
-                    <button class="boton" type="button">Generar PDF</button>
-                </div>
-        
-        </form>
-      
-    </div>
-    
-  </div>
-<!-- Librerías necesarias -->
+<table id="tablaPiezas2">
+<thead>
+<tr>
+<th>PIEZA / ACCESORIOS</th>
+<th>CHAPA</th>
+<th>PINTURA</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>ESPOLON</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>GUARDABARRO TRAS DER</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>GUARDABARRO TRAS IZQ</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>TECHO</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>PARABRISAS</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>PANEL TRASERO</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>TAPA VALIJA / PORTON TRAS.</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>PARAGOLPE TRASERO</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>ZOCALO DERECHO</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>ZOCALO IZQUIERDO</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>LATERAL DERECHO</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>LATERAL IZQUIERDO</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>FARO TRAS DER</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td>FARO TRAS IZQ</td><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td></tr>
+<tr><td><input type="text" class="autocomplete" autocomplete="off" /></td><td><input type="text" /></td><td><input type="text" /></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="firma">
+<label><span>POR CARS:</span> <input type="text" id="QUIEN" class="autocomplete-nombres" required /></label>
+</div>
+
+<div style="text-align:center;margin:30px;">
+<button class="boton" id="btnGenerar" type="button">Generar PDF</button>
+</div>
+
+</div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script> src="https://graph.microsoft.com/v1.0/me/drive/root:/Extra Seguro/miArchivo.pdf:/content"</script>
 
-  
 <!-- Loader dinámico de MSAL -->
 <script>
 (function () {
-  const candidates = [
-    "https://alcdn.msauth.net/browser/2.45.0/js/msal-browser.min.js",
-    "https://cdn.jsdelivr.net/npm/@azure/msal-browser@2.45.0/lib/msal-browser.min.js",
-    "https://unpkg.com/@azure/msal-browser@2.45.0/lib/msal-browser.min.js"
-  ];
-
   function loadScript(url) {
     return new Promise((resolve, reject) => {
-      const s = document.createElement("script");
-      s.src = url;
-      s.async = true;
-      s.onload = () => resolve(url);
-      s.onerror = () => reject(url);
-      document.head.appendChild(s);
+      const script = document.createElement("script");
+      script.src = url;
+      script.async = true;
+      script.onload = () => resolve(url);
+      script.onerror = () => reject(url);
+      document.head.appendChild(script);
     });
   }
 
-  (async function () {
-    async function ensureMsal() {
-      console.log("🟡 Iniciando ensureMsal...");
+  async function ensureMsal() {
+    if (window.msal) return "preloaded";
 
-      if (window.msal) {
-        console.log("✅ MSAL ya estaba preloaded.");
-        return "preloaded";
+    const candidates = [
+      "https://alcdn.msauth.net/browser/2.32.0/js/msal-browser.min.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/msal/2.32.0/msal-browser.min.js",
+      "https://cdn.jsdelivr.net/npm/@azure/msal-browser@2.45.0/lib/msal-browser.min.js",
+      "https://unpkg.com/@azure/msal-browser@2.45.0/lib/msal-browser.min.js"
+    ];
+
+    for (const url of candidates) {
+      try {
+        await loadScript(url);
+        if (window.msal) return url;
+      } catch (error) {
+        console.error("Error cargando MSAL:", url, error);
       }
-
-      const candidates = [
-        "https://alcdn.msauth.net/browser/2.32.0/js/msal-browser.min.js",
-        "https://cdnjs.cloudflare.com/ajax/libs/msal/2.32.0/msal-browser.min.js",
-      ];
-
-      console.log("🔍 Probando carga de MSAL desde CDNs:", candidates);
-
-      for (const url of candidates) {
-        console.log(`➡️ Intentando cargar: ${url}`);
-        try {
-          const result = await loadScript(url);
-          console.log(`📥 Script ${url} cargado correctamente:`, result);
-
-          if (window.msal) {
-            console.log("✅ MSAL cargado exitosamente desde:", url);
-            return url;
-          } else {
-            console.warn("⚠️ Script cargado pero window.msal sigue indefinido.");
-          }
-        } catch (e) {
-          console.error(`❌ Error al cargar ${url}:`, e);
-        }
-      }
-
-      console.error("🚫 MSAL no se pudo cargar desde ningún CDN.");
-      throw new Error("MSAL no se pudo cargar desde ningún CDN.");
     }
 
-    // 🔧 Si querés testear, podés llamar manualmente:
-    // ensureMsal().then(console.log).catch(console.error);
+    throw new Error("MSAL no se pudo cargar desde ningún CDN.");
+  }
 
-    window.ensureMsal = ensureMsal;
-  })(); // cierre de la función interna
-
-})(); // ✅ cierre de la función externa
+  window.ensureMsal = ensureMsal;
+})();
 </script>
 
 <!-- Ajuste dinámico de input -->
@@ -361,13 +189,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("text");
   if (!input) return;
 
-  input.addEventListener("input", function() {
+  input.addEventListener("input", function () {
     const span = document.createElement("span");
     span.style.visibility = "hidden";
     span.style.position = "absolute";
     span.style.whiteSpace = "pre";
     span.style.font = window.getComputedStyle(input).font;
-
     span.textContent = input.value || input.placeholder;
 
     document.body.appendChild(span);
@@ -386,22 +213,21 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!canvas) return;
 
   const ctx = canvas.getContext("2d", { willReadFrequently: true });
-  let baseImageData = null;
   window.userHasDrawn = false;
 
   const image = new Image();
   image.src = "parabrisa.png";
+
   image.onload = () => {
     ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-    baseImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
   };
 
   function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
     window.userHasDrawn = false;
-    baseImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
   }
+
   window.clearCanvas = clearCanvas;
 
   let drawing = false;
@@ -433,6 +259,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function draw(evt) {
     if (!drawing) return;
     evt.preventDefault();
+
     const pos = getPos(evt);
     ctx.lineWidth = 2;
     ctx.lineCap = "round";
@@ -461,18 +288,23 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<!-- Autocompletar -->
+<!-- Autocompletar y filas automáticas -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-
   const sugerencias = [
-    "PUNTERA P/GOLPE DEL DER", "PUNTERA P/GOLPE DEL IZQ", "SEÑALERO DEL DER",
-    "SEÑALERO DEL IZQ", "PUNTERA P/GOLPE TRAS DER", "PUNTERA P/GOLPE TRAS IZQ",
-    "LUNETA TRASERA", "MOLDURA sup tapa caja", "FRENTE DE CHAPA",
-    "PORTON LATERAL DERECHO", "CHORIZO DE TECHO IZQ"
+    "PUNTERA P/GOLPE DEL DER",
+    "PUNTERA P/GOLPE DEL IZQ",
+    "SEÑALERO DEL DER",
+    "SEÑALERO DEL IZQ",
+    "PUNTERA P/GOLPE TRAS DER",
+    "PUNTERA P/GOLPE TRAS IZQ",
+    "LUNETA TRASERA",
+    "MOLDURA sup tapa caja",
+    "FRENTE DE CHAPA",
+    "PORTON LATERAL DERECHO",
+    "CHORIZO DE TECHO IZQ"
   ];
 
-  // 👉 NUEVAS SUGERENCIAS (SOLO PARA POR CARS)
   const sugerenciasNombres = [
     "FEDERICO ALBISTUR",
     "SEBASTIÁN DE ÁVILA",
@@ -492,75 +324,80 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function aplicarAutocompletado(inputAuto) {
     let ultimaEntrada = "";
+
     inputAuto.addEventListener("input", () => {
       const valor = inputAuto.value.toLowerCase();
+
       if (valor.length < ultimaEntrada.length) {
         ultimaEntrada = valor;
         return;
       }
-      const match = sugerencias.find(opcion => opcion.toLowerCase().startsWith(valor));
+
+      const match = sugerencias.find(opcion =>
+        opcion.toLowerCase().startsWith(valor)
+      );
+
       if (match && valor !== match.toLowerCase()) {
         inputAuto.value = match;
         inputAuto.setSelectionRange(valor.length, match.length);
       }
+
       ultimaEntrada = valor;
     });
   }
 
-  // 👉 NUEVA FUNCIÓN SOLO PARA NOMBRES
   function aplicarAutocompletadoNombres(inputAuto) {
     let ultimaEntrada = "";
+
     inputAuto.addEventListener("input", () => {
       const valor = inputAuto.value.toLowerCase();
+
       if (valor.length < ultimaEntrada.length) {
         ultimaEntrada = valor;
         return;
       }
-      const match = sugerenciasNombres.find(opcion => opcion.toLowerCase().startsWith(valor));
+
+      const match = sugerenciasNombres.find(opcion =>
+        opcion.toLowerCase().startsWith(valor)
+      );
+
       if (match && valor !== match.toLowerCase()) {
         inputAuto.value = match;
         inputAuto.setSelectionRange(valor.length, match.length);
       }
+
       ultimaEntrada = valor;
     });
-  }
-
-  // Aplica autocompletado a tablas (SIN CAMBIOS)
-  document.querySelectorAll(".autocomplete").forEach(aplicarAutocompletado);
-
-  // 👉 APLICA SOLO AL INPUT POR CARS
-  const inputQuien = document.getElementById("QUIEN");
-  if (inputQuien) {
-    aplicarAutocompletadoNombres(inputQuien);
   }
 
   function agregarFilaSiEsUltima(input, tablaId) {
     const tabla = document.getElementById(tablaId);
+    if (!tabla) return;
+
     const filas = tabla.querySelectorAll("tbody tr");
     const ultimaFila = filas[filas.length - 1];
 
-    if (ultimaFila.contains(input)) {
+    if (ultimaFila && ultimaFila.contains(input)) {
       const nuevaFila = ultimaFila.cloneNode(true);
 
-      // Limpia los valores y agrega clase "nuevo"
-      nuevaFila.querySelectorAll("input").forEach(input => {
-        input.value = "";
-        input.classList.add("nuevo");
-        if (!input.classList.contains("autocomplete")) {
-          input.classList.add("autocomplete");
+      nuevaFila.querySelectorAll("input").forEach(inputClonado => {
+        inputClonado.value = "";
+        inputClonado.classList.add("nuevo");
+
+        if (!inputClonado.classList.contains("autocomplete")) {
+          inputClonado.classList.add("autocomplete");
         }
       });
 
-      // Inserta la nueva fila
       tabla.querySelector("tbody").appendChild(nuevaFila);
-
-      // Reactiva autocompletado en los inputs clonados
       nuevaFila.querySelectorAll(".autocomplete").forEach(aplicarAutocompletado);
     }
   }
 
   function inicializarAutofila(tablaId) {
     const tabla = document.getElementById(tablaId);
+    if (!tabla) return;
+
     tabla.addEventListener("input", function (e) {
       if (e.target.tagName === "INPUT") {
         agregarFilaSiEsUltima(e.target, tablaId);
@@ -568,34 +405,38 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  document.querySelectorAll(".autocomplete").forEach(aplicarAutocompletado);
+
+  const inputQuien = document.getElementById("QUIEN");
+  if (inputQuien) {
+    aplicarAutocompletadoNombres(inputQuien);
+  }
+
   inicializarAutofila("tablaPiezas1");
   inicializarAutofila("tablaPiezas2");
-
 });
 </script>
 
-  
- <script>
+<!-- Canvas auxiliar de firma, si existe canvas1 -->
+<script>
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("canvas1");
   if (!canvas) return;
+
   const ctx = canvas.getContext("2d");
 
-  // 🟢 Dibuja "POR CARS:" con línea subrayada extendida
   function drawLabel() {
     const texto = "POR CARS:";
     ctx.font = "16px sans-serif";
     ctx.fillStyle = "#333";
 
-    const y = canvas.height - 20; // altura desde abajo
+    const y = canvas.height - 20;
     const startX = 10;
     const textWidth = ctx.measureText(texto).width;
-    const lineY = y + 4; // línea debajo del texto
+    const lineY = y + 4;
 
-    // Texto
     ctx.fillText(texto, startX, y);
 
-    // Línea que empieza después del texto y llega hasta el final
     ctx.beginPath();
     ctx.moveTo(startX + textWidth + 8, lineY);
     ctx.lineTo(canvas.width - 10, lineY);
@@ -604,31 +445,36 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx.stroke();
   }
 
-  // 🟢 Inicializa canvas con fondo blanco + texto
   function initCanvas() {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     drawLabel();
   }
 
-  // 🟢 Limpia el canvas sin borrar el texto
   function clearCanvas1() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     drawLabel();
   }
+
   window.clearCanvas1 = clearCanvas1;
 
-  // 🔹 Variables y funciones para dibujar
   let drawing = false;
 
   function getPos(evt) {
     const rect = canvas.getBoundingClientRect();
     const escalaX = canvas.width / rect.width;
     const escalaY = canvas.height / rect.height;
-    const x = evt.touches ? (evt.touches[0].clientX - rect.left) * escalaX : (evt.clientX - rect.left) * escalaX;
-    const y = evt.touches ? (evt.touches[0].clientY - rect.top) * escalaY : (evt.clientY - rect.top) * escalaY;
+
+    const x = evt.touches
+      ? (evt.touches[0].clientX - rect.left) * escalaX
+      : (evt.clientX - rect.left) * escalaX;
+
+    const y = evt.touches
+      ? (evt.touches[0].clientY - rect.top) * escalaY
+      : (evt.clientY - rect.top) * escalaY;
+
     return { x, y };
   }
 
@@ -643,6 +489,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function draw(evt) {
     if (!drawing) return;
     evt.preventDefault();
+
     const pos = getPos(evt);
     ctx.lineWidth = 2;
     ctx.lineCap = "round";
@@ -659,7 +506,6 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx.beginPath();
   }
 
-  // 🟢 Asignar eventos PC y móviles
   canvas.addEventListener("mousedown", startDraw);
   canvas.addEventListener("mousemove", draw);
   canvas.addEventListener("mouseup", endDraw);
@@ -669,135 +515,138 @@ document.addEventListener("DOMContentLoaded", () => {
   canvas.addEventListener("touchend", endDraw);
   canvas.addEventListener("touchcancel", endDraw);
 
-  // 🟢 Inicializar al cargar
   initCanvas();
 });
 </script>
+
 <!-- Escalado automático -->
 <script>
 function escalarPagina() {
   const baseWidth = 1200;
   const escala = Math.min(window.innerWidth / baseWidth, 1);
-  const escalado = document.getElementById('escalado');
+  const escalado = document.getElementById("escalado");
 
   if (!escalado) return;
 
   escalado.style.transform = `scale(${escala})`;
-  escalado.style.transformOrigin = 'top center';
+  escalado.style.transformOrigin = "top center";
 
   const altoEscalado = escalado.getBoundingClientRect().height;
   document.body.style.height = `${altoEscalado}px`;
 }
-window.addEventListener('resize', escalarPagina);
-window.addEventListener('load', escalarPagina);
+
+window.addEventListener("resize", escalarPagina);
+window.addEventListener("load", escalarPagina);
 </script>
 
-<!-- MSAL + Generación y subida del PDF a OneDrive (modificado con .modo-pdf) -->
+<!-- Utilidades -->
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const boton = document.querySelector("#boton .boton"); 
-  if (!boton) {
-    console.error("❌ No se encontró el botón #boton .boton");
-    return;
+function leerTabla(tablaId) {
+  const filas = document.querySelectorAll(`#${tablaId} tbody tr`);
+  const data = [];
+
+  filas.forEach(tr => {
+    const tds = tr.querySelectorAll("td");
+    if (tds.length < 3) return;
+
+    data.push({
+      pieza: tds[0].querySelector("input")
+        ? tds[0].querySelector("input").value
+        : tds[0].innerText,
+      chapa: tds[1].querySelector("input") ? tds[1].querySelector("input").value : "",
+      pintura: tds[2].querySelector("input") ? tds[2].querySelector("input").value : ""
+    });
+  });
+
+  return data;
+}
+
+function validarCamposBase() {
+  const taller = document.getElementById("taller")?.value.trim() || "";
+  const serieNumero = document.getElementById("serieNumero")?.value.trim() || "";
+  const siniestro1 = document.getElementById("siniestro1")?.value.trim() || "";
+  const siniestro2 = document.getElementById("siniestro2")?.value.trim() || "";
+  const fecha = document.getElementById("fecha")?.value || "";
+  const quien = document.getElementById("QUIEN")?.value.trim() || "";
+  const dificultadVisual = document.getElementById("dificultadVisual")?.value.trim() || "";
+
+  if (!taller || !serieNumero || !siniestro1 || !siniestro2 || !fecha) {
+    alert("Complete todos los campos obligatorios antes de generar el PDF.");
+    return false;
   }
 
-    
-  boton.addEventListener("click", async (e) => {
-    e.preventDefault();
+  if (window.userHasDrawn && !dificultadVisual) {
+    alert("Describa la dificultad visual asociada al dibujo.");
+    return false;
+  }
 
-    const taller = (document.getElementById("taller") || {}).value?.trim() || "";
-    const serieNumero = (document.getElementById("serieNumero") || {}).value?.trim() || "";
-    const siniestro1 = (document.getElementById("siniestro1") || {}).value?.trim() || "";
-    const siniestro2 = (document.getElementById("siniestro2") || {}).value?.trim() || "";
-    const QUIEN = (document.getElementById("QUIEN") || {}).value?.trim() || "";
-    const fechaInput = document.getElementById("fecha");
-    const dificultadVisual = (document.getElementById("dificultadVisual") || {}).value?.trim() || "";
+  if (!quien) {
+    alert("Debe registrar el nombre del técnico que completó este formulario.");
+    return false;
+  }
 
-    if (!taller || !serieNumero || !siniestro1 || !siniestro2 || !fechaInput || !fechaInput.value) {
-      alert("⚠️ Complete todos los campos antes de generar el PDF.");
-      return;
-    }
-    if (window.userHasDrawn && !dificultadVisual) {
-      alert("⚠️ Describa la dificultad visual asociada al dibujo.");
-      return;
-    }
-    
-  if (!QUIEN) {
-      alert("⚠️ Debe registrar el nombre del técnico que completó este formulario.");
-      return;
-    }
-    
-    // Mostrar fecha formateada en el DOM antes de generar el PDF
-    const fechaParts = fechaInput.value.split("-");
-    const fechaFormateada = `${fechaParts[2]}/${fechaParts[1]}/${fechaParts[0]}`;
-    const fechaLabel = fechaInput.parentElement;
-    const spanFecha = document.createElement("span");
-    spanFecha.textContent = fechaFormateada;
-    fechaLabel.appendChild(spanFecha);
-    fechaInput.style.display = "none";
-
-    const ok = confirm("¿El número de siniestro ingresado es correcto:" + siniestro1 + "-" + siniestro2 + "?");
-    if (!ok) {
-      fechaInput.style.display = "inline";
-      fechaLabel.removeChild(spanFecha);
-      return;
-    }
-
-    const element = document.getElementById("contenidoPDF");
-    if (!element) {
-      alert("❌ No se encontró el contenido a exportar (#contenidoPDF).");
-      fechaInput.style.display = "inline";
-      fechaLabel.removeChild(spanFecha);
-      return;
-    }
-
-    try {
-      // 1) Forzar estilos A4
-      document.body.classList.add("modo-pdf");
-
-      // 2) Generar PDF como Blob
-      const opt = {
-        margin: [0, 0, 0, 0],
-        filename: `${siniestro1 || "Siniestro"}-${siniestro2 || ""}.pdf`,
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
-      };
-
-      const blob = await html2pdf().set(opt).from(element).output('blob');
-
-      // 3) Enviar al backend
-      const nombreArchivo = `${siniestro1 || "Siniestro1"}_${siniestro2 || "Siniestro2"}_EXTRA_SEGURO.pdf`;
-      const formData = new FormData();
-      formData.append('pdf', blob, nombreArchivo);
-      formData.append('filename', nombreArchivo);
-      formData.append("folder", "Extra Seguro"); 
-      
-      const res = await fetch('https://extra-seguro-backend.onrender.com/upload', {
-        method: 'POST',
-        body: formData
-      });
-
-      if (res.ok) {
-        const data = await res.json().catch(() => ({}));
-        alert("✅ PDF enviado y subido correctamente");
-        if (data?.webUrl) {
-          console.log("🔗 Archivo en SharePoint/OneDrive:", data.webUrl);
-        }
-      } else {
-        const text = await res.text().catch(() => "");
-        alert("❌ Error al subir PDF: " + res.status + (text ? ` - ${text}` : ""));
-      }
-    } catch (err) {
-      alert("❌ Error generando o subiendo el PDF: " + (err?.message || err));
-    } finally {
-      // 4) Restaurar UI
-      document.body.classList.remove("modo-pdf");
-      fechaInput.style.display = "inline";
-      fechaLabel.removeChild(spanFecha);
-    }
-  });
-});
+  return true;
+}
 </script>
+
+<!-- Envío al backend: PDF editable -->
+<script>
+document.getElementById("btnGenerar").onclick = async (e) => {
+  e.preventDefault();
+
+  if (!validarCamposBase()) return;
+
+  const datos = {
+    taller: document.getElementById("taller").value.trim(),
+    serieNumero: document.getElementById("serieNumero").value.trim(),
+    fecha: document.getElementById("fecha").value,
+    siniestro1: document.getElementById("siniestro1").value.trim(),
+    siniestro2: document.getElementById("siniestro2").value.trim(),
+    dificultadVisual: document.getElementById("dificultadVisual").value.trim(),
+    quien: document.getElementById("QUIEN").value.trim(),
+    tabla1: leerTabla("tablaPiezas1"),
+    tabla2: leerTabla("tablaPiezas2"),
+    canvasImage: document.getElementById("canvas").toDataURL("image/png")
+  };
+
+  const ok = confirm(
+    "¿El número de siniestro ingresado es correcto: " +
+    datos.siniestro1 +
+    "-" +
+    datos.siniestro2 +
+    "?"
+  );
+
+  if (!ok) return;
+
+  try {
+    const res = await fetch("https://extra-seguro-backend.onrender.com/generate-pdf-editable", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(datos)
+    });
+
+    if (!res.ok) {
+      const text = await res.text();
+      console.error("Error generando PDF editable:", text);
+      throw new Error(text);
+    }
+
+    const data = await res.json();
+    alert("PDF editable generado y subido correctamente");
+
+    if (data?.webUrl) {
+      console.log("Archivo editable en SharePoint:", data.webUrl);
+    }
+
+  } catch (e) {
+    console.error("Error generando PDF editable:", e);
+    alert("Error generando PDF editable");
+  }
+};
+</script>
+
+
 </body>
 </html>
+
