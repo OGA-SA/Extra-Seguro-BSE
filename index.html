@@ -319,6 +319,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "DANILO MACHADO",
     "GUILLERMO MENDINA",
     "SERGIO ALZA",
+    "SANTIAGO DURAÑONA",
     "MATHIAS MONTES DE OCA"
   ];
 
@@ -612,8 +613,8 @@ function detectarAlertaMagnitud(tabla1, tabla2) {
       const unidad = coincidencia[2];
 
       if (
-        (["HS", "H", "HORA", "HORAS"].includes(unidad) && numero >= 5) ||
-        (unidad === "%" && numero >= 50)
+        (["HS", "H", "HORA", "HORAS"].includes(unidad) && numero <= 6) ||
+        (unidad === "%" && numero <= 50)
       ) {
         return true;
       }
