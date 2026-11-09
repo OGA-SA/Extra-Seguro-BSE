@@ -596,6 +596,33 @@ document.getElementById("btnGenerar").onclick = async (e) => {
 
   if (!validarCamposBase()) return;
 
+function detectarAlertaMagnitud(tabla1, tabla2) {
+  const todasLasPiezas = [...tabla1, ...tabla2];
+
+  return todasLasPiezas.some(pieza => {
+    const valor = String(pieza.chapa || "").toUpperCase();
+
+    // Detecta valores como 5hs, 6 hs, 50%, 75%
+    const coincidencias = valor.matchAll(
+      /(\d+(?:[.,]\d+)?)\s*(HS|H|HORAS?|%)/g
+    );
+
+    for (const coincidencia of coincidencias) {
+      const numero = parseFloat(coincidencia[1].replace(",", "."));
+      const unidad = coincidencia[2];
+
+      if (
+        (["HS", "H", "HORA", "HORAS"].includes(unidad) && numero >= 5) ||
+        (unidad === "%" && numero >= 50)
+      ) {
+        return true;
+      }
+    }
+
+    return false;
+  });
+}
+  
   const datos = {
     taller: document.getElementById("taller").value.trim(),
     serieNumero: document.getElementById("serieNumero").value.trim(),
@@ -606,6 +633,11 @@ document.getElementById("btnGenerar").onclick = async (e) => {
     quien: document.getElementById("QUIEN").value.trim(),
     tabla1: leerTabla("tablaPiezas1"),
     tabla2: leerTabla("tablaPiezas2"),
+    
+    alertaMagnitud: detectarAlertaMagnitud(
+        leerTabla("tablaPiezas1"),
+      leerTabla("tablaPiezas2")
+    ),
     canvasImage: document.getElementById("canvas").toDataURL("image/png")
   };
 
