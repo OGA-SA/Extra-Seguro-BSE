@@ -613,7 +613,7 @@ function detectarAlertaMagnitud(tabla1, tabla2) {
       const unidad = coincidencia[2];
 
       if (
-        (["HS", "H", "HORA", "HORAS"].includes(unidad) && numero <= 6) ||
+        (["HS", "H", "HORA", "HORAS"].includes(unidad) && numero < 6) ||
         (unidad === "%" && numero <= 50)
       ) {
         return true;
